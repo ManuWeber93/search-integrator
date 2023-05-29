@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "declaration": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "importHelpers": true,
+    "sourceMap": true,
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "esnext",
+      "esModuleInterop": true
+    }
+  },
+  "include": ["src/**/*"]
+}

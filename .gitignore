@@ -1,0 +1,7 @@
+/node_modules
+/.idea
+package-lock.json
+/src/test/coverage
+/src/**/*.js
+/src/**/*.d.ts
+/src/**/*.js.map

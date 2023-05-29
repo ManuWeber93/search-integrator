@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+        content="The Swisscom Digital Experience (SDX) is Swisscom's design system and consists of a component library, UX principles, design guidelines, documentations and rules. It's a living style guide built for all designers and developers working for Swisscom.">
+
+  <title>Developers - Getting started - With Sections</title>
+
+  <script>
+    [
+      "sdx.swisscom.com",
+      "sdxcode.swisscom.ch",
+      "sdxcode.swisscom.com",
+      "digitalexperience.swisscom.ch",
+      "digitalexperience.swisscom.com"
+    ].indexOf(location.hostname) > -1 && (location.hostname = "sdx.swisscom.ch");
+
+    // global function
+    function sdxScrollToAnchor() {
+      if (!location.hash) {
+        return;
+      }
+
+      function scrollToAnchor() {
+        const headerOffset = 71; // $header-level1-height - 1px border
+        const element = document.querySelector(location.hash);
+
+        if (!element) {
+          return;
+        }
+
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+
+      // give the user some time for orientation & give sdx-code-editor time to render
+      setTimeout(scrollToAnchor, 500);
+      setTimeout(scrollToAnchor, 1500);
+    }
+  </script>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
+
+  <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_400_.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_700_.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_600_.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_500_.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/sdx//fonts/sdx-icons/sdx-icons.woff2" as="font" type="font/woff2" crossorigin />
+
+
+  <link rel="stylesheet" href="/sdx//css/sdx.min.css">
+
+
+  <script src="/sdx//js/sdx.min.js"></script>
+
+
+  <script src="/sdx//js/webcomponents/webcomponents/webcomponents.esm.js" type="module"></script>
+  <script src="https://tags.tiqcdn.com/utag/swisscom/main/dev/utag.sync.js"></script>
+
+  <style>
+      body {
+          /*
+           * See https://sdx.swisscom.ch/developers_-_troubleshooting.html#jumping-content
+           */
+          overflow-y: scroll;
+      }
+  </style>
+</head>
+
+<body class="sdx sdx--light-theme">
+<script>
+  (function(a, b, c, d) {
+    a = "//tags.tiqcdn.com/utag/swisscom/main/dev/utag.js";
+    b = document;
+    c = "script";
+    d = b.createElement(c);
+    d.src = a;
+    d.type = "text/java" + c;
+    d.async = true;
+    a = b.getElementsByTagName(c)[0];
+    a.parentNode.insertBefore(d, a);
+  })();
+
+  var pageObject = {
+    platform: {
+      platform: "sdx",
+      environment: "dev",
+      context: "online"
+    },
+    page: {
+      path: "sdx" + location.pathname
+        .replace("_-_", "-")
+        .replace(".html", "")
+        .replace("(", "")
+        .replace(")", ""),
+      language: "en",
+      cfu: "none",
+      charset: "utf-8"
+    },
+    apps: {
+      uxTracking: {
+        active: true
+      }
+    }
+  };
+
+  if (window.SCS && SCS.datalayer && SCS.datalayer.page) {
+    SCS.datalayer.page(pageObject);
+  }
+</script>
+
+
+<div class="main-wrapper">
+  <sdx-header
+    id="header"
+    index='{
+    "href": "/index.html"
+  }'
+    navigation='{"primary":{"label":"Sites","children":[{"label":"Brand Center","href":"https://brand.swisscom.com"},{"label":"Git Repo","href":"https://git.swisscom.com/projects/SDX/repos/sdx"}]},"secondary":{"label":"Services","children":[{"label":"Stay up-to-date","iconName":"icon-information-circle","href":"https://wiki.swisscom.com/pages/viewrecentblogposts.action?key=SDX"},{"label":"Create a ticket","iconName":"icon-new","href":"https://jira.swisscom.com/browse/SDX"}]},"tertiary":{"label":"Contact","children":[{"label":"Contact","href":"mailto:support.sdx@swisscom.com"}]},"main":{"label":"SDX","children":[{"label":"Imprint","href":"/imprint.html","hidden":true},{"label":"Legal aspects","href":"/legal.html","hidden":true},{"label":"Contact","href":"/contact.html","hidden":true},{"label":"Principles","href":"/principles.html"},{"label":"Resources","href":"/index.html","hasLeftHandMenu":true,"children":[{"label":"All the basics","href":"/index.html"},{"label":"Foundation","children":[{"label":"Accessibility","href":"/foundation_-_accessibility.html"},{"label":"Backgrounds","href":"/foundation_-_backgrounds.html"},{"label":"Colours","href":"/foundation_-_colours.html"},{"label":"Grids","href":"/foundation_-_grids.html"},{"label":"Icons","href":"/foundation_-_icons.html"},{"label":"Illustrations","href":"/foundation_-_illustrations.html"},{"label":"Imagery","href":"/foundation_-_imagery.html"},{"label":"Themes","href":"/foundation_-_themes.html"},{"label":"Typography","href":"/foundation_-_typography.html"}]},{"label":"Components","children":[{"label":"Accordions","href":"/components_-_accordions.html"},{"label":"Badges","href":"/components_-_badges.html"},{"label":"Buttons","href":"/components_-_buttons.html"},{"label":"Cards","href":"/components_-_cards.html"},{"label":"Carousel","href":"/components_-_carousel.html"},{"label":"Chart (bar horizontal)","href":"/components_-_chart_(bar_horizontal).html"},{"label":"Chart (bar vertical)","href":"/components_-_chart_(bar_vertical).html"},{"label":"Chart (pie)","href":"/components_-_chart_(pie).html"},{"label":"Checkboxes","href":"/components_-_checkboxes.html"},{"label":"Dividers","href":"/components_-_dividers.html"},{"label":"Dropdown (select)","href":"/components_-_select.html"},{"label":"Empty States (upload)","href":"/components_-_empty_states.html"},{"label":"Expand & Collapse","href":"/components_-_expand_&_collapse.html"},{"label":"Footer","href":"/components_-_footer.html"},{"label":"Header","href":"/components_-_header.html"},{"label":"Input Fields","href":"/components_-_input_fields.html"},{"label":"Links","href":"/components_-_links.html"},{"label":"Lists","href":"/components_-_lists.html"},{"label":"Loading Bar","href":"/components_-_loading_bar.html"},{"label":"Loading Spinner","href":"/components_-_loading_spinner.html"},{"label":"Menu Flyout","href":"/components_-_menu_(flyout_and_contextual).html"},{"label":"Modals","href":"/components_-_modals.html"},{"label":"Numeric Stepper","href":"/components_-_numeric_stepper.html"},{"label":"Notifications (header)","href":"/components_-_notifications_(header).html"},{"label":"Notifications (inline)","href":"/components_-_notifications_(inline).html"},{"label":"Notifications (modal)","href":"/components_-_notifications_(modal).html"},{"label":"Picker (colour)","href":"/components_-_picker_(colour).html"},{"label":"Picker (date)","href":"/components_-_picker_(date).html"},{"label":"Picker (option)","href":"/components_-_picker_(option).html"},{"label":"Progress Bar","href":"/components_-_progress_bar.html"},{"label":"Radio Buttons","href":"/components_-_radio_buttons.html"},{"label":"Ribbons & Stickers","href":"/components_-_ribbons_&_stickers.html"},{"label":"Scroll-to-top","href":"/components_-_scroll_to_top.html"},{"label":"Search","href":"/components_-_search.html"},{"label":"Show More","href":"/components_-_show_more.html"},{"label":"Sliders","href":"/components_-_sliders.html"},{"label":"Switches","href":"/components_-_switches.html"},{"label":"Tables","href":"/components_-_tables.html"},{"label":"Tabs","href":"/components_-_tabs.html"},{"label":"Toolbar","href":"/components_-_toolbar.html"},{"label":"Tooltips","href":"/components_-_tooltips.html"}]},{"label":"Developers","children":[{"label":"Getting started","href":"/developers_-_getting_started.html","active":true},{"label":"CDN vs NPM","href":"/developers_-_npm_installation.html"},{"label":"Troubleshooting","href":"/developers_-_troubleshooting.html"},{"label":"How to contribute","href":"/developers_-_how_to_contribute.html"},{"label":"Clearfix utils","href":"/developers_-_clearfix_utils.html"},{"label":"Margin & padding utils","href":"/developers_-_margin_padding_utils.html"},{"label":"Screen Reader utils","href":"/developers_-_screen_reader_utils.html"},{"label":"Text utils","href":"/developers_-_text_utils.html"},{"label":"Visibility utils","href":"/developers_-_visibility_utils.html"},{"label":"Layout utils","href":"/developers_-_layout_utils.html"},{"label":"CSS Variables","href":"/developers_-_css_variables.html"}]}]}]}}'
+  ></sdx-header>
+
+  <script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": "/index.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Resources",
+        "item": "/index.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Getting started"
+      }
+    ]
+  }
+  </script>
+
+
+  <style>
+      sdx-header {
+          height: var(--sdx-header-height-mobile-with-breadcrumbs);
+      }
+
+      @media (min-width: 1024px) {
+          sdx-header {
+              height: var(--sdx-header-height-desktop-with-breadcrumbs);
+          }
+      }
+  </style>
+
+
+  <a id="content"></a>
+  <div class="major-wrapper page container-page padding-xs-v-2 padding-lg-v-3">
+    <div class="row page">
+
+
+      <div class="col-lg-3 hidden-md-down" id="sdx-left-hand-menu-outlet"></div>
+
+
+      <div class="col-lg-9" aria-labelledby="Getting started">
+
+
+        <h1 class="h1">Getting started</h1>
+
+
+        <sdx-tabs>
+          <sdx-tabs-item label="Intro" href="#intro">
+            <section id="intro">
+              <h1>Intro</h1>
+
+              <p>SDX consists of modern Web Components (such as <code class="code">&lt;sdx-select /&gt;</code>) and a
+                CSS that sets default styles, like fonts and spacings, and provides additional classes (e.g. <code
+                  class="code">.row</code> and <code class="code">.col</code>).</p>
+
+              <p>SDX can be included by either NPM or CDN. The guide <a href="/developers_-_npm_installation.html">NPM
+                vs CDN</a> explains their pros and cons.</p>
+
+              <p>All major frameworks are supported. But none is required. SDX also runs in plain <i>index.html</i> and
+                VanillaJS. The tabs above explain the usage of SDX for each framework individually.</p>
+
+              <p>SDX is language sensitive. It reads <code class="code">&lt;html lang="..."&gt;</code> and supports
+                "en", "de", "fr" and "it". Fallback is "en". If needed, the <code class="code">lang</code> attribute can
+                also be set on individual components, e.g. <code class="code">&lt;sdx-input lang="de"&gt;</code>.</p>
+
+              <p>Some components, such as <code class="code">Table</code>, <code class="code">BarChartHorizontal</code>
+                or <code class="code">Slider</code>, aren't yet converted into the Web Component format. Those called
+                "Pure JavaScript Components" and will also be converted in the future. The API for the Pure JavaScript
+                Components can be found in the generated JavaDoc documentation at <a href="./doc/">/doc</a>.</p>
+
+              <p>Please consider to <a href="/developers_-_how_to_contribute.html">contribute</a> and make SDX better!
+              </p>
+            </section>
+          </sdx-tabs-item>
+
+          <sdx-tabs-item label="Angular" href="#angular">
+            <section id="angular">
+              <h1>Angular</h1>
+
+              <h2 class="h2">Examples</h2>
+
+              <h3 class="h3">Repository</h3>
+
+              <p>Clone the <a href="https://git.swisscom.com/projects/SDX/repos/sdx-angular-example">example
+                repository</a>.</p>
+
+
+              <h3 class="h3" id="angular-to-existing-project"
+                  style="display:flex;align-items:center;"
+                  onmouseover="document.getElementById('sdxbutton-for-angular-to-existing-project').style.opacity = 1;"
+                  onmouseout="document.getElementById('sdxbutton-for-angular-to-existing-project').style.opacity = 0;">
+
+                <sdx-button
+                  onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#angular-to-existing-project')"
+                  id="sdxbutton-for-angular-to-existing-project"
+                  theme="transparent"
+                  style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+                  icon-name="icon-copy"
+                  sr-hint="copy link"
+                ></sdx-button>
+                Adding SDX to existing project
+              </h3>
+
+              <ul class="list">
+                <li>
+                  <p>add "sdx" css class</p>
+                  <sdx-code-editor preview="false">
+          <textarea name="sdx-code-editor">
+            // index.html
+
+            <body class="sdx">
+              <app-root></app-root>
+            </body>
+          </textarea>
+                  </sdx-code-editor>
+                </li>
+
+                <li>
+                  <p>define custom elements</p>
+                  <sdx-code-editor preview="false" language="javascript">
+          <textarea name="sdx-code-editor">
+            // main.ts
+
+            import { defineCustomElements } from '@swisscom/sdx/dist/js/webcomponents/loader';
+            defineCustomElements();
+          </textarea>
+                  </sdx-code-editor>
+                </li>
+
+                <li>
+                  <p>add "styles" and optional "assets" to "build" and "test" blocks</p>
+                  <sdx-code-editor preview="false">
+          <textarea name="sdx-code-editor">
+          // angular.json
+
+          {
+            "projects": {
+              "project-name": {
+                "architect": {
+                  "build": {
+                    "options": {
+                      "assets": [
+                        {
+                          "glob": "**/*",
+                          "input": "node_modules/@swisscom/sdx/dist/js/webcomponents/webcomponents/assets",
+                          "output": "assets"
+                        }
+                      ],
+                      "styles": [
+                        "node_modules/@swisscom/sdx/dist/css/webcomponents.css",
+                      ]
+                    }
+                  },
+                  "test": {
+                    ...
+                  }
+                }
+              }
+            }
+          }
+          </textarea>
+                  </sdx-code-editor>
+                </li>
+
+                <li>
+                  <p>any module where SDX components are supposed to be used must include
+                    <strong>CUSTOM_ELEMENTS_SCHEMA</strong></p>
+                  <sdx-code-editor preview="false" language="javascript">
+          <textarea name="sdx-code-editor">
+            // app.module.ts
+
+            import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+            @NgModule({
+              schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            })
+          </textarea>
+                  </sdx-code-editor>
+                </li>
+              </ul>
+
+
+              <h3 class="h3" id="angular_types"
+                  style="display:flex;align-items:center;"
+                  onmouseover="document.getElementById('sdxbutton-for-angular_types').style.opacity = 1;"
+                  onmouseout="document.getElementById('sdxbutton-for-angular_types').style.opacity = 0;">
+
+                <sdx-button
+                  onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#angular_types')"
+                  id="sdxbutton-for-angular_types"
+                  theme="transparent"
+                  style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+                  icon-name="icon-copy"
+                  sr-hint="copy link"
+                ></sdx-button>
+                Using types
+              </h3>
+
+              <p>Just import the types of a component from the SDX package.</p>
+
+              <sdx-code-editor preview="false" language="javascript">
+      <textarea name="sdx-code-editor">
+        // app.component.ts
+
+        import type { Components } from "@swisscom/sdx"
+
+        @Component({})
+        export class AppComponent {
+          @ViewChild('userChoice') sdxSelectElement!: Components.SdxSelect;
+
+          ngAfterViewInit() {
+            this.sdxSelectElement.label = "What is your choice?";
+          }
+      }
+      </textarea>
+              </sdx-code-editor>
+
+
+              <h3 class="h3" id="angular_bind_callback"
+                  style="display:flex;align-items:center;"
+                  onmouseover="document.getElementById('sdxbutton-for-angular_bind_callback').style.opacity = 1;"
+                  onmouseout="document.getElementById('sdxbutton-for-angular_bind_callback').style.opacity = 0;">
+
+                <sdx-button
+                  onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#angular_bind_callback')"
+                  id="sdxbutton-for-angular_bind_callback"
+                  theme="transparent"
+                  style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+                  icon-name="icon-copy"
+                  sr-hint="copy link"
+                ></sdx-button>
+                Binding a callback
+              </h3>
+
+              <sdx-code-editor preview="false">
+      <textarea name="sdx-code-editor">
+        <sdx-search [searchSubmitCallback]="submit"></sdx-search>
+      </textarea>
+              </sdx-code-editor>
+            </section>
+          </sdx-tabs-item>
+
+          <sdx-tabs-item label="React" href="#react">
+            <section id="react">
+              <h1>React</h1>
+
+              <h2 class="h2">Examples</h2>
+
+              <h3 class="h3">Repository</h3>
+
+              <p>For React using <i>Function Components</i>, clone the <a
+                href="https://git.swisscom.com/projects/SDX/repos/sdx-react-example">example repository</a>.</p>
+
+              <p>For React using <i>Class Components</i>, clone the <a
+                href="https://git.swisscom.com/projects/SDX/repos/sdx-react-example/browse?at=refs%2Fheads%2Fclass-based">example
+                repositories class-based branch</a>.</p>
+
+              <h3 class="h3">NextJS</h3>
+              <p>When using NextJS you have to make sure the Web Components are initialized on client side and not on
+                server side. This can be done through a <code class="code">useEffect</code> hook with an empty
+                dependency array in your <code class="code">_app.tsx</code>:</p>
+
+              <sdx-code-editor preview="false">
+      <textarea name="sdx-code-editor">
+        // pages/_app.tsx
+        import "@swisscom/sdx/dist/css/webcomponents.css";
+        import { defineCustomElements } from "@swisscom/sdx/dist/js/webcomponents/loader";
+
+        const App = ({ Component, pageProps }) => {
+          useEffect(() => void defineCustomElements(), []);
+
+          // your render
+        };
+
+        export default App;
+      </textarea>
+              </sdx-code-editor>
+            </section>
+          </sdx-tabs-item>
+
+          <sdx-tabs-item label="Vue" href="#vue">
+            <section id="vue">
+              <h1>Vue</h1>
+
+              <h2 class="h2">Examples</h2>
+
+              <h3 class="h3">Repositories</h3>
+
+              <p>For Vue 2, clone the <a href="https://git.swisscom.com/projects/SDX/repos/sdx-vue2-example">Vue 2
+                example repository</a>.</p>
+
+              <p>For Vue 3, clone the <a href="https://git.swisscom.com/projects/SDX/repos/sdx-vue3-example">Vue 3
+                example repository</a>.</p>
+            </section>
+          </sdx-tabs-item>
+
+          <sdx-tabs-item label="VanillaJS" href="#vanillajs">
+            <section id="vanillajs">
+              <h1>Vanilla JS</h1>
+
+              <h2 class="h2">Examples</h2>
+
+              <h3 class="h3">Repository</h3>
+
+              <p>Clone the <a href="https://git.swisscom.com/projects/SDX/repos/sdx-noframework-example">example
+                repository</a>.</p>
+
+              <h3 class="h3">Starter template</h3>
+
+              <sdx-code-editor preview="false">
+      <textarea name="sdx-code-editor">
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+            <!-- SDX CSS (~10 KB gzipped, needed for SDX Web Components) -->
+            <link
+              $SRI_webcomponents.min.css$
+              rel="stylesheet"
+              href="https://sdx.scsstatic.ch/sdx//css/webcomponents.min.css">
+
+            <!-- SDX CSS (~140 KB gzipped, needed for "non-Web Component" SDX components) -->
+            <!-- <link $SRI_sdx.min.css$ rel="stylesheet" href="https://sdx.scsstatic.ch/sdx//css/sdx.min.css"> -->
+
+            <!-- SDX Web Components JS (~3 KB gzipped, lazy loads SDX Web Components in use) -->
+            <script
+              $SRI_webcomponents.esm.js$
+              type="module"
+              src="https://sdx.scsstatic.ch/sdx//js/webcomponents/webcomponents/webcomponents.esm.js"></script>
+          </head>
+          <body class="sdx"> <!-- SDX scope (can be applied to any containing element) -->
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <h1 class="h1">Hello World!</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p>SDX is loaded via CDN (note the integrity attribute).</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- SDX JS (~340 KB gzipped, needed for "non-Web Component" SDX components) -->
+            <!-- <script $SRI_sdx.min.js$ src="https://sdx.scsstatic.ch/sdx//js/sdx.min.js"></script> -->
+          </body>
+        </html>
+      </textarea>
+              </sdx-code-editor>
+            </section>
+          </sdx-tabs-item>
+        </sdx-tabs>
+
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer footer--full">
+    <div class="footer__bottom">
+      <div class="container-page">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-lg">
+            <div class="footer--nav footer--left">
+              <ul class="nav-items nav-items--divider">
+
+                <li class="nav-item">
+                  <a class="nav-link " href="/imprint.html">
+                    Imprint
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link " href="/legal.html">
+                    Legal aspects
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link " href="/contact.html">
+                    Contact
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <sdx-scroll-to-top></sdx-scroll-to-top>
+
+  <script src="/js/tabs.js"></script>
+  <script src="/js/smooth-anchor-scrolling.js"></script>
+
+
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The Swisscom Digital Experience (SDX) is Swisscom's design system and consists of a component library, UX principles, design guidelines, documentations and rules. It's a living style guide built for all designers and developers working for Swisscom.">
+
+    <title>Components - Input Fields</title>
+
+    <script>
+      [
+        "sdx.swisscom.com",
+        "sdxcode.swisscom.ch",
+        "sdxcode.swisscom.com",
+        "digitalexperience.swisscom.ch",
+        "digitalexperience.swisscom.com"
+      ].indexOf(location.hostname) > -1 && (location.hostname = "sdx.swisscom.ch");
+
+      // global function
+      function sdxScrollToAnchor() {
+        if (!location.hash) return;
+
+        function scrollToAnchor() {
+          const headerOffset = 71; // $header-level1-height - 1px border
+          const element = document.querySelector(location.hash)
+
+          if (!element) return;
+
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+        // give the user some time for orientation & give sdx-code-editor time to render
+        setTimeout(scrollToAnchor, 500)
+        setTimeout(scrollToAnchor, 1500)
+      }
+    </script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_400_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_700_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_600_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_500_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/sdx-icons/sdx-icons.woff2" as="font" type="font/woff2" crossorigin />
+
+    
+      
+        <link rel="stylesheet" href="/sdx//css/sdx.min.css">
+      
+
+      <script src="/sdx//js/sdx.min.js"></script>
+    
+
+    <script src="/sdx//js/webcomponents/webcomponents/webcomponents.esm.js" type="module"></script>
+    <script src="https://tags.tiqcdn.com/utag/swisscom/main/dev/utag.sync.js"></script>
+
+    <style>
+      body {
+        /*
+         * See https://sdx.swisscom.ch/developers_-_troubleshooting.html#jumping-content
+         */
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+
+  <body class="sdx sdx--light-theme">
+    <script>
+      (function(a,b,c,d){
+      a="//tags.tiqcdn.com/utag/swisscom/main/dev/utag.js";
+      b=document;c="script";d=b.createElement(c);d.src=a;d.type="text/java"+c;d.async=true;
+      a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+      })();
+
+      var pageObject = {
+        platform: {
+          platform: "sdx",
+          environment: "dev",
+          context: "online"
+        },
+        page: {
+          path: "sdx" + location.pathname
+            .replace("_-_", "-")
+            .replace(".html", "")
+            .replace("(", "")
+            .replace(")", ""),
+          language: "en",
+          cfu: "none",
+          charset: "utf-8"
+        },
+        apps: {
+          uxTracking: {
+            active: true
+          }
+        }
+      };
+
+      if (window.SCS && SCS.datalayer && SCS.datalayer.page) {
+        SCS.datalayer.page(pageObject);
+      }
+    </script>
+
+    
+
+    <div class="main-wrapper">
+<sdx-header
+  id="header"
+  index='{
+    "href": "/index.html"
+  }'
+  navigation='{"primary":{"label":"Sites","children":[{"label":"Brand Center","href":"https://brand.swisscom.com"},{"label":"Git Repo","href":"https://git.swisscom.com/projects/SDX/repos/sdx"}]},"secondary":{"label":"Services","children":[{"label":"Stay up-to-date","iconName":"icon-information-circle","href":"https://wiki.swisscom.com/pages/viewrecentblogposts.action?key=SDX"},{"label":"Create a ticket","iconName":"icon-new","href":"https://jira.swisscom.com/browse/SDX"}]},"tertiary":{"label":"Contact","children":[{"label":"Contact","href":"mailto:support.sdx@swisscom.com"}]},"main":{"label":"SDX","children":[{"label":"Imprint","href":"/imprint.html","hidden":true},{"label":"Legal aspects","href":"/legal.html","hidden":true},{"label":"Contact","href":"/contact.html","hidden":true},{"label":"Principles","href":"/principles.html"},{"label":"Resources","href":"/index.html","hasLeftHandMenu":true,"children":[{"label":"All the basics","href":"/index.html"},{"label":"Foundation","children":[{"label":"Accessibility","href":"/foundation_-_accessibility.html"},{"label":"Backgrounds","href":"/foundation_-_backgrounds.html"},{"label":"Colours","href":"/foundation_-_colours.html"},{"label":"Grids","href":"/foundation_-_grids.html"},{"label":"Icons","href":"/foundation_-_icons.html"},{"label":"Illustrations","href":"/foundation_-_illustrations.html"},{"label":"Imagery","href":"/foundation_-_imagery.html"},{"label":"Themes","href":"/foundation_-_themes.html"},{"label":"Typography","href":"/foundation_-_typography.html"}]},{"label":"Components","children":[{"label":"Accordions","href":"/components_-_accordions.html"},{"label":"Badges","href":"/components_-_badges.html"},{"label":"Buttons","href":"/components_-_buttons.html"},{"label":"Cards","href":"/components_-_cards.html"},{"label":"Carousel","href":"/components_-_carousel.html"},{"label":"Chart (bar horizontal)","href":"/components_-_chart_(bar_horizontal).html"},{"label":"Chart (bar vertical)","href":"/components_-_chart_(bar_vertical).html"},{"label":"Chart (pie)","href":"/components_-_chart_(pie).html"},{"label":"Checkboxes","href":"/components_-_checkboxes.html"},{"label":"Dividers","href":"/components_-_dividers.html"},{"label":"Dropdown (select)","href":"/components_-_select.html"},{"label":"Empty States (upload)","href":"/components_-_empty_states.html"},{"label":"Expand & Collapse","href":"/components_-_expand_&_collapse.html"},{"label":"Footer","href":"/components_-_footer.html"},{"label":"Header","href":"/components_-_header.html"},{"label":"Input Fields","href":"/components_-_input_fields.html","active":true},{"label":"Links","href":"/components_-_links.html"},{"label":"Lists","href":"/components_-_lists.html"},{"label":"Loading Bar","href":"/components_-_loading_bar.html"},{"label":"Loading Spinner","href":"/components_-_loading_spinner.html"},{"label":"Menu Flyout","href":"/components_-_menu_(flyout_and_contextual).html"},{"label":"Modals","href":"/components_-_modals.html"},{"label":"Numeric Stepper","href":"/components_-_numeric_stepper.html"},{"label":"Notifications (header)","href":"/components_-_notifications_(header).html"},{"label":"Notifications (inline)","href":"/components_-_notifications_(inline).html"},{"label":"Notifications (modal)","href":"/components_-_notifications_(modal).html"},{"label":"Picker (colour)","href":"/components_-_picker_(colour).html"},{"label":"Picker (date)","href":"/components_-_picker_(date).html"},{"label":"Picker (option)","href":"/components_-_picker_(option).html"},{"label":"Progress Bar","href":"/components_-_progress_bar.html"},{"label":"Radio Buttons","href":"/components_-_radio_buttons.html"},{"label":"Ribbons & Stickers","href":"/components_-_ribbons_&_stickers.html"},{"label":"Scroll-to-top","href":"/components_-_scroll_to_top.html"},{"label":"Search","href":"/components_-_search.html"},{"label":"Show More","href":"/components_-_show_more.html"},{"label":"Sliders","href":"/components_-_sliders.html"},{"label":"Switches","href":"/components_-_switches.html"},{"label":"Tables","href":"/components_-_tables.html"},{"label":"Tabs","href":"/components_-_tabs.html"},{"label":"Toolbar","href":"/components_-_toolbar.html"},{"label":"Tooltips","href":"/components_-_tooltips.html"}]},{"label":"Developers","children":[{"label":"Getting started","href":"/developers_-_getting_started.html"},{"label":"CDN vs NPM","href":"/developers_-_npm_installation.html"},{"label":"Troubleshooting","href":"/developers_-_troubleshooting.html"},{"label":"How to contribute","href":"/developers_-_how_to_contribute.html"},{"label":"Clearfix utils","href":"/developers_-_clearfix_utils.html"},{"label":"Margin & padding utils","href":"/developers_-_margin_padding_utils.html"},{"label":"Screen Reader utils","href":"/developers_-_screen_reader_utils.html"},{"label":"Text utils","href":"/developers_-_text_utils.html"},{"label":"Visibility utils","href":"/developers_-_visibility_utils.html"},{"label":"Layout utils","href":"/developers_-_layout_utils.html"},{"label":"CSS Variables","href":"/developers_-_css_variables.html"}]}]}]}}'
+></sdx-header>
+
+
+  <style>
+    sdx-header {
+      height: var(--sdx-header-height-mobile-with-breadcrumbs);
+    }
+
+    @media (min-width: 1024px) {
+      sdx-header {
+        height: var(--sdx-header-height-desktop-with-breadcrumbs);
+      }
+    }
+  </style>
+
+
+
+
+<a id="content"></a>
+<div class="major-wrapper page container-page padding-xs-v-2 padding-lg-v-3">
+  <div class="row page">
+
+    
+      <div class="col-lg-3 hidden-md-down" id="sdx-left-hand-menu-outlet"></div>
+    
+
+    <div class="col-lg-9" aria-labelledby="Input Fields">
+
+      
+
+      <h1 class="h1">Input Fields</h1>
+
+
+<sdx-tabs>
+  <sdx-tabs-item label="Intro" href="#intro">
+
+    <p>Input fields allow users to enter data. They have a standardized height and corner radius treatment, but are flexible in width. Input fields are based on the grid.</p>
+
+    <div class="row paragraph">
+      <div class="col-lg-6 col-md-6 col-xs-12">
+        <sdx-input label="Single line"></sdx-input>
+      </div>
+    </div>
+
+    <div class="row paragraph">
+      <div class="col-lg-6 col-md-6 col-xs-12">
+        <sdx-input label="Multiple lines (max. 200 characters)" placeholder="Please write your input here" type="textarea" maxlength="200"></sdx-input>
+      </div>
+    </div>
+
+    <p>Input fields typically appear in forms and dialogs. Its design provides a clear affordance for interaction, making the fields discoverable in layouts, efficient to fill in, and accessible.<br>Providing the right type of the input field for requested data will help users enter information in the right format and avoid mistakes, making the process as easy and efficient as possible.</p>
+
+    <ul class="list single-line margin-bottom-4">
+      <li>If any <a href="#developers-validation">validation</a> is needed, you can display this additionally.</li>
+      <li>To display a calendar in input fields see the <a href="/components_-_picker_(date).html">date picker</a> and its options.</li>
+    </ul>
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Designers" href="#designers">
+
+    <p>Input fields have different states to guide users when interacting with them. The main advantage with this input field variant is that additional descriptions for conventions (e.g. telephone number) can be given.</p>
+
+    <p>There can be validations on input fields: A green tick appears when the content is validated. E.g. if the system has to validate the user’s input of the “@” within an email address.</p>
+
+    <p>An error message occurs if the user’s input is invalid or breaks input rules, such as special characters and passwords (which should be explained to the user to avoid errors in advance).</p>
+
+
+    <div class="row paragraph">
+      <div class="col-md-5 col-xs-12">
+
+      <div class="row margin-bottom-2">
+        <div class="col">
+          <sdx-input label="User name" value=""></sdx-input>
+        </div>
+      </div>
+
+      <div class="row margin-bottom-2">
+        <div class="col">
+          <sdx-input label="User name" value="jane_doe_1" valid></sdx-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <sdx-input type="email" autocomplete="email" label="E-Mail address" value="janedoe@invalid@mail" valid="false" validation-message="Please enter a valid email address" required></sdx-input>
+        </div>
+      </div>
+
+     </div>
+    </div>
+
+    
+          <h2 id="designers-date-input-fields"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-date-input-fields').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-date-input-fields').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-date-input-fields')"
+    id="sdxbutton-for-designers-date-input-fields"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Date input fields</h2>
+
+    <p>There are two different ways to enter a date: one with a <strong>masked date input field</strong> and one with <strong>date picker</strong>.</p>
+
+    <div class="row paragraph">
+      <div class="col-md-6 col-xs-12 paragraph">
+        
+          <h3 id="designers-masked-date-input-fields"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-masked-date-input-fields').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-masked-date-input-fields').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-masked-date-input-fields')"
+    id="sdxbutton-for-designers-masked-date-input-fields"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Masked date input fields</h3>
+        <img class="image image--frame-light bg-sc-white" src="/img/design/inputfields/date-of-birth@2x.png" alt="Shows date of birth example">
+        <figcaption class="figcaption">Masked date input fields</figcaption>
+        <p class="margin-top-3">To enter dates that are far in the past, like a date of birth, please use the date input field split into three dedicated fields for day, month and year. Entering the date directly is the most efficient way if the date is further in the past or future.</p>
+      </div>
+      <div class="col-md-6 col-xs-12 paragraph">
+        
+          <h3 id="designers-date-input-field-with-datepicker"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-date-input-field-with-datepicker').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-date-input-field-with-datepicker').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-date-input-field-with-datepicker')"
+    id="sdxbutton-for-designers-date-input-field-with-datepicker"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Date input fields with date picker</h3>
+
+        <img class="image image--frame-light bg-sc-white" src="/img/design/picker_date/calendar.png" alt="Shows a date picker example">
+        <figcaption class="figcaption">Date input fields with date picker</figcaption>
+
+        <p class="margin-top-3">For dates which are close to the present date (e.g. appointments) or for entering <a href="/components_-_picker_(date).html#designers-rules">date range</a> use the <a href="/components_-_picker_(date).html#designers-rules">date picker</a> variant.</p>
+      </div>
+    </div>
+
+    
+          <h2 id="designers-specifications"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-specifications').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-specifications').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-specifications')"
+    id="sdxbutton-for-designers-specifications"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Specifications</h2>
+    <p>
+      <sdx-figma url="https%3A%2F%2Fwww.figma.com%2Ffile%2FVxLpPIRajDeaBiEHrLaFGo%2FSDX-Documentation%3Fnode-id%3D124023%253A12989" height="600"></sdx-figma>
+    </p>
+
+    
+          <h2 id="designers-autocompletion-input-fields"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-autocompletion-input-fields').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-autocompletion-input-fields').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-autocompletion-input-fields')"
+    id="sdxbutton-for-designers-autocompletion-input-fields"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Autocompletion for input fields</h2>
+
+    <p>Autocompletion speeds up the users interaction with the computer when it correctly predicts the word the user intends to enter &ndash; after 3 characters have been typed into the text field (mostly, this content is dynamic and comes from a database).<br>Whereas a filterable drop-down allows the users to filter a large list of choices &ndash; like a country selector &ndash; by typing in some characters (mostly, this content is static within the website).</p>
+
+    <div class="row paragraph">
+      <div class="col">
+        <img class="image" src="/img/design/inputfields/autocomplete.png" alt="Field autocomplete">
+        <figcaption class="figcaption">Autocompletion</figcaption>
+      </div>
+    </div>
+
+    
+          <h2 id="designers-rules"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-rules').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-rules').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-rules')"
+    id="sdxbutton-for-designers-rules"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Rules</h2>
+
+    <ul class="list">
+      <li>For dates that are far off, for example date of birth, use the <a href="#designers-masked-date-input-fields"></a>masked date input field</a> instead.</li>
+      <li><strong>Keep it short</strong> by eliminating unnecessary fields. Cutting fields means increasing conversion rate and reducing users' effort.</li>
+      <li><strong>Group related labels and fields</strong> visually (e.g. if you ask two topics separate these groups of fields).</li>
+      <li><strong>Display fields in a single column layout</strong> as multiple columns interrupt the vertical moving down the form. Exceptions are short and logical fields as city, state and zip code.</li>
+      <li>For related components <strong>next to each other</strong> use a custom <a href="#developers-validation-standalone">Standalone Validation</a> to display error messages instead of the default validation messages.</li>
+      <li><strong>Use logical sequencing</strong> (e.g. credit card number, expiration date and its security code).</li>
+      <li>Use <strong>placeholder</strong> texts wisely and <strong>not per default</strong>. They are just recommended if the user has to enter specific formats (e.g. telephone number or birthday).</li>
+      <li><strong>Distinguish optional and required fields</strong>. Put the instructions at the beginning of the <a href="#example-contact-form">form</a>.</li>
+      <li><strong>Avoid "reset" and "clear" buttons</strong> - it prevents the user from accidential deletion.</li>
+      <li>Give highly visible and <strong>specific error messages</strong>.</li>
+      <li><strong>Match fields to input length</strong>:<br>To achieve good usability adjust the size of form fields to match the length of the expected input (users start wondering if they had misunderstood the label if it is too short or too long). Form fields for variable input (e.g. name or email) typically range from 18 to 33 characters.</li>
+    </ul>
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Developers" href="#developers">
+
+    <p>See <a href="#designers-rules">rules</a> and <a href="#examples">form example</a> for how to use input fields.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-input label="Label" placeholder="Placeholder"></sdx-input>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-read-only-and-disabled"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-read-only-and-disabled').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-read-only-and-disabled').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-read-only-and-disabled')"
+    id="sdxbutton-for-developers-read-only-and-disabled"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Read-only and disabled</h2>
+
+    <p>If you want to block the user from changing an input field add the <code class="code">readonly</code> or <code class="code">disabled</code> attribute to the sdx-input element.</p>
+
+    <p>The difference between the <code class="code">readonly</code> and the <code class="code">disabled</code> attribute is that in <code class="code">readonly</code> the user can tab to the element.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <div class="row margin-bottom-2">
+          <div class="col">
+            <sdx-input label="Single line (read-only)" placeholder="This text is read-only" readonly value="Lorem ipsum dolor sit amet"></sdx-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <sdx-input label="Multiple lines (disabled)" placeholder="This text is disabled" type="textarea" disabled value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."></sdx-input>
+          </div>
+        </div>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-masked-date-input-field"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-masked-date-input-field').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-masked-date-input-field').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-masked-date-input-field')"
+    id="sdxbutton-for-developers-masked-date-input-field"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Masked date input fields</h2>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-input-mask type="ddmmyyyy" label="Date of birth"></sdx-input-mask>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-validation"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-validation').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-validation').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-validation')"
+    id="sdxbutton-for-developers-validation"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Validation</h2>
+
+    <p>Display validation information to the users by using the attributes <code class="code">valid</code> and <code class="code">validation-message</code>.</p>
+
+    <p>Pass the <code class="code">required</code> attribute to the input field to denote them as required and make sure to explain the meaning of the asterisk in a legend below the form in the current customer language. It's recommended not to use  any optional input fields and only ask the users to enter data that is really required.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <div class="row margin-bottom-2">
+          <div class="col">
+            <sdx-input label="User name" value="jane_doe_1" valid></sdx-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <sdx-input type="email" autocomplete="email" label="E-Mail address" value="janedoe@invalid@mail" valid="false" validation-message="Please enter a valid email address" required></sdx-input>
+          </div>
+        </div>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h3 id="developers-validation-standalone"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-validation-standalone').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-validation-standalone').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-validation-standalone')"
+    id="sdxbutton-for-developers-validation-standalone"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Standalone validation</h3>
+
+    <p>The <code class="code">sdx-validation-message</code> component can be used to show a standalone validation message which can refer to multiple components. It should not be used in combination with <code class="code">validation-message</code> attribute of <code class="code">sdx-input</code>.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <div class="row">
+          <div class="col-md-3"><sdx-input label="Name" valid="false"></sdx-input></div>
+          <div class="col-md-3"><sdx-input label="Surname" valid="false"></sdx-input></div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <sdx-validation-message validation-message="Please enter at least either your name or your surname"></sdx-validation-message>
+          </div>
+        </div>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h3 id="developers-validation-automatic"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-validation-automatic').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-validation-automatic').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-validation-automatic')"
+    id="sdxbutton-for-developers-validation-automatic"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Automatic validation</h3>
+
+    <p>Usually, SDX leaves the validation up to the consumers. But if there are enough heuristics, e.g. in <code class="code">&ltsdx-input-mask&gt;</code> SDX sets the <code class="code">valid</code> and <code class="code">validationMessage</code> properties itself. However, it only does that when both of them are unoccupied, meaning <code class="code">undefined</code>. This way, the consumer is always in control of the validation.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-input-mask type="ddmmyyyy" label="Date of birth" value="1.1.3000" required valid="false" validation-message="Please enter a date in the past"></sdx-input-mask>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-autocomplete"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-autocomplete').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-autocomplete').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-autocomplete')"
+    id="sdxbutton-for-developers-autocomplete"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Autocomplete</h2>
+
+    
+          <h3 id="developers-local-data"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-local-data').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-local-data').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-local-data')"
+    id="sdxbutton-for-developers-local-data"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Local data</h3>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-select
+          placeholder="E.g. type 'script'..."
+          label="Programming language"
+          keyboard-behavior="autocomplete"
+        >
+          <sdx-select-option>ActionScript</sdx-select-option>
+          <sdx-select-option>AppleScript</sdx-select-option>
+          <sdx-select-option>Asp</sdx-select-option>
+          <sdx-select-option>Assembly</sdx-select-option>
+          <sdx-select-option>BASIC</sdx-select-option>
+          <sdx-select-option>Batch</sdx-select-option>
+          <sdx-select-option>C</sdx-select-option>
+          <sdx-select-option>C++</sdx-select-option>
+          <sdx-select-option>CSS</sdx-select-option>
+          <sdx-select-option>Clojure</sdx-select-option>
+          <sdx-select-option>COBOL</sdx-select-option>
+          <sdx-select-option>ColdFusion</sdx-select-option>
+          <sdx-select-option>Erlang</sdx-select-option>
+          <sdx-select-option>Fortran</sdx-select-option>
+          <sdx-select-option>Groovy</sdx-select-option>
+          <sdx-select-option>Haskell</sdx-select-option>
+          <sdx-select-option>HTML</sdx-select-option>
+          <sdx-select-option>Java</sdx-select-option>
+          <sdx-select-option>JavaScript</sdx-select-option>
+          <sdx-select-option>Lisp</sdx-select-option>
+          <sdx-select-option>Perl</sdx-select-option>
+          <sdx-select-option>PHP</sdx-select-option>
+          <sdx-select-option>PowerShell</sdx-select-option>
+          <sdx-select-option>Python</sdx-select-option>
+          <sdx-select-option>Ruby</sdx-select-option>
+          <sdx-select-option>Scala</sdx-select-option>
+          <sdx-select-option>Scheme</sdx-select-option>
+          <sdx-select-option>SQL</sdx-select-option>
+          <sdx-select-option>TeX</sdx-select-option>
+          <sdx-select-option>XML</sdx-select-option>
+        </sdx-select>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h3 id="developers-remote-data"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-remote-data').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-remote-data').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-remote-data')"
+    id="sdxbutton-for-developers-remote-data"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Remote data</h3>
+
+    <p>Here is an example of how to connect the autocomplete to a real server (in this case, Apple iTunes).</p>
+
+    <div class="row paragraph">
+      <div class="col-md-6 margin-bottom-2">
+        <sdx-itunes-autocomplete></sdx-itunes-autocomplete>
+      </div>
+    </div>
+
+    <p>The code is written in Stencil, but the principle can be applied to React, Angular, Vue or others:</p>
+
+    <sdx-code-editor preview="false" language="javascript">
+      <textarea name="sdx-code-editor">
+        export class ItunesAutocomplete {
+          @State() artists = []
+          @State() loading = false
+
+          fetch(keyword) {
+            // Clear results from last search (if any)
+            this.artists = []
+
+            // Ensure keyword length
+            if (keyword.length < 3) {
+              return
+            }
+
+            // Loading spinner
+            this.loading = true
+
+            // Request data
+            fetch("https://itunes.apple.com/search?term=" + encodeURI(keyword)} + "&entity=musicArtist&limit=10", {
+              method: "post"
+            })
+              .then((payload) => payload.json())
+              .then((payload) => this.artists = payload.results.map((result) => result.artistName))
+              .then(() => this.loading = false)
+          }
+
+          render() {
+            return (
+              <sdx-select
+                label="(Server autocomplete) Your favourite artist on iTunes"
+                placeholder="Search artists..."
+                onInput={(e) => {
+                  const selection = (e.target as HTMLSdxSelectElement).value
+                  this.fetch(selection[0])
+                }}
+                keyboardBehavior="autocomplete"
+                filterFunction={() => true} // iTunes already filters, bypass local filter
+                loading={this.loading}
+              >
+                {this.artists.map((artist) =>
+                  <sdx-select-option>{artist}</sdx-select-option>
+                )}
+              </sdx-select>
+            )
+          }
+        }
+      </textarea>
+    </sdx-code-editor>
+
+    
+  
+  
+  
+
+  
+
+  <div class="table table--responsive table--highlight padding-v-2">
+    
+          <h3 id="sdx-input-api"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-sdx-input-api').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-sdx-input-api').style.opacity = 0;"  class="h3 table__title">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#sdx-input-api')"
+    id="sdxbutton-for-sdx-input-api"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          &lt;sdx-input /&gt;: <code class="code">HTMLSdxInputElement</code></h3>
+
+    <div class="table__wrapper">
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute / property (attributes are used in HTML, properties in JavaScript)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>autofocus</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Focuses the input field as soon as it's rendered.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>blur-callback / blurCallback</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string | () =&gt; void</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Callback that will fire when the input loses focus.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>disabled</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Disabled and not focussable using tab.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>flatpickr-options / flatpickrOptions</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">any</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Datepicker settings.
+When <code class='code'>type="date"</code>, flatpickr is used and can be configured via this
+attribute. Examples:
+<code class='code'>{ locale: "fr" }</code>, <code class='code'>{ minDate: "today" }</code> or
+<code class='code'>{ "altInput": true, "altFormat": "l j. F, Y" }</code>.
+See <a href="components_-_picker_(date).html#developers">Picker (date)</a> for
+available options.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>focus-callback / focusCallback</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string | () =&gt; void</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Callback that will fire when the input gets focus.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>hit-enter-callback / hitEnterCallback</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string | () =&gt; void</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Callback that will fire on hitting enter.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>inputmode</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5"></pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Which keyboard to be displayed on touchscreens.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>key-down-callback / keyDownCallback</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string | (e: CustomEvent) =&gt; void</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Callback that will fire when the a key is pressed down.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>label</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Text that will be written on the top.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>maxlength</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">number</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Allowed number of characters.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>name</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Name parameter (useful when the component is used in a traditional HTML
+form submit).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>placeholder</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Default text that will be shown unless there's a value.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>readonly</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Disabled, but focussable using tab.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>required</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Marks the component as required (please note that this itself does not
+handle validation &mdash; use the "valid" and "validation-message" for
+that).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>select-text-on-focus / selectTextOnFocus</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Marks the text within the input on focus.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>sr-hint / srHint</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Text for the screen reader labelling the input field.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>type</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;text&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">&#34;text&#34; | &#34;password&#34; | &#34;search&#34; | &#34;textarea&#34; | &#34;email&#34; | &#34;date&#34; | &#34;tel&#34; | &#34;url&#34; | &#34;number&#34;</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Default input field type (e.g. "search", "password", "date", etc.). When
+set to "date", flatpickr will take over. Caution: flatpickr does not
+fulfill the accessibility requirements of SDX, yet (but we're on it…).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>valid</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Set this to false to declare the component as invalid and use the
+<code class='code'>validation-message</code> attribute to explain why.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>validation-message / validationMessage</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Text that explains the validation status to the user.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>value</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Can be used for both reading and writing the value.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Events</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>input</strong> <span class="gray-tint-4">=</span>
+
+                  <pre class="gray-tint-5 text-smaller margin-top-0">{
+  target: <code class="code">HTMLSdxInputElement</code>,
+  bubbles: <code class="code">boolean</code> = true,
+  composed: <code class="code">boolean</code> = true
+}</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Emitted whenever user is typing or clearing/changing the input.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Methods</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>doBlur()</strong>: <code class="code">Promise&lt;void&gt;</code>
+
+                  
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>doFocus()</strong>: <code class="code">Promise&lt;void&gt;</code>
+
+                  
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    </div>
+  </div>
+
+
+
+    
+  
+  
+  
+
+  
+
+  <div class="table table--responsive table--highlight padding-v-2">
+    
+          <h3 id="sdx-input-mask-api"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-sdx-input-mask-api').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-sdx-input-mask-api').style.opacity = 0;"  class="h3 table__title">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#sdx-input-mask-api')"
+    id="sdxbutton-for-sdx-input-mask-api"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          &lt;sdx-input-mask /&gt;: <code class="code">HTMLSdxInputMaskElement</code></h3>
+
+    <div class="table__wrapper">
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute / property (attributes are used in HTML, properties in JavaScript)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>autofocus</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Focuses the input field as soon as it's rendered.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>label</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Text that will be written on the top.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>name</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Name parameter (useful when the component is used in a traditional HTML
+form submit).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>required</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Marks the component as required (please note that this itself does not
+handle validation &mdash; use the "valid" and "validation-message" for
+that).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>sr-hint / srHint</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Description text read by the screen reader.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>type</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5"></pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>undefined</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>valid</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Set this to false to declare the component as invalid and use the
+<code class='code'>validation-message</code> attribute to explain why.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>validation-message / validationMessage</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Text that explains the validation status to the user.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>value</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Can be used for both reading and writing the value.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Events</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>input</strong> <span class="gray-tint-4">=</span>
+
+                  <pre class="gray-tint-5 text-smaller margin-top-0">{
+  target: <code class="code">HTMLSdxInputMaskElement</code>,
+  bubbles: <code class="code">boolean</code> = true,
+  composed: <code class="code">boolean</code> = true
+}</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Emitted whenever user is typing or clearing the input.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Methods</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>doFocus()</strong>: <code class="code">Promise&lt;void&gt;</code>
+
+                  
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    </div>
+  </div>
+
+
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Examples" href="#examples">
+
+    
+          <h2 id="example-contact-form"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-example-contact-form').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-example-contact-form').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#example-contact-form')"
+    id="sdxbutton-for-example-contact-form"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Contact form</h2>
+    <p>Fields marked with * are required.</p>
+
+    <form class="paragraph">
+      <div class="row">
+        <div class="col-md-6 col-lg-6 paragraph">
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input-group type="radio" name="salutation" inline="inline" label="Salutation" required>
+                <sdx-input-item value="misses">Misses</sdx-input-item>
+                <sdx-input-item value="mister">Mister</sdx-input-item>
+              </sdx-input-group>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input label="Firstname" name="firstname" required></sdx-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input label="Lastname" name="lastname" required></sdx-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input label="Street / No." name="street" autocomplete="address" required></sdx-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-lg-4 col-xs-12 margin-bottom-2">
+              <sdx-input label="Zip code" name="zip" type="number" autocomplete="postal-code" required></sdx-input>
+            </div>
+            <div class="col-md-8 col-lg-8 col-xs-12 margin-bottom-2">
+              <sdx-input label="City" name="city" autocomplete="city" required></sdx-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input label="E-Mail" name="email" required></sdx-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input-mask type="ddmmyyyy" label="Date of birth" name="birthdate" required></sdx-input-mask>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col margin-bottom-2">
+              <sdx-input-item type="checkbox" name="newsletter" change-callback="console.log('Checked:', arguments[0])">
+                Subscribe me to a free email newsletter
+              </sdx-input-item>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <sdx-button-group>
+                <sdx-button layout="responsive" type="submit" label="Submit"></sdx-button>
+              </sdx-button-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    
+          <h2 id="example-autocompletion"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-example-autocompletion').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-example-autocompletion').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#example-autocompletion')"
+    id="sdxbutton-for-example-autocompletion"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Autocompletion</h2>
+
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-xs-12">
+        <sdx-select placeholder="E.g. type 'script'..." label="Your main programming language?" name="language" keyboard-behavior="autocomplete">
+          <sdx-select-option>ActionScript</sdx-select-option>
+          <sdx-select-option>AppleScript</sdx-select-option>
+          <sdx-select-option>Asp</sdx-select-option>
+          <sdx-select-option>Assembly</sdx-select-option>
+          <sdx-select-option>BASIC</sdx-select-option>
+          <sdx-select-option>Batch</sdx-select-option>
+          <sdx-select-option>C</sdx-select-option>
+          <sdx-select-option>C++</sdx-select-option>
+          <sdx-select-option>CSS</sdx-select-option>
+          <sdx-select-option>Clojure</sdx-select-option>
+          <sdx-select-option>COBOL</sdx-select-option>
+          <sdx-select-option>ColdFusion</sdx-select-option>
+          <sdx-select-option>Erlang</sdx-select-option>
+          <sdx-select-option>Fortran</sdx-select-option>
+          <sdx-select-option>Groovy</sdx-select-option>
+          <sdx-select-option>Haskell</sdx-select-option>
+          <sdx-select-option>HTML</sdx-select-option>
+          <sdx-select-option>Java</sdx-select-option>
+          <sdx-select-option>JavaScript</sdx-select-option>
+          <sdx-select-option>Lisp</sdx-select-option>
+          <sdx-select-option>Perl</sdx-select-option>
+          <sdx-select-option>PHP</sdx-select-option>
+          <sdx-select-option>PowerShell</sdx-select-option>
+          <sdx-select-option>Python</sdx-select-option>
+          <sdx-select-option>Ruby</sdx-select-option>
+          <sdx-select-option>Scala</sdx-select-option>
+          <sdx-select-option>Scheme</sdx-select-option>
+          <sdx-select-option>SQL</sdx-select-option>
+          <sdx-select-option>TeX</sdx-select-option>
+          <sdx-select-option>XML</sdx-select-option>
+        </sdx-select>
+      </div>
+    </div>
+
+  </sdx-tabs-item>
+</sdx-tabs>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <footer class="footer footer--full">
+    <div class="footer__bottom">
+      <div class="container-page">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-lg">
+            <div class="footer--nav footer--left">
+              <ul class="nav-items nav-items--divider">
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/imprint.html">
+                      Imprint
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/legal.html">
+                      Legal aspects
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/contact.html">
+                      Contact
+                    </a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+<sdx-scroll-to-top></sdx-scroll-to-top>
+
+<script src="/js/tabs.js"></script>
+<script src="/js/smooth-anchor-scrolling.js"></script>
+
+      
+    </div>
+  </body>
+</html>
+

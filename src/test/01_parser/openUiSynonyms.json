@@ -1,0 +1,56 @@
+{
+  "synonymCollections": [
+    ["Alert", "Message", "Toaster", "Snackbar"],
+    ["Avatar", "Persona"],
+    ["Button", "Buttons", "Button group", "Button Groups", "Button Icons"],
+    [
+      "DatePicker",
+      "Datetime Picker",
+      "Date picker",
+      "Calendar",
+      "Datepickers",
+      "Datetime Picker.Popup",
+      "Datepicker dialog"
+    ],
+    ["Dialog", "Modal", "Modal dialog", "Corner Dialog", "Prompt"],
+    ["File", "Upload", "File uploader", "Filepicker", "File Selector"],
+    [
+      "Flex",
+      "Space",
+      "Page",
+      "Grid",
+      "Grids",
+      "GridColumn",
+      "Stack Layout",
+      "Pane",
+      "Stack"
+    ],
+    ["Image", "Img"],
+    ["Popup", "Alert", "Dialog", "Toast", "Tooltip"],
+    ["Radio", "Radio Button", "ChoiceGroup", "Radio Group", "Radio Buttons"],
+    [
+      "Autocomplete",
+      "Select",
+      "Select Menu",
+      "Combobox",
+      "Dropdown",
+      "Picker",
+      "Selection Dropdown",
+      "Datalist"
+    ],
+    ["Skeleton", "Shimmer", "Placeholder"],
+    ["Slider", "Range", "Sliders"],
+    ["Switch", "Toggle", "Checkbox Toggle", "Switches", "Checkbox"],
+    [
+      "Table",
+      "Dynamic table",
+      "Tables",
+      "Data table",
+      "DetailsList",
+      "Data Tables",
+      "Tree Grid"
+    ],
+    ["Notification", "Notifications", "Toasts", "Toast"],
+    ["Tooltip", "Inline dialog", "Popover"]
+  ]
+}

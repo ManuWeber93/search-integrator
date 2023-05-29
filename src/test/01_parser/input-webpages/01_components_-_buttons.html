@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The Swisscom Digital Experience (SDX) is Swisscom's design system and consists of a component library, UX principles, design guidelines, documentations and rules. It's a living style guide built for all designers and developers working for Swisscom.">
+
+    <title>Components - Buttons</title>
+
+    <script>
+      [
+        "sdx.swisscom.com",
+        "sdxcode.swisscom.ch",
+        "sdxcode.swisscom.com",
+        "digitalexperience.swisscom.ch",
+        "digitalexperience.swisscom.com"
+      ].indexOf(location.hostname) > -1 && (location.hostname = "sdx.swisscom.ch");
+
+      // global function
+      function sdxScrollToAnchor() {
+        if (!location.hash) return;
+
+        function scrollToAnchor() {
+          const headerOffset = 71; // $header-level1-height - 1px border
+          const element = document.querySelector(location.hash)
+
+          if (!element) return;
+
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+        // give the user some time for orientation & give sdx-code-editor time to render
+        setTimeout(scrollToAnchor, 500)
+        setTimeout(scrollToAnchor, 1500)
+      }
+    </script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_400_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_700_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_600_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_500_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/sdx-icons/sdx-icons.woff2" as="font" type="font/woff2" crossorigin />
+
+    
+      
+        <link rel="stylesheet" href="/sdx//css/sdx.min.css">
+      
+
+      <script src="/sdx//js/sdx.min.js"></script>
+    
+
+    <script src="/sdx//js/webcomponents/webcomponents/webcomponents.esm.js" type="module"></script>
+    <script src="https://tags.tiqcdn.com/utag/swisscom/main/dev/utag.sync.js"></script>
+
+    <style>
+      body {
+        /*
+         * See https://sdx.swisscom.ch/developers_-_troubleshooting.html#jumping-content
+         */
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+
+  <body class="sdx sdx--light-theme">
+    <script>
+      (function(a,b,c,d){
+      a="//tags.tiqcdn.com/utag/swisscom/main/dev/utag.js";
+      b=document;c="script";d=b.createElement(c);d.src=a;d.type="text/java"+c;d.async=true;
+      a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+      })();
+
+      var pageObject = {
+        platform: {
+          platform: "sdx",
+          environment: "dev",
+          context: "online"
+        },
+        page: {
+          path: "sdx" + location.pathname
+            .replace("_-_", "-")
+            .replace(".html", "")
+            .replace("(", "")
+            .replace(")", ""),
+          language: "en",
+          cfu: "none",
+          charset: "utf-8"
+        },
+        apps: {
+          uxTracking: {
+            active: true
+          }
+        }
+      };
+
+      if (window.SCS && SCS.datalayer && SCS.datalayer.page) {
+        SCS.datalayer.page(pageObject);
+      }
+    </script>
+
+    
+
+    <div class="main-wrapper">
+<sdx-header
+  id="header"
+  index='{
+    "href": "/index.html"
+  }'
+  navigation='{"primary":{"label":"Sites","children":[{"label":"Brand Center","href":"https://brand.swisscom.com"},{"label":"Git Repo","href":"https://git.swisscom.com/projects/SDX/repos/sdx"}]},"secondary":{"label":"Services","children":[{"label":"Stay up-to-date","iconName":"icon-information-circle","href":"https://wiki.swisscom.com/pages/viewrecentblogposts.action?key=SDX"},{"label":"Create a ticket","iconName":"icon-new","href":"https://jira.swisscom.com/browse/SDX"}]},"tertiary":{"label":"Contact","children":[{"label":"Contact","href":"mailto:support.sdx@swisscom.com"}]},"main":{"label":"SDX","children":[{"label":"Imprint","href":"/imprint.html","hidden":true},{"label":"Legal aspects","href":"/legal.html","hidden":true},{"label":"Contact","href":"/contact.html","hidden":true},{"label":"Principles","href":"/principles.html"},{"label":"Resources","href":"/index.html","hasLeftHandMenu":true,"children":[{"label":"All the basics","href":"/index.html"},{"label":"Foundation","children":[{"label":"Accessibility","href":"/foundation_-_accessibility.html"},{"label":"Backgrounds","href":"/foundation_-_backgrounds.html"},{"label":"Colours","href":"/foundation_-_colours.html"},{"label":"Grids","href":"/foundation_-_grids.html"},{"label":"Icons","href":"/foundation_-_icons.html"},{"label":"Illustrations","href":"/foundation_-_illustrations.html"},{"label":"Imagery","href":"/foundation_-_imagery.html"},{"label":"Themes","href":"/foundation_-_themes.html"},{"label":"Typography","href":"/foundation_-_typography.html"}]},{"label":"Components","children":[{"label":"Accordions","href":"/components_-_accordions.html"},{"label":"Badges","href":"/components_-_badges.html"},{"label":"Buttons","href":"/components_-_buttons.html","active":true},{"label":"Cards","href":"/components_-_cards.html"},{"label":"Carousel","href":"/components_-_carousel.html"},{"label":"Chart (bar horizontal)","href":"/components_-_chart_(bar_horizontal).html"},{"label":"Chart (bar vertical)","href":"/components_-_chart_(bar_vertical).html"},{"label":"Chart (pie)","href":"/components_-_chart_(pie).html"},{"label":"Checkboxes","href":"/components_-_checkboxes.html"},{"label":"Dividers","href":"/components_-_dividers.html"},{"label":"Dropdown (select)","href":"/components_-_select.html"},{"label":"Empty States (upload)","href":"/components_-_empty_states.html"},{"label":"Expand & Collapse","href":"/components_-_expand_&_collapse.html"},{"label":"Footer","href":"/components_-_footer.html"},{"label":"Header","href":"/components_-_header.html"},{"label":"Input Fields","href":"/components_-_input_fields.html"},{"label":"Links","href":"/components_-_links.html"},{"label":"Lists","href":"/components_-_lists.html"},{"label":"Loading Bar","href":"/components_-_loading_bar.html"},{"label":"Loading Spinner","href":"/components_-_loading_spinner.html"},{"label":"Menu Flyout","href":"/components_-_menu_(flyout_and_contextual).html"},{"label":"Modals","href":"/components_-_modals.html"},{"label":"Numeric Stepper","href":"/components_-_numeric_stepper.html"},{"label":"Notifications (header)","href":"/components_-_notifications_(header).html"},{"label":"Notifications (inline)","href":"/components_-_notifications_(inline).html"},{"label":"Notifications (modal)","href":"/components_-_notifications_(modal).html"},{"label":"Picker (colour)","href":"/components_-_picker_(colour).html"},{"label":"Picker (date)","href":"/components_-_picker_(date).html"},{"label":"Picker (option)","href":"/components_-_picker_(option).html"},{"label":"Progress Bar","href":"/components_-_progress_bar.html"},{"label":"Radio Buttons","href":"/components_-_radio_buttons.html"},{"label":"Ribbons & Stickers","href":"/components_-_ribbons_&_stickers.html"},{"label":"Scroll-to-top","href":"/components_-_scroll_to_top.html"},{"label":"Search","href":"/components_-_search.html"},{"label":"Show More","href":"/components_-_show_more.html"},{"label":"Sliders","href":"/components_-_sliders.html"},{"label":"Switches","href":"/components_-_switches.html"},{"label":"Tables","href":"/components_-_tables.html"},{"label":"Tabs","href":"/components_-_tabs.html"},{"label":"Toolbar","href":"/components_-_toolbar.html"},{"label":"Tooltips","href":"/components_-_tooltips.html"}]},{"label":"Developers","children":[{"label":"Getting started","href":"/developers_-_getting_started.html"},{"label":"CDN vs NPM","href":"/developers_-_npm_installation.html"},{"label":"Troubleshooting","href":"/developers_-_troubleshooting.html"},{"label":"How to contribute","href":"/developers_-_how_to_contribute.html"},{"label":"Clearfix utils","href":"/developers_-_clearfix_utils.html"},{"label":"Margin & padding utils","href":"/developers_-_margin_padding_utils.html"},{"label":"Screen Reader utils","href":"/developers_-_screen_reader_utils.html"},{"label":"Text utils","href":"/developers_-_text_utils.html"},{"label":"Visibility utils","href":"/developers_-_visibility_utils.html"},{"label":"Layout utils","href":"/developers_-_layout_utils.html"},{"label":"CSS Variables","href":"/developers_-_css_variables.html"}]}]}]}}'
+></sdx-header>
+
+
+  <style>
+    sdx-header {
+      height: var(--sdx-header-height-mobile-with-breadcrumbs);
+    }
+
+    @media (min-width: 1024px) {
+      sdx-header {
+        height: var(--sdx-header-height-desktop-with-breadcrumbs);
+      }
+    }
+  </style>
+
+
+
+
+<a id="content"></a>
+<div class="major-wrapper page container-page padding-xs-v-2 padding-lg-v-3">
+  <div class="row page">
+
+    
+      <div class="col-lg-3 hidden-md-down" id="sdx-left-hand-menu-outlet"></div>
+    
+
+    <div class="col-lg-9" aria-labelledby="Buttons">
+
+      
+
+      <h1 class="h1">Buttons</h1>
+
+
+<sdx-tabs>
+  <sdx-tabs-item label="Intro" href="#intro">
+
+    <p>Buttons are graphical control elements that provide users a triggered event. They must contain a clear actionable text and may additionally contain icons. Buttons are more visually dominant than text links. They guide the user through the content as a visual highlight and act as "call to action".</p>
+
+    <p>For an example of how to use buttons in a form, please see <a href="#designers-layout-variants">layout variants</a>.</p>
+
+    <div class="row">
+      <div class="col">
+        <sdx-button-group>
+          <sdx-button label="Primary Button"></sdx-button>
+          <sdx-button theme="secondary" label="Secondary Button"></sdx-button>
+          <sdx-button theme="cancel" label="Cancel"></sdx-button>
+        </sdx-button-group>
+      </div>
+    </div>
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Designers" href="#designers">
+
+    
+          <h2 id="designers-button-group"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-button-group').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-button-group').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-button-group')"
+    id="sdxbutton-for-designers-button-group"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Button group</h2>
+
+    <p>
+      The Button Group can be used to group buttons inside a container in order to create a set of related actions. The buttons will always be right aligned and will be placed under each other on mobile.</br>
+      A Button Group can have an optional "Cancel" button to interrupt a certain operation. The cancel button has a specific style in order to be less prominent than the other buttons.
+    </p>
+    <p>See also <a href="#designers-layout-variants">button group behaviours</a> for additional layout options.</p>
+
+    <p>
+      <sdx-figma url="https%3A%2F%2Fwww.figma.com%2Ffile%2FVxLpPIRajDeaBiEHrLaFGo%2FSDX-Documentation%3Fnode-id%3D49077%253A5872" height="500"></sdx-figma>
+    </p>
+
+    
+          <h2 id="designers-types"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-types').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-types').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-types')"
+    id="sdxbutton-for-designers-types"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Button types</h2>
+
+    <p>A screen can contain different button types. The hyerarchical structure can be controlled by using the different buttons.</p>
+
+    <ul class="list">
+      <li>Primary buttons are used for the main call to action and therefore use it sparingly and selectively.</li>
+      <li>Secondary buttons can be used in conjunction with primary buttons to indicate that the button is of lower priority.</li>
+      <li>Confirmation buttons are used for the final step in a process to indicate that an action is final and significant. For example, an 'Order' button at the end of a checkout process.</li>
+      <li>Icons can be used in buttons to help give their functionality more clarity at a glance.</li>
+    </ul>
+
+    
+          <h3 id="designers-primary-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-primary-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-primary-button').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-primary-button')"
+    id="sdxbutton-for-designers-primary-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Primary button</h3>
+
+    <div class="paragraph">
+      <sdx-button-group layout="fixed">
+        <sdx-button label="Primary"></sdx-button>
+        <sdx-button icon-name="icon-shopping-trolley" label="Order"></sdx-button>
+      </sdx-button-group>
+    </div>
+
+    
+          <h3 id="designers-secondary-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-secondary-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-secondary-button').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-secondary-button')"
+    id="sdxbutton-for-designers-secondary-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Secondary button</h3>
+
+    <div class="paragraph">
+      <sdx-button-group layout="fixed">
+        <sdx-button theme="secondary" label="Secondary"></sdx-button>
+        <sdx-button theme="secondary" icon-name="icon-shopping-trolley" label="Order"></sdx-button>
+      </sdx-button-group>
+    </div>
+
+    
+          <h3 id="designers-confirmation-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-confirmation-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-confirmation-button').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-confirmation-button')"
+    id="sdxbutton-for-designers-confirmation-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Confirmation button</h3>
+
+    <div class="paragraph">
+      <sdx-button-group layout="fixed">
+        <sdx-button theme="confirm" label="Confirmation"></sdx-button>
+        <sdx-button theme="confirm" label="Order" icon-name="icon-shopping-trolley"></sdx-button>
+      </sdx-button-group>
+    </div>
+
+    
+          <h3 id="designers-outlined-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-outlined-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-outlined-button').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-outlined-button')"
+    id="sdxbutton-for-designers-outlined-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Outlined button</h3>
+
+    <p>Buttons on a coloured background should revert to the colourless theme and not use the interaction colours for buttons. See guidelines for <a href="/foundation_-_backgrounds.html#designers-dark-backgrounds">Dark backgrounds</a>
+    </p>
+
+    <div class="row paragraph">
+      <div class="bg-gradient-1 col-lg-9 col-md-9 margin-left-1 padding-1">
+        <sdx-button-group layout="fixed">
+          <sdx-button background="dark" label="Button"></sdx-button>
+          <sdx-button background="dark" label="Order" icon-name="icon-shopping-trolley"></sdx-button>
+        </sdx-button-group>
+      </div>
+    </div>
+
+    
+          <h3 id="designers-transparent-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-transparent-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-transparent-button').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-transparent-button')"
+    id="sdxbutton-for-designers-transparent-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Transparent button</h3>
+
+    <p>Transparent buttons can be used for interactive icons (i.e. 'Close' buttons or tooltip toggles) or text with icons. When using only text, make sure not to confuse it with <a class="link" href="/components_-_links.html">text links</a>.
+    </p>
+
+    <div class="paragraph">
+      <sdx-button theme="transparent" icon-name="icon-thumb-up" icon-size="3" sr-hint="Vote if you like"></sdx-button>
+    </div>
+
+    
+          <h2 id="designers-layout-variants"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-layout-variants').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-layout-variants').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-layout-variants')"
+    id="sdxbutton-for-designers-layout-variants"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Layout variants</h2>
+
+    <p>The regular placement of the buttons on desktop, is bottom right.</p>
+
+    <div class="row paragraph">
+      <div class="col-xs-12 col-md-8 paragraph">
+        <img class="image image--frame-light bg-sc-white" src="/img/design/buttons/regular-desktop@2x.png" alt="Layout example desktop">
+        <figcaption class="figcaption">Regular button position desktop</figcaption>
+      </div>
+      <div class="col-xs-12 col-md-4 paragraph">
+        <img class="image image--frame-light bg-sc-white" src="/img/design/buttons/regular-mobile@2x.png" alt="Layout example mobile">
+        <figcaption class="figcaption">Regular button position mobile</figcaption>
+      </div>
+    </div>
+
+    
+          <h3 id="designers-layout-fullwidth"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-layout-fullwidth').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-layout-fullwidth').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-layout-fullwidth')"
+    id="sdxbutton-for-designers-layout-fullwidth"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Layout fullwidth</h3>
+
+    <p>Within small components, such as cards, it's possible to use the fullwidth layout. This layout behaves the same on desktop and mobile screens.</p>
+
+    <div class="row paragraph">
+      <div class="col-xs-12 col-md-8 paragraph">
+        <img class="image image--frame-light bg-sc-white" src="/img/design/buttons/fullwidth-desktop@2x.png" alt="Buttons layout example desktop">
+        <figcaption class="figcaption">Fullwidth button example desktop</figcaption>
+      </div>
+      <div class="col-xs-12 col-md-4 paragraph">
+        <img class="image image--frame-light bg-sc-white" src="/img/design/buttons/fullwidth-mobile@2x.png" alt="Buttons layout example mobile">
+        <figcaption class="figcaption">Fullwidth button example mobile</figcaption>
+      </div>
+    </div>
+
+    
+          <h3 id="designers-layout-fill"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-layout-fill').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-layout-fill').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-layout-fill')"
+    id="sdxbutton-for-designers-layout-fill"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Layout fill</h3>
+
+      <p>Layout fill can be used inside small modals to place two buttons next to each other along the width. This variant is preferred to give equal importance to both actions. This layout should be used only with short labels that fit on mobile screens.</p>
+
+    <div class="row paragraph">
+      <div class="col-xs-12 col-md-8 paragraph">
+        <img class="image" src="/img/design/buttons/fill-desktop@2x.png" alt="Buttons layout example desktop">
+        <figcaption class="figcaption">Layout fill button example desktop</figcaption>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <img class="image" src="/img/design/buttons/fill-mobile@2x.png" alt="Buttons layout example desktop">
+        <figcaption class="figcaption">Layout fill button example mobile</figcaption>
+      </div>
+    </div>
+
+    
+          <h3 id="designers-layout-responsive-fill"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-designers-layout-responsive-fill').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-designers-layout-responsive-fill').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#designers-layout-responsive-fill')"
+    id="sdxbutton-for-designers-layout-responsive-fill"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Layout responsive fill</h3>
+
+    <p>This variant is based on "Layout fill" with the addition of a responsive behavior on mobile when the button labels require more text.</p>
+
+    <div class="row paragraph">
+      <div class="col-xs-12 col-md-8 paragraph">
+        <img class="image" src="/img/design/buttons/responsive-fill-desktop@2x.png" alt="Buttons layout example desktop">
+        <figcaption class="figcaption">Responsive fill button example desktop</figcaption>
+      </div>
+      <div class="col-xs-12 col-md-4">
+        <img class="image" src="/img/design/buttons/responsive-fill-mobile@2x.png" alt="Buttons layout example desktop">
+        <figcaption class="figcaption">Responsive fill button example mobile</figcaption>
+      </div>
+    </div>
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Developers" href="#developers">
+
+    
+          <h2 id="developers-button-types"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-button-types').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-button-types').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-button-types')"
+    id="sdxbutton-for-developers-button-types"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Button types</h2>
+
+    <p>There are four button types: Primary, secondary, confirm and cancel.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button-group>
+          <sdx-button label="Primary"></sdx-button>
+          <sdx-button theme="secondary" label="Secondary"></sdx-button>
+          <sdx-button theme="cancel" label="Cancel"></sdx-button>
+        </sdx-button-group>
+
+        <br>
+
+        <sdx-button-group>
+          <sdx-button theme="confirm" label="Confirm"></sdx-button>
+        </sdx-button-group>
+
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-outlined-buttons"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-outlined-buttons').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-outlined-buttons').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-outlined-buttons')"
+    id="sdxbutton-for-developers-outlined-buttons"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Outlined buttons</h2>
+
+    <p>For buttons on coloured background, set the attribute <code class="code">background="dark"</code>, so the basic button will just have an outline.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <div class="bg-gradient-1 padding-1">
+          <sdx-button-group>
+            <sdx-button background="dark" label="Order" icon-name="icon-shopping-trolley"></sdx-button>
+          </sdx-button-group>
+        </div>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-transparent-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-transparent-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-transparent-button').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-transparent-button')"
+    id="sdxbutton-for-developers-transparent-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Transparent button</h2>
+
+    <p>This button has no border at all and can be used for example for icon buttons or tooltip toggles. Use <code class="code">theme="transparent"</code> for interactive single icons. Provide enough space for click and tap area.</p>
+
+    <p>This theme can be used with an icon and text or only icon.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button theme="transparent" icon-name="icon-thumb-up" icon-size="2" label="Like" sr-hint="Vote if you like"></sdx-button>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-loading-button"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-loading-button').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-loading-button').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-loading-button')"
+    id="sdxbutton-for-developers-loading-button"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Loading button</h2>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <div class="padding-3">
+          <sdx-button theme="secondary" loading></sdx-button>
+        </div>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-button-group-behaviours"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-button-group-behaviours').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-button-group-behaviours').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-button-group-behaviours')"
+    id="sdxbutton-for-developers-button-group-behaviours"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Button group behaviours</h2>
+
+    <p>Buttons can be placed inside an <code class="code">&lt;sdx-button-group&gt;</code>. The Button Group then defines the layout and size of the buttons.</p>
+
+    <ul class="list single-line">
+      <li>Standalone buttons can be placed without a button group.</li>
+      <li>Button groups with the <code class="code">responsive</code> layout are always right aligned and reversed in order. This makes the first button in the DOM (primary) displayed as the first button on the right on desktops and on the top on mobiles.</li>
+      <li>To make the buttons use the full width of a group, use the layout <code class="code">fill</code>.</li>
+      <li>Use the layout <code class="code">fullwidth</code> to make every button use 100% of the width of the container. Buttons will be vertically aligned. Full width buttons should only be used in smaller containers, i.e. the sidebar or inside cards.</li>
+      <li>To keep the buttons from resizing, use the <code class="code">fixed</code> layout.</li>
+      <li>A combination of "fill" and "responsive" is <code class="code">responsive-fill</code>. On desktop the buttons have full width and on mobiles they are among each other.</li>
+    </ul>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button theme="secondary" label="Standalone"></sdx-button>
+
+        <hr/>
+        <h4 class="h4">Layout fullwidth</h4>
+        <sdx-button-group layout="fullwidth">
+          <sdx-button theme="secondary" label="Discover Swisscom Pay"></sdx-button>
+        </sdx-button-group>
+
+        <hr/>
+        <h4 class="h4">Layout fill</h4>
+        <sdx-button-group layout="fill">
+          <sdx-button theme="secondary" label="Okay"></sdx-button>
+          <sdx-button theme="secondary" label="Cancel"></sdx-button>
+        </sdx-button-group>
+
+        <hr/>
+        <h4 class="h4">Layout responsive fill</h4>
+        <sdx-button-group layout="responsive-fill">
+          <sdx-button theme="secondary" label="Download for Windows"></sdx-button>
+          <sdx-button theme="secondary" label="Download for Mac"></sdx-button>
+          <sdx-button theme="secondary" label="Cancel"></sdx-button>
+        </sdx-button-group>
+
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-buttons-as-link"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-buttons-as-link').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-buttons-as-link').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-buttons-as-link')"
+    id="sdxbutton-for-developers-buttons-as-link"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Button as a link</h2>
+
+    <p>To get a link in button look, just add the <code class="code">href</code> attribute with value.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button-group>
+          <sdx-button label="Button" href="javascript:;"></sdx-button>
+        </sdx-button-group>
+      </textarea>
+    </sdx-code-editor>
+
+    
+          <h2 id="developers-submit"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-developers-submit').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-developers-submit').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#developers-submit')"
+    id="sdxbutton-for-developers-submit"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Submit</h2>
+
+    <p>Since the &lt;sdx-button /&gt; is not a native HTML element, adding <code class="code">type="submit"</code> won't work. To make it submit the form, JavaScript has to be used. For example:</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button label="Submit" onclick="document.forms[0].submit()"></sdx-button>
+      </textarea>
+    </sdx-code-editor>
+
+    
+  
+  
+  
+
+  
+
+  <div class="table table--responsive table--highlight padding-v-2">
+    
+          <h3 id="sdx-button-api"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-sdx-button-api').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-sdx-button-api').style.opacity = 0;"  class="h3 table__title">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#sdx-button-api')"
+    id="sdxbutton-for-sdx-button-api"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          &lt;sdx-button /&gt;: <code class="code">HTMLSdxButtonElement</code></h3>
+
+    <div class="table__wrapper">
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute / property (attributes are used in HTML, properties in JavaScript)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>aria-expanded-on-button / ariaExpandedOnButton</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Value for aria-expanded that will be applied to the button element. Used
+for buttons that trigger expanding/collapsing such as an accordion,
+dropdown menu or tooltip.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>background</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;light&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">&#34;light&#34; | &#34;dark&#34;</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Background theme. Use "dark" to make button transparent, whenever it is
+used on a colored or dark background (single color or image).</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>badge</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Usually a number, to be used to gain the user's attention.
+Supported for icon buttons when "theme" is "transparent".</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>disabled</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Button disabled.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>href</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>"href" when used as a link looking like a button.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>icon-name / iconName</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">IconName</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Which icon to display.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>icon-size / iconSize</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">1 | 2 | 3 | 4 | 5 | 6 | undefined</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Size of the displayed icon. Can only be modified when theme="transparent".
+Font-size will be adjusted automatically.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>label</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Button text.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>loading</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">false</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">boolean</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Shows a loading spinner and disables the sdx-button.
+Don't forget to set srHint accordingly.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>sr-hint / srHint</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Description text read by the screen reader. Will be appended to the button
+content and to the loading spinner when loading="true".</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>target</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">undefined</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">string</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>"target" when used as a link looking like a button.</p>
+                  </div>
+                </td>
+              </tr>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>theme</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;primary&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">&#34;primary&#34; | &#34;secondary&#34; | &#34;confirm&#34; | &#34;transparent&#34; | &#34;cancel&#34; | &#34;chip&#34;</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Button theme.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Methods</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>doFocus()</strong>: <code class="code">Promise&lt;void&gt;</code>
+
+                  
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Set focus to element.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+    </div>
+  </div>
+
+  
+  
+  
+
+  
+
+  <div class="table table--responsive table--highlight padding-v-2">
+    
+          <h3 id="sdx-button-group-api"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-sdx-button-group-api').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-sdx-button-group-api').style.opacity = 0;"  class="h3 table__title">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#sdx-button-group-api')"
+    id="sdxbutton-for-sdx-button-group-api"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          &lt;sdx-button-group /&gt;: <code class="code">HTMLSdxButtonGroupElement</code></h3>
+
+    <div class="table__wrapper">
+      
+        <table>
+          <thead>
+            <tr>
+              <th>Attribute / property (attributes are used in HTML, properties in JavaScript)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            
+              <tr>
+                <td style="white-space: normal;">
+                  <strong>layout</strong>
+
+                  <span class="gray-tint-5">=</span>
+
+                  <code class="code">&#34;responsive&#34;</code>
+
+                  <pre class="text-smaller margin-top-0 gray-tint-5">&#34;responsive&#34; | &#34;fixed&#34; | &#34;fullwidth&#34; | &#34;fill&#34; | &#34;responsive-fill&#34;</pre>
+
+                  <!-- Allow Markdown -->
+                  <div class="margin-top-2">
+                    <p>Defines how buttons are aligned, sized and distributed.</p>
+                  </div>
+                </td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    </div>
+  </div>
+
+
+
+  </sdx-tabs-item>
+  <sdx-tabs-item label="Accessibility" href="#accessibility">
+
+    
+          <h3 id="accessibility-semantic-markup"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-accessibility-semantic-markup').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-accessibility-semantic-markup').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#accessibility-semantic-markup')"
+    id="sdxbutton-for-accessibility-semantic-markup"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Semantic markup</h3>
+
+    <p>Screen readers can differentiate between buttons and links and offer alternative control options for different HTML elements. You should always <strong>respect the true nature of an element</strong> and pass it on to the screen reader accordingly.</p>
+
+    <p>Buttons are generally used to trigger actions, such submitting forms, going forward in a process, open modals etc. For less important actions or to navigate to a new page use the <a class="link" href="/components_-_links.html">link element</a>.
+    </p>
+
+    <ul class="list">
+      <li>Ensure to use the right markup for the correct purpose.</li>
+      <li>Define a clear actionable text.</li>
+      <li>If the URL has to navigate to new window or tab, provide a spoken warning into <code class="code">sr-hint</code> to mitigate confusion for assistive technology.</li>
+    </ul>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button theme="secondary" label="Open in a new tab" href="javascript:;" aria-label="opens in new tab or window" target="_blank"
+        sr-hint="opens in new tab or window"></sdx-button>
+      </textarea>
+    </sdx-code-editor>
+
+    <p>Remember to put an appropriate text for the screen reader for the <code class="code">sr-hint</code> attribute.</p>
+
+    <sdx-code-editor>
+      <textarea name="sdx-code-editor">
+        <sdx-button theme="transparent" icon-name="icon-thumb-up" icon-size="2" label="Like" sr-hint="Vote if you like"></sdx-button>
+      </textarea>
+    </sdx-code-editor>
+
+  </sdx-tabs-item>
+</sdx-tabs>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <footer class="footer footer--full">
+    <div class="footer__bottom">
+      <div class="container-page">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-lg">
+            <div class="footer--nav footer--left">
+              <ul class="nav-items nav-items--divider">
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/imprint.html">
+                      Imprint
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/legal.html">
+                      Legal aspects
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/contact.html">
+                      Contact
+                    </a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+<sdx-scroll-to-top></sdx-scroll-to-top>
+
+<script src="/js/tabs.js"></script>
+<script src="/js/smooth-anchor-scrolling.js"></script>
+
+      
+    </div>
+  </body>
+</html>
+
+

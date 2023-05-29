@@ -1,0 +1,78 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
+        "accessibility": "explicit",
+        "overrides": {
+          "constructors": "no-public",
+          "accessors": "no-public"
+        }
+      }
+    ],
+    "@typescript-eslint/no-empty-function": "error",
+    "@typescript-eslint/no-misused-new": "off",
+    "@typescript-eslint/no-shadow": [
+      "off",
+      {
+        "hoist": "all"
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-redeclare": [
+      "error",
+      {
+        "builtinGlobals": false
+      }
+    ],
+    "curly": "error",
+    "default-case": "error",
+    "dot-notation": "error",
+    "eqeqeq": ["error", "always"],
+    "id-denylist": "error",
+    "id-match": "error",
+    "no-bitwise": "error",
+    "no-caller": "error",
+    "no-cond-assign": "error",
+    "no-constant-condition": "error",
+    "no-control-regex": "error",
+    "no-debugger": "error",
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-fallthrough": "error",
+    "no-invalid-regexp": "error",
+    "no-invalid-this": "off",
+    "no-irregular-whitespace": "error",
+    "no-magic-numbers": "off",
+    "no-new-wrappers": "error",
+    "no-regex-spaces": "error",
+    "no-shadow": "off",
+    "no-sparse-arrays": "error",
+    "no-throw-literal": "error",
+    "no-undef-init": "error",
+    "no-unsafe-finally": "error",
+    "no-unused-labels": "error",
+    "no-use-before-define": "off",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "one-var": ["off", "never"],
+    "prefer-template": "error",
+    "radix": "error",
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "markers": ["/"]
+      }
+    ],
+    "use-isnan": "error"
+  }
+}

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The Swisscom Digital Experience (SDX) is Swisscom's design system and consists of a component library, UX principles, design guidelines, documentations and rules. It's a living style guide built for all designers and developers working for Swisscom.">
+
+    <title>Guidelines - Accessibility</title>
+
+    <script>
+      [
+        "sdx.swisscom.com",
+        "sdxcode.swisscom.ch",
+        "sdxcode.swisscom.com",
+        "digitalexperience.swisscom.ch",
+        "digitalexperience.swisscom.com"
+      ].indexOf(location.hostname) > -1 && (location.hostname = "sdx.swisscom.ch");
+
+      // global function
+      function sdxScrollToAnchor() {
+        if (!location.hash) return;
+
+        function scrollToAnchor() {
+          const headerOffset = 71; // $header-level1-height - 1px border
+          const element = document.querySelector(location.hash)
+
+          if (!element) return;
+
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+        }
+        // give the user some time for orientation & give sdx-code-editor time to render
+        setTimeout(scrollToAnchor, 500)
+        setTimeout(scrollToAnchor, 1500)
+      }
+    </script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico"/>
+
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_400_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_700_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_600_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/TheSans/TheSansB_500_.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/sdx//fonts/sdx-icons/sdx-icons.woff2" as="font" type="font/woff2" crossorigin />
+
+    
+      
+        <link rel="stylesheet" href="/sdx//css/sdx.min.css">
+      
+
+      <script src="/sdx//js/sdx.min.js"></script>
+    
+
+    <script src="/sdx//js/webcomponents/webcomponents/webcomponents.esm.js" type="module"></script>
+    <script src="https://tags.tiqcdn.com/utag/swisscom/main/dev/utag.sync.js"></script>
+
+    <style>
+      body {
+        /*
+         * See https://sdx.swisscom.ch/developers_-_troubleshooting.html#jumping-content
+         */
+        overflow-y: scroll;
+      }
+    </style>
+  </head>
+
+  <body class="sdx sdx--light-theme">
+    <script>
+      (function(a,b,c,d){
+      a="//tags.tiqcdn.com/utag/swisscom/main/dev/utag.js";
+      b=document;c="script";d=b.createElement(c);d.src=a;d.type="text/java"+c;d.async=true;
+      a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+      })();
+
+      var pageObject = {
+        platform: {
+          platform: "sdx",
+          environment: "dev",
+          context: "online"
+        },
+        page: {
+          path: "sdx" + location.pathname
+            .replace("_-_", "-")
+            .replace(".html", "")
+            .replace("(", "")
+            .replace(")", ""),
+          language: "en",
+          cfu: "none",
+          charset: "utf-8"
+        },
+        apps: {
+          uxTracking: {
+            active: true
+          }
+        }
+      };
+
+      if (window.SCS && SCS.datalayer && SCS.datalayer.page) {
+        SCS.datalayer.page(pageObject);
+      }
+    </script>
+
+    
+
+    <div class="main-wrapper">
+<sdx-header
+  id="header"
+  index='{
+    "href": "/index.html"
+  }'
+  navigation='{"primary":{"label":"Sites","children":[{"label":"Brand Center","href":"https://brand.swisscom.com"},{"label":"Git Repo","href":"https://git.swisscom.com/projects/SDX/repos/sdx"}]},"secondary":{"label":"Services","children":[{"label":"Stay up-to-date","iconName":"icon-information-circle","href":"https://wiki.swisscom.com/pages/viewrecentblogposts.action?key=SDX"},{"label":"Create a ticket","iconName":"icon-new","href":"https://jira.swisscom.com/browse/SDX"}]},"tertiary":{"label":"Contact","children":[{"label":"Contact","href":"mailto:support.sdx@swisscom.com"}]},"main":{"label":"SDX","children":[{"label":"Imprint","href":"/imprint.html","hidden":true},{"label":"Legal aspects","href":"/legal.html","hidden":true},{"label":"Contact","href":"/contact.html","hidden":true},{"label":"Principles","href":"/principles.html"},{"label":"Resources","href":"/index.html","hasLeftHandMenu":true,"children":[{"label":"All the basics","href":"/index.html"},{"label":"Foundation","children":[{"label":"Accessibility","href":"/foundation_-_accessibility.html","active":true},{"label":"Backgrounds","href":"/foundation_-_backgrounds.html"},{"label":"Colours","href":"/foundation_-_colours.html"},{"label":"Grids","href":"/foundation_-_grids.html"},{"label":"Icons","href":"/foundation_-_icons.html"},{"label":"Illustrations","href":"/foundation_-_illustrations.html"},{"label":"Imagery","href":"/foundation_-_imagery.html"},{"label":"Themes","href":"/foundation_-_themes.html"},{"label":"Typography","href":"/foundation_-_typography.html"}]},{"label":"Components","children":[{"label":"Accordions","href":"/components_-_accordions.html"},{"label":"Badges","href":"/components_-_badges.html"},{"label":"Buttons","href":"/components_-_buttons.html"},{"label":"Cards","href":"/components_-_cards.html"},{"label":"Carousel","href":"/components_-_carousel.html"},{"label":"Chart (bar horizontal)","href":"/components_-_chart_(bar_horizontal).html"},{"label":"Chart (bar vertical)","href":"/components_-_chart_(bar_vertical).html"},{"label":"Chart (pie)","href":"/components_-_chart_(pie).html"},{"label":"Checkboxes","href":"/components_-_checkboxes.html"},{"label":"Dividers","href":"/components_-_dividers.html"},{"label":"Dropdown (select)","href":"/components_-_select.html"},{"label":"Empty States (upload)","href":"/components_-_empty_states.html"},{"label":"Expand & Collapse","href":"/components_-_expand_&_collapse.html"},{"label":"Footer","href":"/components_-_footer.html"},{"label":"Header","href":"/components_-_header.html"},{"label":"Input Fields","href":"/components_-_input_fields.html"},{"label":"Links","href":"/components_-_links.html"},{"label":"Lists","href":"/components_-_lists.html"},{"label":"Loading Bar","href":"/components_-_loading_bar.html"},{"label":"Loading Spinner","href":"/components_-_loading_spinner.html"},{"label":"Menu Flyout","href":"/components_-_menu_(flyout_and_contextual).html"},{"label":"Modals","href":"/components_-_modals.html"},{"label":"Numeric Stepper","href":"/components_-_numeric_stepper.html"},{"label":"Notifications (header)","href":"/components_-_notifications_(header).html"},{"label":"Notifications (inline)","href":"/components_-_notifications_(inline).html"},{"label":"Notifications (modal)","href":"/components_-_notifications_(modal).html"},{"label":"Picker (colour)","href":"/components_-_picker_(colour).html"},{"label":"Picker (date)","href":"/components_-_picker_(date).html"},{"label":"Picker (option)","href":"/components_-_picker_(option).html"},{"label":"Progress Bar","href":"/components_-_progress_bar.html"},{"label":"Radio Buttons","href":"/components_-_radio_buttons.html"},{"label":"Ribbons & Stickers","href":"/components_-_ribbons_&_stickers.html"},{"label":"Scroll-to-top","href":"/components_-_scroll_to_top.html"},{"label":"Search","href":"/components_-_search.html"},{"label":"Show More","href":"/components_-_show_more.html"},{"label":"Sliders","href":"/components_-_sliders.html"},{"label":"Switches","href":"/components_-_switches.html"},{"label":"Tables","href":"/components_-_tables.html"},{"label":"Tabs","href":"/components_-_tabs.html"},{"label":"Toolbar","href":"/components_-_toolbar.html"},{"label":"Tooltips","href":"/components_-_tooltips.html"}]},{"label":"Developers","children":[{"label":"Getting started","href":"/developers_-_getting_started.html"},{"label":"CDN vs NPM","href":"/developers_-_npm_installation.html"},{"label":"Troubleshooting","href":"/developers_-_troubleshooting.html"},{"label":"How to contribute","href":"/developers_-_how_to_contribute.html"},{"label":"Clearfix utils","href":"/developers_-_clearfix_utils.html"},{"label":"Margin & padding utils","href":"/developers_-_margin_padding_utils.html"},{"label":"Screen Reader utils","href":"/developers_-_screen_reader_utils.html"},{"label":"Text utils","href":"/developers_-_text_utils.html"},{"label":"Visibility utils","href":"/developers_-_visibility_utils.html"},{"label":"Layout utils","href":"/developers_-_layout_utils.html"},{"label":"CSS Variables","href":"/developers_-_css_variables.html"}]}]}]}}'
+></sdx-header>
+
+
+  <style>
+    sdx-header {
+      height: var(--sdx-header-height-mobile-with-breadcrumbs);
+    }
+
+    @media (min-width: 1024px) {
+      sdx-header {
+        height: var(--sdx-header-height-desktop-with-breadcrumbs);
+      }
+    }
+  </style>
+
+
+
+
+<a id="content"></a>
+<div class="major-wrapper page container-page padding-xs-v-2 padding-lg-v-3">
+  <div class="row page">
+
+    
+      <div class="col-lg-3 hidden-md-down" id="sdx-left-hand-menu-outlet"></div>
+    
+
+    <div class="col-lg-9" aria-labelledby="Accessibility">
+
+      
+
+      <h1 class="h1">Accessibility</h1>
+
+
+<p>Swisscom is looking forward to reaching at least the AA Compliance for their experience. It is still an ongoing process and we will keep improving the accessibility. Therefore, we work with "Access for all" to evaluate the SDX style guide in order to get an AA Certification,
+  and even more important, to prevent excluding anyone.</p>
+
+<p>By making your website accessible, you are ensuring that all users, including people with disabilities, have a good user experience and are able to easily access your information.</p>
+
+<p>Web accessibility includes all disabilities that affect access to the Web:</p>
+
+<ul class="list single-line">
+  <li>auditory</li>
+  <li>cognitive</li>
+  <li>neurological</li>
+  <li>physical</li>
+  <li>speech</li>
+  <li>visual</li>
+  <li>impairments due to age</li>
+</ul>
+
+<p>Approximately 20% of the Swiss population is affected (10’000 blind, 325’000 visually impaired, 500’000 auditorily impaired).</p>
+
+
+          <h2 id="rules"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-rules').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-rules').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#rules')"
+    id="sdxbutton-for-rules"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Rules</h2>
+
+<p>To achieve an AA compliant website, it’s necessary to follow some rules:</p>
+
+<ul class="list">
+  <li>It's always recommended to use <b>native HTML</b> instead of ARIA-labels.</li>
+  <li>Implement a semantically correct structure (H1 followed by H2, P used for text, …).</li>
+  <li>Keep in mind that all elements of a website should be focusable by using the keyboard only, in the desired order and have a visual focus.</li>
+  <li>Do not delete ARIA information from SDX examples. It ensures the right interpretation by screen readers.</li>
+</ul>
+
+
+          <h3 id="wai-aria"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-wai-aria').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-wai-aria').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#wai-aria')"
+    id="sdxbutton-for-wai-aria"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          WAI-ARIA (Web Accessibility Initiative – Accessible Rich Internet Applications)</h3>
+
+<p>Add <a href="https://www.w3.org/WAI/standards-guidelines/aria/">semantics</a> to elements that are not native HTML (e.g. Web Components):</p>
+
+<ul class="list single-line">
+  <li>Use them sparingly</li>
+  <li>Use them consistently</li>
+  <li>Avoid redundant output through screen readers</li>
+</ul>
+
+
+          <h3 id="focus"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-focus').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-focus').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#focus')"
+    id="sdxbutton-for-focus"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Focus</h3>
+
+<p>Use <a href="https://www.w3.org/TR/WCAG20-TECHS/G1.html">skip links</a> as an initial focus on your page which enables the screen reader quickly access the most important content.</p>
+
+
+          <h3 id="further-infos"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-further-infos').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-further-infos').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#further-infos')"
+    id="sdxbutton-for-further-infos"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Further information</h3>
+
+<ul class="list single-line">
+  <li class="icon-chevron-normal-right"><a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Accessibility Initiative WAI</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://www.access-for-all.ch/ch/">Access for all</a> (Independent authority for the certification of accessible websites)</li>
+  <li class="icon-chevron-normal-right"><a href="https://www.accessibility-developer-guide.com/">Accessibility Developer Guide</a></li>
+  <li class="icon-chevron-normal-right"><a href="http://www.accessibility-checklist.ch">Accessibility checklist</a></li>
+</ul>
+
+
+          <h2 id="usage"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-usage').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-usage').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#usage')"
+    id="sdxbutton-for-usage"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Usage</h2>
+
+<p>You have to check the whole page semantic structure and context.
+Please check your website by using a screen reader – see section <a href="#testingtools">Testing Tools</a>.</p>
+
+<p>
+  <sdx-card layout="notification" notification-type="general" label="Compliance responsibility" label-aria-level="3">
+    By using the accessible components, it is not a guarantee that the website is also accessible. The SDX consumer should take the responsibility of the whole accessible experience.
+  </sdx-card>
+</p>
+
+
+          <h3 id="facts"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-facts').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-facts').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#facts')"
+    id="sdxbutton-for-facts"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Facts</h3>
+
+<p>Most used by screen reader users are...</p>
+
+<ul class="list single-line">
+  <li>Operating system: Windows</li>
+  <li>Browser: Chrome</li>
+  <li>Mobile device (VoiceOver): iPhone</li>
+</ul>
+
+
+          <h3 id="code-examples"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-code-examples').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-code-examples').style.opacity = 0;"  class="h3">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#code-examples')"
+    id="sdxbutton-for-code-examples"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Code examples</h3>
+
+<p>Use the <code class="code">sr-hint</code> to give screen readers the information of what kind of icon is used:</p>
+
+<sdx-code-editor preview="false">
+  <textarea name="sdx-code-editor">
+    <sdx-icon icon-name="icon-heart" size="6" sr-hint="Like"></sdx-icon>
+  </textarea>
+</sdx-code-editor>
+
+<p>Please add an alternative description to your images using <code class="code">alt</code>:</p>
+
+<sdx-code-editor preview="false">
+  <textarea name="sdx-code-editor">
+    <img alt="iPhone 7" src="...">
+  </textarea>
+</sdx-code-editor>
+
+<p>Use the role <code class="code">group</code> to group together belonging options.<br>By setting <code class="code">aria-describedby</code> the screen reader user knows that further information is given and helps for better understanding.</p>
+
+<sdx-code-editor preview="false">
+  <textarea name="sdx-code-editor">
+    <form>
+      <div class="form-group" role="group" aria-label="Group vertical">
+        <label>Checkbox group</label>
+
+        <div class="checkbox">
+          <input type="checkbox" name="dummy" id="checkbox5-1">
+          <label for="checkbox5-1">Option 1</label>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" name="dummy" id="checkbox5-2" aria-describedby="supportingText-1">
+          <label for="checkbox5-2">Option 2</label>
+          <p id="supportingText-1">Supporting description text</p>
+        </div>
+      </div>
+    </form>
+  </textarea>
+</sdx-code-editor>
+
+
+          <h2 id="testingtools"
+          style="display:flex;align-items:center;"
+          onmouseover="document.getElementById('sdxbutton-for-testingtools').style.opacity = 1;"
+          onmouseout="document.getElementById('sdxbutton-for-testingtools').style.opacity = 0;"  class="h2">
+          
+  <sdx-button
+    onclick="navigator.clipboard.writeText(location.origin + location.pathname + '#testingtools')"
+    id="sdxbutton-for-testingtools"
+    theme="transparent"
+    style="opacity: 0; position: absolute; margin-left: -23px; padding-right: 5px;"
+    icon-name="icon-copy"
+    sr-hint="copy link"
+  ></sdx-button>
+          Testing tools</h2>
+
+<p>The following testing tools are recommended by "Access for all":</p>
+
+<ul class="list single-line">
+  <li class="icon-chevron-normal-right"><a href="https://www.mozilla.org/de/firefox/new/">Firefox, latest version</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://www.nvaccess.org">NVDA Screen Reader Software</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://addons.nvda-project.org/addons/focusHighlight.de.html">NVDA Focus tool</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://hinderlingvolkart.github.io/h123/">h123 Bookmarklet</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://testen.bitv-test.de/bookmarklets.html">Structured Contents Bookmarklet</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://addons.mozilla.org/de/firefox/addon/web-developer/">Web Developer Toolbar</a></li>
+  <li class="icon-chevron-normal-right"><a href="http://wave.webaim.org/extension/">WAVE Chrome Extension</a></li>
+  <li class="icon-chevron-normal-right"><a href="http://www.paciellogroup.com/resources/contrastAnalyser">Colour Contrast Analyser (CCA)</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi">headingsMap (Chrome)</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://addons.mozilla.org/de/firefox/addon/headingsmap/">headingsMap (Firefox)</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://chrome.google.com/webstore/detail/headingsmap/flbjommegcjonpdmenkdiocclhjacmbi">VisBug (Chrome)</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://chrome.google.com/webstore/detail/wcag-contrast-checker/plnahcmalebffmaghcpcmpaciebdhgdf">WCAG Contrast checker (Chrome)</a></li>
+  <li class="icon-chevron-normal-right"><a href="https://addons.mozilla.org/de/firefox/addon/wcag-contrast-checker/">WCAG Contrast checker (Firefox)</a></li>
+</ul>
+
+<p>See also <a href="/developers_-_screen_reader_utils.html">Developers - Screen Reader utils</a>.</p>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <footer class="footer footer--full">
+    <div class="footer__bottom">
+      <div class="container-page">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-lg">
+            <div class="footer--nav footer--left">
+              <ul class="nav-items nav-items--divider">
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/imprint.html">
+                      Imprint
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/legal.html">
+                      Legal aspects
+                    </a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link " href="/contact.html">
+                      Contact
+                    </a>
+                  </li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+<sdx-scroll-to-top></sdx-scroll-to-top>
+
+<script src="/js/tabs.js"></script>
+<script src="/js/smooth-anchor-scrolling.js"></script>
+
+      
+    </div>
+  </body>
+</html>
+
+
