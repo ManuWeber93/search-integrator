@@ -149,10 +149,7 @@ describe("Integrator", () => {
                 const fileName: string = 'test1.html';
                 const filePath: string = path.join(directoryPath, fileName);
 
-                // @ts-ignore
-                const expectedHtmlComponent: string = "<div id=\"test-component\">\r\n" +
-                    "  <h1>I am a test-component</h1>\r\n" +
-                    "</div>"
+                const expectedHtmlComponent: string = "<div id=\"test-component\"><h1>I am a test-component</h1></div>"
 
                 expect(fs.existsSync(directoryPath)).to.be.true;
                 expect(fs.existsSync(filePath)).to.be.true;
@@ -194,10 +191,7 @@ describe("Integrator", () => {
                 const fileName: string = `test1.html`;
                 const filePath: string = path.join(directoryPath, fileName);
 
-                // @ts-ignore
-                const expectedHtmlComponent: string = "<div id=\"test-component\">\r\n" +
-                    "  <h1>I am a test-component</h1>\r\n" +
-                    "</div>"
+                const expectedHtmlComponent: string = "<div id=\"test-component\"><h1>I am a test-component</h1></div>"
 
                 expect(fs.existsSync(directoryPath)).to.be.true;
                 expect(fs.existsSync(filePath)).to.be.true;
@@ -212,28 +206,6 @@ describe("Integrator", () => {
         });
 
         context("IHtmlComponentIntegration with pathToComponent and placement", () => {
-            let config: ISearchIntegratorConfig = {
-
-                inputDirectories: [
-                    {
-                        "inputDirectory": testInputDirectory,
-                    }
-                ],
-                baseUrl: testBaseUrl,
-                outputBaseDirectory: testOutputDirectory,
-                integratorConfig: {
-                    htmlComponentIntegrations: [
-                        {
-                            pathToComponent: "./src/test/03_integrator/component-to-integrate/test-component.html",
-                            placement: "beforeend"
-                        }
-                    ]
-                }
-            }
-
-            // @ts-ignore
-            const integrator = new Integrator(config);
-
             it('should check if an HTML file exists and contains the specified component and the specified place', function () {
                 expect(true).to.be.true
             });
