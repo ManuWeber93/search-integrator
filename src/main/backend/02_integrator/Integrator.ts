@@ -34,6 +34,7 @@ class Integrator {
 
     this.htmlComponentsToIntegrate =
         this.config.integratorConfig?.htmlComponentIntegrations;
+
     this.scriptsToIntegrate = concatDefaultAndConfigLists(
         [
           {
@@ -42,6 +43,7 @@ class Integrator {
         ],
         this.config.integratorConfig?.scriptIntegrations
     );
+
     this.stylesheetsToIntegrate =
         this.config.integratorConfig?.stylesheetIntegrations;
   }

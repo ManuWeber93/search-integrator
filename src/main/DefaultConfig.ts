@@ -21,6 +21,7 @@ class DefaultConfig {
     threshold: 0.4,
     ignoreLocation: true,
   } as ISearchOptions;
+
   public static readonly SEARCH_MAX_NUMBER_OF_SEARCH_RESULTS_ON_DESKTOP = 10;
   public static readonly SEARCH_MAX_NUMBER_OF_SEARCH_RESULTS_ON_MOBILE = 5;
 
@@ -28,9 +29,11 @@ class DefaultConfig {
     ".html",
     ".htm",
   ];
+
   public static readonly INTEGRATOR_SCRIPT_INTEGRATIONS: IScriptIntegration = {
     pathToScript: "dist/search-integrator.js",
   };
+
   public static readonly INTEGRATOR_HTML_COMPONENT_SELECTOR = "body";
   public static readonly INTEGRATOR_HTML_COMPONENT_PLACEMENT = "afterbegin";
   public static readonly INTEGRATOR_SCRIPT_SELECTOR = "body";

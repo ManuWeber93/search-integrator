@@ -1,4 +1,5 @@
 interface IIntegratorConfig {
+  // TODO: Wiso sind dies Listen? Kann man mehrere Suchkomponenten integrieren? macht dies Sinn?
   htmlComponentIntegrations?: IHtmlComponentIntegration[];
   scriptIntegrations?: IScriptIntegration[];
   stylesheetIntegrations?: IStylesheetIntegration[];

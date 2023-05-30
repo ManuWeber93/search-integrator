@@ -1,199 +1,219 @@
-/*
 import { expect } from "chai";
 import fs from "fs";
-import Integrator from "../../../main/01_Npm/backend/02_integrator/Integrator.js";
-import { IIntegratorConfig } from "../../../main/01_Npm/backend/02_integrator/models/IntegratorModels";
+import Integrator from "../../main/backend/02_integrator/Integrator.js";
+import {ISearchIntegratorConfig} from "../../main/models/SearchIntegratorModels";
 import path from "path";
-import { JSDOM } from "jsdom";
+// @ts-ignore
+import {afterEach} from "mocha";
+import {parse} from "node-html-parser";
 
 describe("Integrator", () => {
-  let testConfig: IIntegratorConfig;
 
-  afterEach(() => {
-    const outputDirectory = testConfig.outputDirectory;
-    fs.readdirSync(outputDirectory).forEach((file) => {
-      fs.unlinkSync(`${outputDirectory}/${file}`);
-    });
-  });
+    const testInputDirectory = "src/test/03_integrator/html-files";
+    const testBaseUrl = "./test/03_integrator";
+    const testOutputDirectory = "src/test/03_integrator/output/";
 
-  it("should not run integration if both scriptIntegration and componentIntegration are false", () => {
-    testConfig = {
-      scriptIntegration: false,
-      componentIntegration: false,
-      targetDirectory: "src/test/01_Npm/03_integrator/HTMLFiles",
-      scriptIntegrationConfig: {
-        directoryScripts: "src/test/01_Npm/03_integrator/ScriptFiles",
-        sourceScriptFileExtensions: [".js", ".cjs", "json"],
-      },
-      componentIntegrationConfig: {
-        hookElementID: "searchBar",
-        pathToComponentToIntegrate:
-          "src/test/01_Npm/03_integrator/SearchComponentTest.html",
-      },
-      targetFileExtensions: [".html"],
-      excludedFiles: [],
-      outputDirectory: "src/test/01_Npm/03_integrator/output",
-    };
+    afterEach(() => {
+        deleteFolderRecursive(testOutputDirectory)
+    })
 
-    const integrator = new Integrator(testConfig);
-    const originalFiles = fs.readdirSync(
-      testConfig.targetDirectory
-    );
-    integrator.runIntegrator();
-    const stillOriginalFiles = fs.readdirSync(
-      testConfig.targetDirectory
-    );
-    const modifiedFiles = fs.readdirSync(testConfig.outputDirectory);
+    describe("Minimal Configuration", () => {
+        context("inputDirectory with one plain, outputBaseDirectory and baseUrl are given", () => {
+            const config: ISearchIntegratorConfig = {
 
-    expect(modifiedFiles).to.deep.equal([]);
-    expect(originalFiles).to.deep.equal(stillOriginalFiles);
-  });
+                inputDirectories: [
+                    {
+                        inputDirectory: testInputDirectory,
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory
+            }
 
-  it("should run integration for HTML files if componentIntegration is true", () => {
-    testConfig = {
-      scriptIntegration: false,
-      componentIntegration: true,
-      targetDirectory: "src/test/01_Npm/03_integrator/HTMLFiles",
-      scriptIntegrationConfig: {
-        directoryScripts: "src/test/01_Npm/03_integrator/ScriptFiles",
-        sourceScriptFileExtensions: [".js", ".cjs", "json"],
-      },
-      componentIntegrationConfig: {
-        hookElementID: "searchBar",
-        pathToComponentToIntegrate:
-            "src/test/01_Npm/03_integrator/SearchComponentTest.html",
-      },
-      targetFileExtensions: [".html"],
-      excludedFiles: [],
-      outputDirectory: "src/test/01_Npm/03_integrator/output",
-    };
+            const integrator = new Integrator(config)
 
-/!*    const integrator = new Integrator(testConfig);
+            it("should create outputDirectory with html file in it", () => {
+                integrator.runIntegrator();
+                expect(fs.existsSync(config.outputBaseDirectory)).to.be.true;
 
-    integrator.runIntegrator();
+                const isFileExists = fs.existsSync(`${config.outputBaseDirectory}/test1.html`);
+                expect(isFileExists).to.be.true;
+            });
 
-    const originalFiles = readFiles(
-      testConfig.componentIntegrationConfig.directoryHtmlFiles
-    );
-    const modifiedFiles = fs.readdirSync(testConfig.outputDirectory);
-    const toBeIntegratedComopnent = fs.readFileSync(
-      testConfig.componentIntegrationConfig.pathToComponentToIntegrate
-    );
-    console.log(originalFiles);
-    console.log(modifiedFiles);
+        })
 
-    expect(originalFiles.length).to.equal(modifiedFiles.length);
-    modifiedFiles.forEach((file) => {
-      let fileContents = fs
-        .readFileSync(`${testConfig.outputDirectory}/${file}`)
-        .toString();
-      const dom = new JSDOM();
-      let document = dom.window.document;
-      document.documentElement.innerHTML = fileContents;
+        context("inputDirectory with one plain, outputBaseDirectory and baseUrl are given and relativeOutputDirectory", () => {
+            const config: ISearchIntegratorConfig = {
 
-      const searchBar = document.querySelector(
-        testConfig.componentIntegrationConfig.hookElementID
-      );
+                inputDirectories: [
+                    {
+                        inputDirectory: testInputDirectory,
+                        relativeOutputDirectory: "/html-files"
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory
+            }
 
+            const integrator = new Integrator(config)
 
-      expect(searchBar).to.be.true;
-      // @ts-ignore
-      expect(searchBar.innerHTML).to.deep.equal(toBeIntegratedComopnent);
-       *!/
-    });
-  });
+            it("should create outputDirectory which contains the relativeOutputDirectory stated in the config with html file in it", () => {
+                integrator.runIntegrator();
+                expect(fs.existsSync(config.outputBaseDirectory)).to.be.true;
+                expect(fs.existsSync(`${config.outputBaseDirectory}/${config.inputDirectories[0].relativeOutputDirectory}`)).to.be.true;
 
-  it("should run integration for script files if scriptIntegration is true", () => {
-    testConfig = {
-      scriptIntegration: true,
-      componentIntegration: false,
-      targetDirectory: "src/test/01_Npm/03_integrator/HTMLFiles",
-      scriptIntegrationConfig: {
-        directoryScripts: "src/test/01_Npm/03_integrator/ScriptFiles",
-        sourceScriptFileExtensions: [".js", ".cjs", "json"],
-      },
-      componentIntegrationConfig: {
-        hookElementID: "searchBar",
-        pathToComponentToIntegrate:
-            "src/test/01_Npm/03_integrator/SearchComponentTest.html",
-      },
-      targetFileExtensions: [".html"],
-      excludedFiles: [],
-      outputDirectory: "src/test/01_Npm/03_integrator/output",
-    };
+                const isFileExists = fs.existsSync(`${config.outputBaseDirectory}/${config.inputDirectories[0].relativeOutputDirectory}/test1.html`);
+                expect(isFileExists).to.be.true;
 
-    const integrator = new Integrator(testConfig);
+            });
 
-    integrator.runIntegrator();
+        })
 
-    // TODO: Assert the expected changes to the HTML files
-    // TODO: Assert that the corresponding files are created or modified
-  });
+        context("inputDirectory with more than one plain, outputBaseDirectory and baseUrl are given", () => {
+            const config: ISearchIntegratorConfig = {
 
-  it("should run integration for both HTML and script files if both scriptIntegration and componentIntegration are true", () => {
-    const testConfig = {
-      scriptIntegration: true,
-      componentIntegration: true,
-      targetDirectory: "src/test/01_Npm/03_integrator/HTMLFiles",
-      scriptIntegrationConfig: {
-        directoryScripts: "src/test/01_Npm/03_integrator/ScriptFiles",
-        sourceScriptFileExtensions: [".js", ".cjs", "json"],
-      },
-      componentIntegrationConfig: {
-        hookElementID: "searchBar",
-        pathToComponentToIntegrate:
-            "src/test/01_Npm/03_integrator/SearchComponentTest.html",
-      },
-      targetFileExtensions: [".html"],
-      excludedFiles: [],
-      outputDirectory: "src/test/01_Npm/03_integrator/output",
-    };
+                inputDirectories: [
+                    {
+                        "inputDirectory": testInputDirectory,
+                    },
+                    {
+                        "inputDirectory": "src/test/03_integrator/html-files/Subfolder1",
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory
+            }
 
-    const integrator = new Integrator(testConfig);
+            const integrator = new Integrator(config)
 
-    integrator.runIntegrator();
-    // TODO: Assert the expected changes to the HTML files
-    // TODO: Assert that the corresponding files are created or modified
-  });
-});
+            it("should create outputDirectory with all plains", () => {
+                integrator.runIntegrator();
+                expect(fs.existsSync(config.outputBaseDirectory)).to.be.true;
+                expect(fs.existsSync(`${config.outputBaseDirectory}/Subfolder1`)).to.be.false;
+            });
+        })
 
-function readFiles(dir: string): string[] {
-  let files: string[] = [];
-  const entries = fs.readdirSync(dir);
+        context("inputDirectory with more than one plain, outputBaseDirectory and baseUrl are given and relativeOutputDirectory", () => {
+            const config: ISearchIntegratorConfig = {
 
-  for (const entry of entries) {
-    const entryPath = path.join(dir, entry);
-    const stat = fs.statSync(entryPath);
+                inputDirectories: [
+                    {
+                        inputDirectory: testInputDirectory,
+                        relativeOutputDirectory: "/html-files"
+                    },
+                    {
+                        inputDirectory: "src/test/03_integrator/html-files/Subfolder1",
+                        relativeOutputDirectory: "/html-files/Subfolder1"
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory
+            }
 
-    if (stat.isDirectory()) {
-      const subFiles = readFiles(entryPath);
-      files = files.concat(subFiles);
-    } else {
-      files.push(path.basename(entryPath));
+            const integrator = new Integrator(config)
+
+            it("should create outputDirectory with all plains which contains the relativeOutputDirectory stated in the config", () => {
+                integrator.runIntegrator();
+                expect(fs.existsSync(config.outputBaseDirectory)).to.be.true;
+                expect(fs.existsSync(`${config.outputBaseDirectory}/${config.inputDirectories[0].relativeOutputDirectory}`)).to.be.true;
+                expect(fs.existsSync(`${config.outputBaseDirectory}/${config.inputDirectories[1].relativeOutputDirectory}`)).to.be.true;
+            });
+        })
+    })
+
+    describe("Integrator Config is used", () => {
+        context("IHtmlComponentIntegration with pathToComponent", () => {
+            // TODO: Siehe TODO in IntegratorModels.ts
+            const config: ISearchIntegratorConfig = {
+
+                inputDirectories: [
+                    {
+                        "inputDirectory": testInputDirectory,
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory,
+                integratorConfig: {
+                    htmlComponentIntegrations: [
+                        {
+                            pathToComponent: "./src/test/03_integrator/component-to-integrate/test-component.html"
+                        }
+                    ]
+                }
+            }
+
+            const integrator = new Integrator(config);
+
+            it('should check if an HTML file contains the specified reference to the component as link element', () => {
+                integrator.runIntegrator();
+                const directoryPath: string = './src/test/03_integrator/output';
+                const fileName: string = 'test1.html';
+                const filePath: string = path.join(directoryPath, fileName);
+
+                // @ts-ignore
+                const expectedHtmlComponent: string = "<div id=\"test-component\">\r\n" +
+                    "  <h1>I am a test-component</h1>\r\n" +
+                    "</div>"
+
+                expect(fs.existsSync(directoryPath)).to.be.true;
+                expect(fs.existsSync(filePath)).to.be.true;
+
+                const fileContent = fs.readFileSync(filePath, 'utf8');
+                const html = parse(fileContent)
+                const element = html.querySelector('#test-component')
+
+                expect(element).not.to.be.null
+                // @ts-ignore
+                expect(element.toString()).to.equal(expectedHtmlComponent);
+            });
+        })
+
+        context("IHtmlComponentIntegration with pathToComponent and selector", () => {
+            console.log("")
+        })
+
+        context("IHtmlComponentIntegration with pathToComponent and placement", () => {
+            console.log("")
+        })
+
+        context("IHtmlComponentIntegration with pathToComponent, selector and placement", () => {
+            console.log("")
+        })
+
+        context("IScriptIntegration with pathToScript", () => {
+            console.log("")
+        })
+
+        context("IScriptIntegration with pathToScript and selector", () => {
+            console.log("")
+        })
+
+        context("IScriptIntegration with pathToScript and placement", () => {
+            console.log("")
+        })
+
+        context("IScriptIntegration with pathToScript and module is true", () => {
+            console.log("")
+        })
+
+        context("IHtmlComponentIntegration with pathToComponent, selector and placement", () => {
+            console.log("")
+        })
+    })
+})
+
+// @ts-ignore
+function deleteFolderRecursive(folderPath: string): void {
+    if (fs.existsSync(folderPath)) {
+        fs.readdirSync(folderPath).forEach((file) => {
+            const curPath = path.join(folderPath, file);
+            if (fs.lstatSync(curPath).isDirectory()) {
+                deleteFolderRecursive(curPath);
+            } else {
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(folderPath);
     }
-  }
-
-  return files;
 }
 
-
-const config: IIntegratorConfig = {
-    "targetFileExtensions": [".html", ".htm"],
-    "targetDirectory": "./test/HTMLFiles/",
-    "scriptIntegrationConfig": {
-        "directoryScripts": "./test/ScriptFiles/",
-        "sourceScriptFileExtensions": [".js", ".cjs", ".json"]
-    },
-    "excludedFiles": [],
-    "componentIntegrationConfig": {
-        "hookElement": "#searchBar",
-        "pathToComponentToIntegrate": "./test/SearchComponentTest.html"
-    },
-    "outputDirectory": "./test/output/"
-}
-
-const TestIntegrator = new Integrator(config);
-TestIntegrator.runIntegrator();
-
-
-*/
