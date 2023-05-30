@@ -3,9 +3,8 @@ import fs from "fs";
 import Integrator from "../../main/backend/02_integrator/Integrator.js";
 import {ISearchIntegratorConfig} from "../../main/models/SearchIntegratorModels";
 import path from "path";
-// @ts-ignore
 import {afterEach} from "mocha";
-import {parse} from "node-html-parser";
+import {HTMLElement, parse} from "node-html-parser";
 
 describe("Integrator", () => {
 
@@ -144,7 +143,7 @@ describe("Integrator", () => {
 
             const integrator = new Integrator(config);
 
-            it('should check if an HTML file contains the specified reference to the component as link element', () => {
+            it('should check if an HTML file exists and contains the specified component', () => {
                 integrator.runIntegrator();
                 const directoryPath: string = './src/test/03_integrator/output';
                 const fileName: string = 'test1.html';
@@ -158,51 +157,114 @@ describe("Integrator", () => {
                 expect(fs.existsSync(directoryPath)).to.be.true;
                 expect(fs.existsSync(filePath)).to.be.true;
 
-                const fileContent = fs.readFileSync(filePath, 'utf8');
-                const html = parse(fileContent)
-                const element = html.querySelector('#test-component')
+                const fileContent: string = fs.readFileSync(filePath, 'utf8');
+                const html:HTMLElement = parse(fileContent)
+                const element:HTMLElement | null = html.querySelector('#test-component')
 
                 expect(element).not.to.be.null
-                // @ts-ignore
-                expect(element.toString()).to.equal(expectedHtmlComponent);
+                expect(element?.toString()).to.equal(expectedHtmlComponent);
             });
         })
 
         context("IHtmlComponentIntegration with pathToComponent and selector", () => {
-            console.log("")
-        })
+            const config: ISearchIntegratorConfig = {
+
+                inputDirectories: [
+                    {
+                        "inputDirectory": testInputDirectory,
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory,
+                integratorConfig: {
+                    htmlComponentIntegrations: [
+                        {
+                            pathToComponent: "./src/test/03_integrator/component-to-integrate/test-component.html",
+                            selector: "#searchBar"
+                        }
+                    ]
+                }
+            }
+
+            const integrator = new Integrator(config);
+
+            it('should check if an HTML file exists and contains the specified component and the specified place', function () {
+                integrator.runIntegrator();
+                const directoryPath: string = testOutputDirectory;
+                const fileName: string = `test1.html`;
+                const filePath: string = path.join(directoryPath, fileName);
+
+                // @ts-ignore
+                const expectedHtmlComponent: string = "<div id=\"test-component\">\r\n" +
+                    "  <h1>I am a test-component</h1>\r\n" +
+                    "</div>"
+
+                expect(fs.existsSync(directoryPath)).to.be.true;
+                expect(fs.existsSync(filePath)).to.be.true;
+
+                const fileContent: string = fs.readFileSync(filePath, 'utf8');
+                const html:HTMLElement = parse(fileContent)
+                const element:HTMLElement | null = html.querySelector('#searchBar')
+
+                expect(element).not.to.be.null
+                expect(element?.childNodes.toString()).to.equal(expectedHtmlComponent);
+            });
+        });
 
         context("IHtmlComponentIntegration with pathToComponent and placement", () => {
-            console.log("")
-        })
+            let config: ISearchIntegratorConfig = {
+
+                inputDirectories: [
+                    {
+                        "inputDirectory": testInputDirectory,
+                    }
+                ],
+                baseUrl: testBaseUrl,
+                outputBaseDirectory: testOutputDirectory,
+                integratorConfig: {
+                    htmlComponentIntegrations: [
+                        {
+                            pathToComponent: "./src/test/03_integrator/component-to-integrate/test-component.html",
+                            placement: "beforeend"
+                        }
+                    ]
+                }
+            }
+
+            // @ts-ignore
+            const integrator = new Integrator(config);
+
+            it('should check if an HTML file exists and contains the specified component and the specified place', function () {
+                expect(true).to.be.true
+            });
+        });
 
         context("IHtmlComponentIntegration with pathToComponent, selector and placement", () => {
             console.log("")
-        })
+        });
 
         context("IScriptIntegration with pathToScript", () => {
             console.log("")
-        })
+        });
 
         context("IScriptIntegration with pathToScript and selector", () => {
             console.log("")
-        })
+        });
 
         context("IScriptIntegration with pathToScript and placement", () => {
             console.log("")
-        })
+        });
 
         context("IScriptIntegration with pathToScript and module is true", () => {
             console.log("")
-        })
+        });
 
         context("IHtmlComponentIntegration with pathToComponent, selector and placement", () => {
             console.log("")
-        })
+        });
     })
 })
 
-// @ts-ignore
 function deleteFolderRecursive(folderPath: string): void {
     if (fs.existsSync(folderPath)) {
         fs.readdirSync(folderPath).forEach((file) => {
