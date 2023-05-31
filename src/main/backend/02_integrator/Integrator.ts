@@ -26,48 +26,48 @@ class Integrator {
     this.config = config;
 
     this.inputFileExtensions = concatDefaultAndConfigLists(
-        DefaultConfig.INTEGRATOR_INPUT_FILE_EXTENSIONS,
-        this.config.inputFileExtensions
+      DefaultConfig.INTEGRATOR_INPUT_FILE_EXTENSIONS,
+      this.config.inputFileExtensions
     );
 
     this.inputDirectories = this.config.inputDirectories;
 
     this.htmlComponentsToIntegrate =
-        this.config.integratorConfig?.htmlComponentIntegrations;
+      this.config.integratorConfig?.htmlComponentIntegrations;
 
     this.scriptsToIntegrate = concatDefaultAndConfigLists(
-        [
-          {
-            pathToScript: `${this.config.outputBaseDirectory}/${DefaultConfig.INTEGRATOR_SCRIPT_INTEGRATIONS.pathToScript}`,
-          },
-        ],
-        this.config.integratorConfig?.scriptIntegrations
+      [
+        {
+          pathToScript: `${this.config.outputBaseDirectory}/${DefaultConfig.INTEGRATOR_SCRIPT_INTEGRATIONS.pathToScript}`,
+        },
+      ],
+      this.config.integratorConfig?.scriptIntegrations
     );
 
     this.stylesheetsToIntegrate =
-        this.config.integratorConfig?.stylesheetIntegrations;
+      this.config.integratorConfig?.stylesheetIntegrations;
   }
 
   public runIntegrator(): void {
     this.inputDirectories.forEach((inputDirectory: IInputDirectory) => {
       const outputDirectoryName: string = `${this.config.outputBaseDirectory}/${
-          inputDirectory.relativeOutputDirectory ?? ""
+        inputDirectory.relativeOutputDirectory ?? ""
       }`;
       const filesOfDirectoryToBeEnriched = FileHandler.extractFiles(
-          inputDirectory.inputDirectory,
-          this.inputFileExtensions
+        inputDirectory.inputDirectory,
+        this.inputFileExtensions
       );
 
       this.integrateComponentsInFilesOfDirectory(
-          filesOfDirectoryToBeEnriched,
-          outputDirectoryName
+        filesOfDirectoryToBeEnriched,
+        outputDirectoryName
       );
     });
   }
 
   private integrateComponentsInFilesOfDirectory(
-      filesOfDirectoryToBeEnriched: string[],
-      outputDirectoryName: string
+    filesOfDirectoryToBeEnriched: string[],
+    outputDirectoryName: string
   ) {
     filesOfDirectoryToBeEnriched.forEach((htmlFilePath: string): void => {
       const htmlFile: HTMLElement = this.createHTMLDocument(htmlFilePath);
@@ -77,9 +77,9 @@ class Integrator {
       this.integrateStylesheets(htmlFile, outputDirectoryName);
 
       FileHandler.saveHTMLToFile(
-          htmlFile,
-          outputDirectoryName,
-          path.basename(htmlFilePath)
+        htmlFile,
+        outputDirectoryName,
+        path.basename(htmlFilePath)
       );
     });
   }
@@ -95,26 +95,26 @@ class Integrator {
     }
 
     this.htmlComponentsToIntegrate.forEach(
-        (htmlComponentIntegration: IHtmlComponentIntegration) => {
-          const htmlComponent = fs.readFileSync(
-              htmlComponentIntegration.pathToComponent,
-              "utf-8"
-          );
-          this.integrateComponent(
-              htmlFile,
-              htmlComponent,
-              htmlComponentIntegration.selector ??
-              DefaultConfig.INTEGRATOR_HTML_COMPONENT_SELECTOR,
-              htmlComponentIntegration.placement ??
-              DefaultConfig.INTEGRATOR_HTML_COMPONENT_PLACEMENT
-          );
-        }
+      (htmlComponentIntegration: IHtmlComponentIntegration) => {
+        const htmlComponent = fs.readFileSync(
+          htmlComponentIntegration.pathToComponent,
+          "utf-8"
+        );
+        this.integrateComponent(
+          htmlFile,
+          htmlComponent,
+          htmlComponentIntegration.selector ??
+            DefaultConfig.INTEGRATOR_HTML_COMPONENT_SELECTOR,
+          htmlComponentIntegration.placement ??
+            DefaultConfig.INTEGRATOR_HTML_COMPONENT_PLACEMENT
+        );
+      }
     );
   }
 
   private integrateScripts(
-      htmlFile: HTMLElement,
-      outputDirectoryName: string
+    htmlFile: HTMLElement,
+    outputDirectoryName: string
   ): void {
     if (!this.scriptsToIntegrate) {
       return;
@@ -122,84 +122,84 @@ class Integrator {
 
     this.scriptsToIntegrate.forEach((scriptIntegration: IScriptIntegration) => {
       const scriptTag = this.createScriptTag(
-          scriptIntegration.pathToScript,
-          outputDirectoryName,
-          scriptIntegration.module
+        scriptIntegration.pathToScript,
+        outputDirectoryName,
+        scriptIntegration.module
       );
       this.integrateComponent(
-          htmlFile,
-          scriptTag,
-          scriptIntegration.selector ?? DefaultConfig.INTEGRATOR_SCRIPT_SELECTOR,
-          scriptIntegration.placement ?? DefaultConfig.INTEGRATOR_SCRIPT_PLACEMENT
+        htmlFile,
+        scriptTag,
+        scriptIntegration.selector ?? DefaultConfig.INTEGRATOR_SCRIPT_SELECTOR,
+        scriptIntegration.placement ?? DefaultConfig.INTEGRATOR_SCRIPT_PLACEMENT
       );
     });
   }
 
   private createScriptTag(
-      pathToScript: string,
-      outputDirectoryName: string,
-      module?: boolean
+    pathToScript: string,
+    outputDirectoryName: string,
+    module?: boolean
   ): string {
     const relativePathToScript = path
-        .relative(outputDirectoryName, pathToScript)
-        .replace(/\\/g, "/");
+      .relative(outputDirectoryName, pathToScript)
+      .replace(/\\/g, "/");
     return `<script src="${relativePathToScript}" type="${
-        module ? "module" : "text/javascript"
+      module ? "module" : "text/javascript"
     }"></script>`;
   }
 
   private integrateStylesheets(
-      htmlFile: HTMLElement,
-      outputDirectoryName: string
+    htmlFile: HTMLElement,
+    outputDirectoryName: string
   ): void {
     if (!this.stylesheetsToIntegrate) {
       return;
     }
 
     this.stylesheetsToIntegrate.forEach(
-        (stylesheetIntegration: IStylesheetIntegration) => {
-          const linkTag = this.createLinkTag(
-              stylesheetIntegration.pathToStylesheet,
-              outputDirectoryName
-          );
-          this.integrateComponent(
-              htmlFile,
-              linkTag,
-              stylesheetIntegration.selector ??
-              DefaultConfig.INTEGRATOR_STYLESHEET_SELECTOR,
-              stylesheetIntegration.placement ??
-              DefaultConfig.INTEGRATOR_STYLESHEET_PLACEMENT
-          );
-        }
+      (stylesheetIntegration: IStylesheetIntegration) => {
+        const linkTag = this.createLinkTag(
+          stylesheetIntegration.pathToStylesheet,
+          outputDirectoryName
+        );
+        this.integrateComponent(
+          htmlFile,
+          linkTag,
+          stylesheetIntegration.selector ??
+            DefaultConfig.INTEGRATOR_STYLESHEET_SELECTOR,
+          stylesheetIntegration.placement ??
+            DefaultConfig.INTEGRATOR_STYLESHEET_PLACEMENT
+        );
+      }
     );
   }
 
   private createLinkTag(
-      pathToStylesheet: string,
-      outputDirectoryName: string
+    pathToStylesheet: string,
+    outputDirectoryName: string
   ): string {
     const relativePathToStylesheet = path
-        .relative(outputDirectoryName, pathToStylesheet)
-        .replace(/\\/g, "/");
+      .relative(outputDirectoryName, pathToStylesheet)
+      .replace(/\\/g, "/");
     return `<link rel="stylesheet" href="${relativePathToStylesheet}" />`;
   }
 
   private integrateComponent(
-      htmlFile: HTMLElement,
-      component: string,
-      parentElementSelector: string,
-      placement: InsertPosition
+    htmlFile: HTMLElement,
+    component: string,
+    parentElementSelector: string,
+    placement: InsertPosition
   ): void {
     const parentElement = this.getParentElement(
-        htmlFile,
-        parentElementSelector
+      htmlFile,
+      parentElementSelector
     );
     parentElement.insertAdjacentHTML(placement, component);
   }
 
   private getParentElement(
-      htmlFile: HTMLElement,
-      selector: string
+    htmlFile: HTMLElement,
+    selector: string
   ): HTMLElement {
     const parentElement: HTMLElement | null = htmlFile.querySelector(selector);
 
