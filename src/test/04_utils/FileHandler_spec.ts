@@ -13,9 +13,9 @@ import path from "path";
 import { HTMLElement, parse } from "node-html-parser";
 
 describe("FileHandler", () => {
-  const validDirectory: string = "./src/test/04_utils/testDirectory/existing";
+  const validDirectory: string = "./src/test/04_utils/test-directory/existing";
   const invalidDirectory: string =
-    "./notValid/test/04_utils/testDirectory/existing";
+    "./notValid/test/04_utils/test-directory/existing";
   const content: string = "<div>Test</div>";
   const html: HTMLElement = parse(content);
   const fileName: string = "test.html";
@@ -52,7 +52,7 @@ describe("FileHandler", () => {
   context("getJsonFromFile", () => {
     it("should return json from an existing file", function () {
       const existingFilePath: string =
-        "src/test/03_integrator/scripts-to-integrate/json-script.json";
+        "./src/test/04_utils/test-directory/json-script.json";
 
       expect(getJsonFileFromFS(existingFilePath)).to.eql({
         test: "tralalalalala",
@@ -70,7 +70,7 @@ describe("FileHandler", () => {
 
   context("extractFiles", () => {
     it("should return an array of files when directory contains matching files", () => {
-      const directoryPath = "src/test/04_utils/testDirectory/notEmpty";
+      const directoryPath = "src/test/04_utils/test-directory/notEmpty";
       const fileExtensions = [".txt", ".csv"];
 
       const expectedFiles = [
@@ -83,7 +83,7 @@ describe("FileHandler", () => {
     });
 
     it("should return an empty array when directory contains no files", () => {
-      const directoryPath = "src/test/04_utils/testDirectory/empty";
+      const directoryPath = "src/test/04_utils/test-directory/empty";
       const fileExtensions = [".txt", ".csv"];
 
       fs.readdirSync = () => [];
@@ -134,7 +134,7 @@ describe("FileHandler", () => {
 
   context("createDirectoryIfNotPresent", () => {
     it("should create the directory if it does not exist", () => {
-      const directoryPath = "./src/test/04_utils/testDirectory/notExisting";
+      const directoryPath = "./src/test/04_utils/test-directory/notExisting";
       createDirectoryIfNotPresent(directoryPath);
       expect(fs.existsSync(directoryPath)).to.be.true;
     });
