@@ -5,4 +5,4 @@ package-lock.json
 /src/**/*.js
 /src/**/*.d.ts
 /src/**/*.js.map
-./notValid
+/notValid
