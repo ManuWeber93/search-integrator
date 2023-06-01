@@ -1,9 +1,9 @@
+import "mocha";
+import {expect} from "chai";
 import SearchIntegrator from "../main/SearchIntegrator.js";
 import {ISearchIntegratorConfig} from "../main/models/SearchIntegratorModels";
-import {expect} from "chai";
 import fs from "fs";
 import path from "path";
-
 
 describe("SearchIntegrator", () => {
 
