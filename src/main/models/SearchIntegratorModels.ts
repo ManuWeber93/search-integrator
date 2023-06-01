@@ -25,7 +25,7 @@ interface ISearchIntegrator {
   integrateSearch: () => Promise<void>;
 }
 
-// TODO: @Manu, Can we get Rid of not used Config?
+// used in the frontend (clientside)
 interface ISearchProcessor {
   search: (
     searchTerm: string,
