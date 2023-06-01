@@ -51,12 +51,8 @@ class Parser {
 
   public parseWebpages(): IRecords {
     this.inputDirectories.forEach((inputDirectory: IInputDirectory) => {
-      // TODO: Filehandler nutzen anstatt direkt fs (wegen Error Handling)
-      // TODO: Auslagern in FileHandler, in
-      // const webpages: string[] = fs.readdirSync(inputDirectory.inputDirectory,);
+      const webpages: string[] = fs.readdirSync(inputDirectory.inputDirectory);
 
-      // TODO: Mit Manu besprechen !webpages braucht es eigentlich nicht oder?
-      // TODO: Fix, Funktioniert nicht       console.log(webpages.length)
       if (!webpages || webpages.length === 0) {
         throw new Error(
           `Unable to scan input directory '${inputDirectory}'. No webpages found.`

@@ -81,15 +81,6 @@ class SearchIntegrator implements ISearchIntegrator {
     const parser: Parser = new Parser(this.config);
     const records: IRecords = parser.parseWebpages();
 
-    // TODO: Mit Manu besprechen: Records kann nie leer sein wenn Inputverzeichnis nicht leer ist. Und ob Webseiten enthalten sind, wird im parser geprüft.
-    //     console.log(records)
-
-    if (!records) {
-      throw new Error(
-        "Websites could not be parsed. Please check that the input directory is not empty."
-      );
-    }
-
     if (this.config.parserConfig?.includeThesaurusSynonyms) {
       await parser.enrichRecordsWithSynonymsFromThesaurus(records);
     }

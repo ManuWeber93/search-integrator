@@ -55,19 +55,13 @@ function saveHTMLToFile(
   filePath: string,
   fileName: string
 ) {
-  createDirectoryIfNotPresent(filePath);
-  const outputPath = `${filePath}/${fileName}`;
-  fs.writeFileSync(outputPath, htmlFile.toString(), "utf-8");
-  /*
-    TODO: Mit Manu besprechen, es kann gar nie ein Error geworfen werden
     try {
      createDirectoryIfNotPresent(filePath);
-    const outputPath = `${filePath}/${fileName}`;
-    fs.writeFileSync(outputPath, htmlFile.toString(), "utf-8");
+      const outputPath = `${filePath}/${fileName}`;
+      fs.writeFileSync(outputPath, htmlFile.toString(), "utf-8");
     } catch (err) {
-    throw new Error(`HTML-File could not be saved: ${err} `);
+      throw new Error(`HTML-File could not be saved: ${err} `);
   }
-  */
 }
 
 function createDirectoryIfNotPresentAndWriteJsonFile(

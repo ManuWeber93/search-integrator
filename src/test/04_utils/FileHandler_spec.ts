@@ -117,19 +117,8 @@ describe("FileHandler", () => {
       expect(fs.existsSync(filePath)).to.be.true;
       expect(fs.readFileSync(filePath).toString()).to.eql(content);
     });
-
-    /*
-    TODO: siehe FileHandler Zeile 62
-    it('should throw an error when directory path is invalid', function () {
-      expect(() => saveHTMLToFile(html, invalidDirectory, fileName)).to.throw(
-          Error,
-          "HTML-File could not be saved"
-      )
-    });
-     */
   });
 
-  // TODO: Mit Manu besprechen, braucht es diese Funktion wirklich (reine Kosmetik?)
   context("createDirectoryIfNotPresentAndWriteJsonFile", () => {
     it("should create the directory and write the JSON file", () => {
       createDirectoryIfNotPresentAndWriteJsonFile(

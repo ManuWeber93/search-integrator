@@ -314,12 +314,12 @@ describe("Integrator", () => {
           integratorConfig: {
             scriptIntegrations: [
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/json-script.json",
+                pathToScript: "./src/test/03_integrator/scripts-to-integrate/script-two.js",
                 selector: "#scriptSelector",
                 placement: "afterbegin"
               },
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/script.js",
+                pathToScript: "./src/test/03_integrator/scripts-to-integrate/script-one.js",
                 selector: "#scriptSelector",
                 placement: "afterbegin"
               },
@@ -335,11 +335,9 @@ describe("Integrator", () => {
           const fileName: string = `test1.html`;
           const filePath: string = path.join(directoryPath, fileName);
 
-          // TODO: Mit Manu besprechen, sollte bei JSON Script nicht type="application/json" stehen?
-
           const expectedScriptTags: string[] = [
-                '<script src="../scripts-to-integrate/script.js" type="text/javascript"></script>',
-                '<script src="../scripts-to-integrate/json-script.json" type="text/javascript"></script>'
+                '<script src="../scripts-to-integrate/script-one.js" type="text/javascript"></script>',
+                '<script src="../scripts-to-integrate/script-two.js" type="text/javascript"></script>'
           ]
 
           expect(fs.existsSync(directoryPath)).to.be.true;
@@ -385,8 +383,6 @@ describe("Integrator", () => {
           const fileName: string = `test1.html`;
           const filePath: string = path.join(directoryPath, fileName);
 
-          // TODO: Mit Manu besprechen, sollte bei JSON Script nicht type="application/json" stehen?
-
           const expectedScriptTag: string =
             '<script src="../scripts-to-integrate/module-script.js" type="module"></script>';
 
@@ -431,14 +427,6 @@ describe("Integrator", () => {
           const directoryPath: string = testOutputDirectory;
           const fileName: string = `test1.html`;
           const filePath: string = path.join(directoryPath, fileName);
-
-          /* TODO: Mit Manu besprechen:
-          Node-html-parser erstellt link element nicht mit self closing /
-
-          const expectedLinkTag: string =
-              '<link rel="stylesheet" href="../stylesheets-to-integrate/stylesheet.css" />';
-          */
-
           const expectedLinkTag: string =
               '<link rel="stylesheet" href="../stylesheets-to-integrate/stylesheet.css" >';
 
@@ -451,9 +439,7 @@ describe("Integrator", () => {
           const link = head?.querySelector('link');
 
           expect(link).not.to.be.null;
-          expect(link?.toString()).to.equal(
-              expectedLinkTag
-          );
+          expect(link?.toString()).to.equal(expectedLinkTag);
         });
 
       });
@@ -486,14 +472,6 @@ describe("Integrator", () => {
           const directoryPath: string = testOutputDirectory;
           const fileName: string = `test1.html`;
           const filePath: string = path.join(directoryPath, fileName);
-
-          /* TODO: Mit Manu besprechen:
-          Node-html-parser erstellt link element nicht mit self closing /
-
-          const expectedLinkTag: string =
-              '<link rel="stylesheet" href="../stylesheets-to-integrate/stylesheet.css" />';
-          */
-
           const expectedLinkTag: string =
               '<link rel="stylesheet" href="../stylesheets-to-integrate/stylesheet.css" >';
 

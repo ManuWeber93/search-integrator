@@ -13,7 +13,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser//input-webpages",
+            inputDirectory: "src/test/01_parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -99,7 +99,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser//empty-directory",
+            inputDirectory: "src/test/01_parser/empty-directory",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -116,7 +116,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser//nonexistent-directory",
+            inputDirectory: "src/test/01_parser/nonexistent-directory",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -252,7 +252,7 @@ describe("Parser", () => {
         outputBaseDirectory: "./parsed-webpages",
         baseUrl: ".",
         parserConfig: {
-          synonymsFile: "src/test/01_parser//openUiSynonyms.json",
+          synonymsFile: "src/test/01_parser/openUiSynonyms.json",
         },
       };
       const parser = new Parser(config);

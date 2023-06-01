@@ -116,7 +116,6 @@ class Integrator {
     htmlFile: HTMLElement,
     outputDirectoryName: string
   ): void {
-    // TODO: @Manu, ist dies nötig, script von uns wird immer integriert.. this. scriptsToIntegrate kann also nie leer sein.
     if (!this.scriptsToIntegrate) {
       return;
     }
