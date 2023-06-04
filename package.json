@@ -1,7 +1,22 @@
 {
   "name": "search-integrator",
-  "version": "1.0.0",
-  "private": true,
+  "main": "./src/main/frontend/SearchProcessor.js",
+  "files": [
+    "/src/main/**/*.js",
+    "/src/main/**/*.d.ts"
+  ],
+  "version": "1.0.2",
+  "description": "A framework which allows to integrate a clientside on-site-search to any website.",
+  "keywords": ["search", "onsite search", "search integration", "clientside search"],
+  "homepage": "https://github.com/ManuWeber93/search-integrator",
+  "bugs": {
+    "url": "https://github.com/ManuWeber93/search-integrator/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ManuWeber93/search-integrator.git"
+  },
   "type": "module",
   "devDependencies": {
     "@babel/preset-env": "^7.20.2",
