@@ -1,11 +1,11 @@
 {
   "name": "search-integrator",
-  "main": "./src/main/frontend/SearchProcessor.js",
+  "main": "./src/main/SearchIntegrator.js",
   "files": [
     "/src/main/**/*.js",
     "/src/main/**/*.d.ts"
   ],
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A framework which allows to integrate a clientside on-site-search to any website.",
   "keywords": ["search", "onsite search", "search integration", "clientside search"],
   "homepage": "https://github.com/ManuWeber93/search-integrator",
