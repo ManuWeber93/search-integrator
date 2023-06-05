@@ -52,7 +52,6 @@ class Parser {
   public parseWebpages(): IRecords {
     this.inputDirectories.forEach((inputDirectory: IInputDirectory) => {
       const webpages: string[] = fs.readdirSync(inputDirectory.inputDirectory);
-
       if (!webpages || webpages.length === 0) {
         throw new Error(
           `Unable to scan input directory '${inputDirectory}'. No webpages found.`

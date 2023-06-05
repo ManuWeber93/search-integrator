@@ -78,6 +78,19 @@ function createDirectoryIfNotPresent(directoryPath: string): void {
     fs.mkdirSync(directoryPath, { recursive: true });
   }
 }
+function deleteFolderRecursive(directoryPath: string) {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach(file => {
+      const filePath = `${directoryPath}/${file}`;
+      if (fs.lstatSync(filePath).isDirectory()) {
+        deleteFolderRecursive(filePath);
+      } else {
+        fs.unlinkSync(filePath);
+      }
+    });
+    fs.rmdirSync(directoryPath);
+  }
+}
 
 export {
   saveHTMLToFile,
@@ -86,4 +99,5 @@ export {
   getJsonFileFromFS,
   createDirectoryIfNotPresentAndWriteJsonFile,
   createDirectoryIfNotPresent,
+  deleteFolderRecursive
 };

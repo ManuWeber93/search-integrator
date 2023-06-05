@@ -25,7 +25,6 @@ interface ISearchIntegrator {
   integrateSearch: () => Promise<void>;
 }
 
-// used in the frontend (clientside)
 interface ISearchProcessor {
   search: (
     searchTerm: string,

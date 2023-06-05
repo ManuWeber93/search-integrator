@@ -6,7 +6,7 @@ import {
   createDirectoryIfNotPresent,
   extractFiles,
   saveHTMLToFile,
-  createDirectoryIfNotPresentAndWriteJsonFile,
+  createDirectoryIfNotPresentAndWriteJsonFile, deleteFolderRecursive
 } from "../../main/utils/FileHandler.js";
 import fs from "fs";
 import path from "path";
@@ -26,8 +26,11 @@ describe("FileHandler", () => {
 
   const pathToFile: string = "./testData.json";
 
+  const originalFs = fs;
+
   after(function () {
     fs.unlinkSync(pathToFile);
+    fs.readdirSync = originalFs.readdirSync;
   });
 
   context("writeJsonToFile", () => {
@@ -83,10 +86,8 @@ describe("FileHandler", () => {
     });
 
     it("should return an empty array when directory contains no files", () => {
-      const directoryPath = "src/test/04_utils/test-directory/empty";
+      const directoryPath = "src/test/04_utils/test-directory/existing-empty";
       const fileExtensions = [".txt", ".csv"];
-
-      fs.readdirSync = () => [];
 
       const expectedFiles: string[] = [];
 
@@ -98,14 +99,12 @@ describe("FileHandler", () => {
       const directoryPath = "/path/to/nonexistent/directory";
       const fileExtensions = [".txt", ".csv"];
 
-      fs.readdirSync = () => {
-        throw new Error("File system error");
-      };
-
       expect(() => extractFiles(directoryPath, fileExtensions)).to.throw(
         Error,
         "Extraction Failed"
       );
+
+      fs.readdirSync = originalFs.readdirSync;
     });
   });
 
@@ -120,6 +119,11 @@ describe("FileHandler", () => {
   });
 
   context("createDirectoryIfNotPresentAndWriteJsonFile", () => {
+
+    after("Delete created Folder", () => {
+      deleteFolderRecursive(invalidDirectory)
+    })
+
     it("should create the directory and write the JSON file", () => {
       createDirectoryIfNotPresentAndWriteJsonFile(
         invalidDirectory,
@@ -133,6 +137,11 @@ describe("FileHandler", () => {
   });
 
   context("createDirectoryIfNotPresent", () => {
+
+    after("Delete created Folder", () => {
+      deleteFolderRecursive("./src/test/04_utils/test-directory/notExisting")
+    })
+
     it("should create the directory if it does not exist", () => {
       const directoryPath = "./src/test/04_utils/test-directory/notExisting";
       createDirectoryIfNotPresent(directoryPath);
