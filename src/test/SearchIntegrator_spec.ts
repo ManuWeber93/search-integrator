@@ -1,63 +1,86 @@
-// import { expect } from "chai";
-// import fs from "fs";
-// import SearchIntegrator from "../../main/01_Npm/SearchIntegrator.js";
-// import {getJsonFileFromFS} from "../../main/03_utils/FileHandler.js";
+import "mocha";
+import {expect} from "chai";
+import SearchIntegrator from "../main/SearchIntegrator.js";
+import {ISearchIntegratorConfig} from "../main/models/SearchIntegratorModels";
+import fs from "fs";
+import { after } from "mocha";
+import { deleteFolderRecursive } from "../main/utils/FileHandler.js";
+
+
 describe("SearchIntegrator", () => {
-  /*
-  beforeEach(() => {
-    const searchIntegrator = new SearchIntegrator(
-      "C:/BA/sdx_search_code/src/main/02_Swisscom/config/parserConfig.json",
-      "C:/BA/sdx_search_code/src/main/02_Swisscom/config/searchConfig.json"
-    );
-  });
+    const testInputDirectoryNotEmpty: string = "src/test/search-integrator-test/website";
+    const testBaseUrl: string = ".";
+    const testOutputDirectory: string = "src/test/search-integrator-test/output";
 
-  describe("integrateSearch()", () => {
-    it("should successfully integrate search", async () => {
-      // TODO: mit manu anschauen, was genau hat geändert? await searchIntegrator.integrateSearch();
-      // --> Funktion wurde umbenannt in writeWebsiteDataAndIndex()
+    after( "delete output folder", () => deleteFolderRecursive(testOutputDirectory))
 
-      // Assert that the search index file was created
-      console.log(process.cwd());
-      expect(
-        fs.existsSync("C:/BA/sdx_search_code/src/main/02_Swisscom/generated/")
-      ).to.be.true;
-      expect(
-        fs.existsSync(
-          "C:/BA/sdx_search_code/src/main/02_Swisscom/generated/searchIndex.json"
-        )
-      ).to.be.true;
-      expect(
-        fs.existsSync(
-          "C:/BA/sdx_search_code/src/main/02_Swisscom/generated/parsedWebpages.json"
-        )
-      ).to.be.true;
-    });
-  });
-    describe("getSearchInstance()", () => {
-      it("should return an instance of ISearchInstance", () => {
-        const searchInstance = searchIntegrator.getSearchInstance();
-        expect(searchInstance).to.be.a("object");
-        expect(searchInstance).to.have.property("search").that.is.a("function");
-      });
-    });
+    describe("integrateSearch", () => {
 
-      describe('search()', () => {
-          it('should return an array of ISearchResult', () => {
-              const searchInstance = searchIntegrator.getSearchInstance();
-              const searchResults = searchIntegrator.search(searchInstance, 'test');
-              expect(searchResults).to.be.an('array');
-              expect(searchResults[0]).to.have.property('item').that.is.a('object');
-              expect(searchResults[0]).to.have.property('refIndex').that.is.a('number');
-              expect(searchResults[0]).to.have.property('score').that.is.a('number');
-          });
+        context("valid configuration without packing ", () => {
+            const config: ISearchIntegratorConfig = {
+                baseUrl: testBaseUrl,
+                parserConfig: {
+                    parserOutputFilename: "records.json"
+                },
+                searchConfig: {
+                    searchIndexFilename: "searchIndex.json"
+                },
+                inputDirectories: [
+                    {
+                        inputDirectory: testInputDirectoryNotEmpty,
+                        relativeOutputDirectory: "/html-files"
+                    }
+                ],
+                packJsonInWebpackBundle: false,
+                outputBaseDirectory: testOutputDirectory
+            }
 
-          it('should filter good search results', () => {
-              const SearchConfig = getJsonFileFromFS("src/main/02_Swisscom/config/searchConfig.json")
-              const searchInstance = searchIntegrator.getSearchInstance();
-              const searchResults = searchIntegrator.search(searchInstance, 'test');
-              expect(searchResults.every(result => result.score! >= SearchConfig.minScoreToBeConsideredInResultList)).to.be.true;
-          });
-      });
+            const searchIntegrator: SearchIntegrator = new SearchIntegrator(config);
 
-   */
-});
+            it('should run through all the steps and create all files', async function() {
+                this.timeout(15000)
+                await searchIntegrator.integrateSearch()
+                expect(fs.existsSync(`${testOutputDirectory}/${config.parserConfig?.parserOutputFilename}`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/${config.searchConfig?.searchIndexFilename}`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/dist/search-integrator.js`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-one.html`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-two.html`)).to.be.true;
+            });
+
+        });
+
+        context("valid configuration with packing ", () => {
+            const config: ISearchIntegratorConfig = {
+                baseUrl: testBaseUrl,
+                parserConfig: {
+                    parserOutputFilename: "records.json"
+                },
+                searchConfig: {
+                    searchIndexFilename: "searchIndex.json"
+                },
+                inputDirectories: [
+                    {
+                        inputDirectory: testInputDirectoryNotEmpty,
+                        relativeOutputDirectory: "/html-files"
+                    }
+                ],
+                packJsonInWebpackBundle: true,
+                outputBaseDirectory: testOutputDirectory
+            }
+            const searchIntegrator: SearchIntegrator = new SearchIntegrator(config);
+
+            it('should run through all the steps', async function() {
+                this.timeout(15000)
+                await searchIntegrator.integrateSearch();
+                expect(fs.existsSync(`${testOutputDirectory}/${config.parserConfig?.parserOutputFilename}`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/${config.searchConfig?.searchIndexFilename}`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/dist/search-integrator.js`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-one.html`)).to.be.true;
+                expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-two.html`)).to.be.true;
+            });
+
+        })
+    })
+})

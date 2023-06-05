@@ -56,12 +56,12 @@ class SearchIntegrator implements ISearchIntegrator {
   }
 
   public async integrateSearch(): Promise<void> {
-    const logger = new Logger(this.config.logLevel);
+    const logger: Logger = new Logger(this.config.logLevel);
 
-    const records = await this.parseWebsiteData();
+    const records: IRecords = await this.parseWebsiteData();
     logger.log("Webpages successfully parsed.", LogLevel.Info);
 
-    const index = this.createSearchIndex(records);
+    const index: ISearchIndex = this.createSearchIndex(records);
     logger.log("Search index successfully created.", LogLevel.Info);
 
     this.writeWebsiteDataAndSearchIndex(records, index);
@@ -78,14 +78,8 @@ class SearchIntegrator implements ISearchIntegrator {
   }
 
   private async parseWebsiteData(): Promise<IRecords> {
-    const parser = new Parser(this.config);
-    const records = parser.parseWebpages();
-
-    if (!records) {
-      throw new Error(
-        "Websites could not be parsed. Please check that the input directory is not empty."
-      );
-    }
+    const parser: Parser = new Parser(this.config);
+    const records: IRecords = parser.parseWebpages();
 
     if (this.config.parserConfig?.includeThesaurusSynonyms) {
       await parser.enrichRecordsWithSynonymsFromThesaurus(records);

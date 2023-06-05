@@ -30,13 +30,13 @@ function extractFiles(
 ): string[] {
   let files: string[] = [];
   try {
-    const fileList = fs.readdirSync(directoryPath);
+    const fileList:string[] = fs.readdirSync(directoryPath);
     for (const file of fileList) {
-      const filePath = path.join(directoryPath, file);
-      const fileStat = fs.statSync(filePath);
+      const filePath:string = path.join(directoryPath, file);
+      const fileStat:fs.Stats = fs.statSync(filePath);
 
       if (fileStat.isFile()) {
-        const extension = path.extname(filePath).toLowerCase();
+        const extension:string = path.extname(filePath).toLowerCase();
 
         if (fileExtensions.includes(extension)) {
           files.push(filePath);
@@ -55,13 +55,12 @@ function saveHTMLToFile(
   filePath: string,
   fileName: string
 ) {
-  try {
-    createDirectoryIfNotPresent(filePath);
-
-    const outputPath = `${filePath}/${fileName}`;
-    fs.writeFileSync(outputPath, htmlFile.toString(), "utf-8");
-  } catch (err) {
-    throw new Error(`HTML-File could not be saved: ${err} `);
+    try {
+     createDirectoryIfNotPresent(filePath);
+      const outputPath = `${filePath}/${fileName}`;
+      fs.writeFileSync(outputPath, htmlFile.toString(), "utf-8");
+    } catch (err) {
+      throw new Error(`HTML-File could not be saved: ${err} `);
   }
 }
 
@@ -79,6 +78,19 @@ function createDirectoryIfNotPresent(directoryPath: string): void {
     fs.mkdirSync(directoryPath, { recursive: true });
   }
 }
+function deleteFolderRecursive(directoryPath: string) {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach(file => {
+      const filePath = `${directoryPath}/${file}`;
+      if (fs.lstatSync(filePath).isDirectory()) {
+        deleteFolderRecursive(filePath);
+      } else {
+        fs.unlinkSync(filePath);
+      }
+    });
+    fs.rmdirSync(directoryPath);
+  }
+}
 
 export {
   saveHTMLToFile,
@@ -87,4 +99,5 @@ export {
   getJsonFileFromFS,
   createDirectoryIfNotPresentAndWriteJsonFile,
   createDirectoryIfNotPresent,
+  deleteFolderRecursive
 };

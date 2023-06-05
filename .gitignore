@@ -5,3 +5,5 @@ package-lock.json
 /src/**/*.js
 /src/**/*.d.ts
 /src/**/*.js.map
+/notValid
+/src/test/search-integrator-test/output/**/*
