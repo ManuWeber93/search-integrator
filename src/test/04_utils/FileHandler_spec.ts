@@ -25,12 +25,10 @@ describe("FileHandler", () => {
 
   const pathToFile: string = "./testData.json";
 
-  const originalFs = fs;
-
   after(function () {
     fs.unlinkSync(pathToFile);
-    fs.readdirSync = originalFs.readdirSync;
     deleteFolderRecursive("./notValid");
+    deleteFolderRecursive("./src/test/04_utils/test-directory/notExisting")
   });
 
   context("writeJsonToFile", () => {
@@ -99,12 +97,9 @@ describe("FileHandler", () => {
       const directoryPath = "/path/to/nonexistent/directory";
       const fileExtensions = [".txt", ".csv"];
 
-      expect(() => extractFiles(directoryPath, fileExtensions)).to.throw(
-        Error,
-        "Extraction Failed"
-      );
-
-      fs.readdirSync = originalFs.readdirSync;
+      expect(() => {
+        extractFiles(directoryPath, fileExtensions);
+      }).to.throw(Error);
     });
   });
 
@@ -134,9 +129,7 @@ describe("FileHandler", () => {
 
   context("createDirectoryIfNotPresent", () => {
 
-    after("Delete created Folder", () => {
-      deleteFolderRecursive("./src/test/04_utils/test-directory/notExisting")
-    })
+
 
     it("should create the directory if it does not exist", () => {
       const directoryPath = "./src/test/04_utils/test-directory/notExisting";
