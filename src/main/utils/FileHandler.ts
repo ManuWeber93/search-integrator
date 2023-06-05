@@ -31,6 +31,7 @@ function extractFiles(
   let files: string[] = [];
   try {
     const fileList:string[] = fs.readdirSync(directoryPath);
+    console.log(fileList)
     for (const file of fileList) {
       const filePath:string = path.join(directoryPath, file);
       const fileStat:fs.Stats = fs.statSync(filePath);

@@ -84,12 +84,12 @@ describe("FileHandler", () => {
     });
 
     it("should return an empty array when directory contains no files", () => {
-      const directoryPath = "src/test/04_utils/test-directory/existing-empty";
-      const fileExtensions = [".txt", ".csv"];
-
+      const directoryPath: string = "src/test/04_utils/test-directory/existing-empty/";
+      const fileExtensions: string [] = [".txt", ".csv"];
       const expectedFiles: string[] = [];
 
-      const result = extractFiles(directoryPath, fileExtensions);
+      createDirectoryIfNotPresent(directoryPath);
+      const result: string[] = extractFiles(directoryPath, fileExtensions);
       expect(result).to.deep.equal(expectedFiles);
     });
 
