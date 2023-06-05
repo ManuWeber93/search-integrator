@@ -14,8 +14,7 @@ import { HTMLElement, parse } from "node-html-parser";
 
 describe("FileHandler", () => {
   const validDirectory: string = "./src/test/04_utils/test-directory/existing";
-  const invalidDirectory: string =
-    "./notValid/test/04_utils/test-directory/existing";
+  const invalidDirectory: string = "./notValid/test/04_utils/test-directory/existing";
   const content: string = "<div>Test</div>";
   const html: HTMLElement = parse(content);
   const fileName: string = "test.html";
@@ -31,6 +30,7 @@ describe("FileHandler", () => {
   after(function () {
     fs.unlinkSync(pathToFile);
     fs.readdirSync = originalFs.readdirSync;
+    deleteFolderRecursive("./notValid");
   });
 
   context("writeJsonToFile", () => {
@@ -119,10 +119,6 @@ describe("FileHandler", () => {
   });
 
   context("createDirectoryIfNotPresentAndWriteJsonFile", () => {
-
-    after("Delete created Folder", () => {
-      deleteFolderRecursive(invalidDirectory)
-    })
 
     it("should create the directory and write the JSON file", () => {
       createDirectoryIfNotPresentAndWriteJsonFile(
