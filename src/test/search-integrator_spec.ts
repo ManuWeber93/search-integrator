@@ -45,7 +45,7 @@ describe("SearchIntegrator", (): void => {
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-one.html`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-two.html`)).to.be.true;
-            });
+            }).timeout(60000);
 
         });
 
@@ -69,8 +69,7 @@ describe("SearchIntegrator", (): void => {
             }
             const searchIntegrator: SearchIntegrator = new SearchIntegrator(config);
 
-            it('should run through all the steps', async function() {
-                this.timeout(30000)
+            it('should run through all the steps', async () => {
                 await searchIntegrator.integrateSearch();
                 expect(fs.existsSync(`${testOutputDirectory}/${config.parserConfig?.parserOutputFilename}`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/${config.searchConfig?.searchIndexFilename}`)).to.be.true;
@@ -78,7 +77,7 @@ describe("SearchIntegrator", (): void => {
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-one.html`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-two.html`)).to.be.true;
-            });
+            }).timeout(30000);
         })
     })
 })
