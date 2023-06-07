@@ -3,8 +3,8 @@ import {expect} from "chai";
 import SearchIntegrator from "../main/search-integrator.js";
 import {ISearchIntegratorConfig} from "../main/models/search-integrator-models";
 import fs from "fs";
-// import { after } from "mocha";
-// import { deleteFolderRecursive } from "../main/utils/file-handler.js";
+import { after } from "mocha";
+import { deleteFolderRecursive } from "../main/utils/file-handler.js";
 
 
 describe("SearchIntegrator", (): void => {
@@ -12,7 +12,7 @@ describe("SearchIntegrator", (): void => {
     const testBaseUrl: string = ".";
     const testOutputDirectory: string = "src/test/search-integrator-test/output";
 
-    // after( "delete output folder", () => deleteFolderRecursive(testOutputDirectory))
+    after( "delete output folder", () => deleteFolderRecursive(testOutputDirectory))
 
     describe("integrateSearch", (): void => {
 
