@@ -1,8 +1,8 @@
-import { LogLevel } from "../utils/Logger";
-import { IParserConfig, IRecords } from "./ParserModels";
-import { ISearchConfig } from "./SearchModels";
-import { IIntegratorConfig } from "./IntegratorModels";
-import { ISearchResult } from "../search/search_framework/models/ISearchFramework";
+import { LogLevel } from "../utils/logger.js";
+import { IParserConfig, IRecords } from "./parser-models";
+import { ISearchConfig } from "./search-models";
+import { IIntegratorConfig } from "./integrator-models";
+import { ISearchResult } from "../search/search-framework/models/i-search-framework";
 
 interface ISearchIntegratorConfig {
   inputDirectories: IInputDirectory[];

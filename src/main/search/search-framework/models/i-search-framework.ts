@@ -1,4 +1,4 @@
-import { IRecord } from "../../../models/ParserModels";
+import { IRecord } from "../../../models/parser-models";
 import Fuse from "fuse.js";
 
 type ISearchIndex = Fuse.FuseIndex<IRecord>;

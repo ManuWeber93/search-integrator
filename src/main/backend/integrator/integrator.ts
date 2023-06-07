@@ -3,16 +3,16 @@ import {
   IHtmlComponentIntegration,
   IScriptIntegration,
   IStylesheetIntegration,
-} from "../../models/IntegratorModels";
-import * as FileHandler from "../../utils/FileHandler.js";
+} from "../../models/integrator-models";
+import * as FileHandler from "../../utils/file-handler.js";
 import { HTMLElement, parse } from "node-html-parser";
-import DefaultConfig from "../../DefaultConfig.js";
-import { concatDefaultAndConfigLists } from "../../utils/HelperFunctions.js";
+import DefaultConfig from "../../default-config.js";
+import { concatDefaultAndConfigLists } from "../../utils/helper-functions.js";
 import path from "path";
 import {
   IInputDirectory,
   ISearchIntegratorConfig,
-} from "../../models/SearchIntegratorModels";
+} from "../../models/search-integrator-models";
 
 class Integrator {
   private readonly config: ISearchIntegratorConfig;

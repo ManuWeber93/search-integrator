@@ -1,5 +1,5 @@
-function removeDuplicatesAndFalsyValuesInArray(inputArray: any[]): any[] {
-  return [...new Set(inputArray)].filter(Boolean) as any[];
+function removeDuplicatesAndFalsyValuesInArray<T>(inputArray: T[]): T[] {
+  return [...new Set(inputArray)].filter(Boolean) as T[];
 }
 
 function removeLinebreaksAndTrailingSpaces(inputs: string[]): string[] {

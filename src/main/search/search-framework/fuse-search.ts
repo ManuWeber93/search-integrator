@@ -2,10 +2,10 @@ import {
   ISearchFramework,
   ISearchIndex,
   ISearchInstance,
-} from "./models/ISearchFramework";
-import { IRecord } from "../../models/ParserModels";
+} from "./models/i-search-framework";
+import { IRecord } from "../../models/parser-models";
 import Fuse from "fuse.js";
-import { ISearchOptions } from "./models/ISearchFramework";
+import { ISearchOptions } from "./models/i-search-framework";
 
 class FuseSearch implements ISearchFramework {
   public createIndex(

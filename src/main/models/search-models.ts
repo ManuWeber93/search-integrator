@@ -1,4 +1,4 @@
-import { ISearchOptions } from "../search/search_framework/models/ISearchFramework";
+import { ISearchOptions } from "../search/search-framework/models/i-search-framework";
 
 interface ISearchConfig {
   searchIndexFilename?: string;

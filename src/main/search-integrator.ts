@@ -1,18 +1,18 @@
-import Parser from "./backend/01_parser/Parser.js";
-import * as FileHandler from "./utils/FileHandler.js";
+import Parser from "./backend/parser/parser.js";
+import * as FileHandler from "./utils/file-handler.js";
 import {
   ISearchIntegrator,
   ISearchIntegratorConfig,
-} from "./models/SearchIntegratorModels";
-import { IRecords } from "./models/ParserModels";
+} from "./models/search-integrator-models";
+import { IRecords } from "./models/parser-models";
 import {
   ISearchFramework,
   ISearchIndex,
-} from "./search/search_framework/models/ISearchFramework";
-import FuseSearch from "./search/search_framework/FuseSearch.js";
-import DefaultConfig from "./DefaultConfig.js";
-import { Logger, LogLevel } from "./utils/Logger.js";
-import Integrator from "./backend/02_integrator/Integrator.js";
+} from "./search/search-framework/models/i-search-framework";
+import FuseSearch from "./search/search-framework/fuse-search.js";
+import DefaultConfig from "./default-config.js";
+import { Logger, LogLevel } from "./utils/logger.js";
+import Integrator from "./backend/integrator/integrator.js";
 
 import webpack, { Configuration, Stats } from "webpack";
 
@@ -40,7 +40,7 @@ class SearchIntegrator implements ISearchIntegrator {
 
     this.webpackConfig = {
       mode: "production",
-      entry: [path.resolve(__dirname, "frontend", "SearchProcessor.js")],
+      entry: [path.resolve(__dirname, "frontend", "search-processor.js")],
       output: {
         filename: "search-integrator.js",
         path: path.resolve(`${this.config.outputBaseDirectory}/dist`),
@@ -124,15 +124,18 @@ class SearchIntegrator implements ISearchIntegrator {
       );
     }
 
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
       webpack(
         this.webpackConfig,
         (err: Error | undefined, stats: Stats | undefined) => {
           if (err || stats?.hasErrors()) {
-            throw new Error(`Webpack bundle could not be created.
-              Error: ${err}
-              Stats: ${stats?.toString()}`);
+            reject(
+              new Error(`Webpack bundle could not be created.
+                Error: ${err}
+                Stats: ${stats?.toString()}`)
+            );
           }
+
           resolve();
         }
       );

@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { ISearchConfig } from "../../main/models/SearchModels";
+import { ISearchConfig } from "../../main/models/search-models";
 
 let options: any = {
   includeScore: true,

@@ -1,9 +1,9 @@
-import { IRecords, ISynonyms } from "../../main/models/ParserModels";
-import Parser from "../../main/backend/01_parser/Parser.js";
+import { IRecords, ISynonyms } from "../../../main/models/parser-models";
+import Parser from "../../../main/backend/parser/parser.js";
 import chai, { expect } from "chai";
 import fs from "fs";
 import chaiAsPromised from "chai-as-promised";
-import { ISearchIntegratorConfig } from "../../main/models/SearchIntegratorModels";
+import { ISearchIntegratorConfig } from "../../../main/models/search-integrator-models";
 
 chai.use(chaiAsPromised);
 
@@ -13,7 +13,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -75,10 +75,10 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
           {
-            inputDirectory: "src/test/01_parser/input-webpages-2",
+            inputDirectory: "src/test/backend/parser/input-webpages-2",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -99,7 +99,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/empty-directory",
+            inputDirectory: "src/test/backend/parser/empty-directory",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -116,7 +116,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/nonexistent-directory",
+            inputDirectory: "src/test/backend/parser/nonexistent-directory",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -133,7 +133,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
             relativeOutputDirectory: "outputDirectory",
           },
         ],
@@ -156,7 +156,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -179,7 +179,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -217,7 +217,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -246,13 +246,13 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
         baseUrl: ".",
         parserConfig: {
-          synonymsFile: "src/test/01_parser/openUiSynonyms.json",
+          synonymsFile: "src/test/backend/parser/openUiSynonyms.json",
         },
       };
       const parser = new Parser(config);
@@ -267,7 +267,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -288,7 +288,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -311,7 +311,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -334,7 +334,7 @@ describe("Parser", () => {
       const config: ISearchIntegratorConfig = {
         inputDirectories: [
           {
-            inputDirectory: "src/test/01_parser/input-webpages",
+            inputDirectory: "src/test/backend/parser/input-webpages",
           },
         ],
         outputBaseDirectory: "./parsed-webpages",
@@ -358,7 +358,7 @@ describe("Parser", () => {
         const config: ISearchIntegratorConfig = {
           inputDirectories: [
             {
-              inputDirectory: "src/test/01_parser/input-webpages",
+              inputDirectory: "src/test/backend/parser/input-webpages",
             },
           ],
           outputBaseDirectory: "./parsed-webpages",
@@ -373,11 +373,12 @@ describe("Parser", () => {
       });
 
       // Test case should not run to often, since there is a limit of API requests with the free plan of API ninjas
-      /* it("should extract synonyms if API key is present", async () => {
+      /*
+      it("should extract synonyms if API key is present", async () => {
         const config: ISearchIntegratorConfig = {
           inputDirectories: [
             {
-              inputDirectory: "src/test/01_parser/input-webpages"
+              inputDirectory: "src/test/backend/parser/input-webpages"
             }
           ],
           outputBaseDirectory: "./parsed-webpages",
@@ -393,7 +394,8 @@ describe("Parser", () => {
         expect(records.records[1].thesaurusSynonyms.length).to.be.greaterThan(
           0
         );
-      }).timeout(30000); */
+      }).timeout(30000);
+    */
     });
   });
 });

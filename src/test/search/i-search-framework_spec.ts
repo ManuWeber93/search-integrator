@@ -1,10 +1,10 @@
 import { expect } from "chai";
-import FuseSearch from "../../main/search/search_framework/FuseSearch.js";
+import FuseSearch from "../../main/search/search-framework/fuse-search.js";
 import {
   ISearchFramework,
   ISearchIndex,
-} from "../../main/search/search_framework/models/ISearchFramework";
-import { IRecord } from "../../main/models/ParserModels";
+} from "../../main/search/search-framework/models/i-search-framework";
+import { IRecord } from "../../main/models/parser-models";
 import Fuse from "fuse.js";
 import { v4 as uuidv4 } from "uuid";
 

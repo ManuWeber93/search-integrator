@@ -1,7 +1,7 @@
 import "mocha";
 
 import { expect } from "chai";
-import { removeDuplicatesAndFalsyValuesInArray } from "../../main/utils/HelperFunctions.js";
+import { removeDuplicatesAndFalsyValuesInArray } from "../../main/utils/helper-functions.js";
 
 describe("HelperFunctions", () => {
   describe("removeDuplicatesInArray", () => {
