@@ -1,15 +1,15 @@
 import { expect } from "chai";
 import fs from "fs";
-import Integrator from "../../main/backend/02_integrator/Integrator.js";
-import { ISearchIntegratorConfig } from "../../main/models/SearchIntegratorModels";
+import Integrator from "../../../main/backend/integrator/integrator.js";
+import { ISearchIntegratorConfig } from "../../../main/models/search-integrator-models";
 import path from "path";
 import { afterEach } from "mocha";
 import { HTMLElement, parse } from "node-html-parser";
 
 describe("Integrator", () => {
-  const testInputDirectory: string = "src/test/03_integrator/html-files";
+  const testInputDirectory: string = "src/test/backend/integrator/html-files";
   const testBaseUrl: string = ".";
-  const testOutputDirectory: string = "src/test/03_integrator/output/";
+  const testOutputDirectory: string = "src/test/backend/integrator/output/";
 
   afterEach(() => {
     deleteFolderRecursive(testOutputDirectory);
@@ -87,7 +87,7 @@ describe("Integrator", () => {
                   inputDirectory: testInputDirectory,
                 },
                 {
-                  inputDirectory: "src/test/03_integrator/html-files/Subfolder1",
+                  inputDirectory: "src/test/backend/integrator/html-files/Subfolder1",
                 },
               ],
               baseUrl: testBaseUrl,
@@ -115,7 +115,7 @@ describe("Integrator", () => {
                   relativeOutputDirectory: "/html-files",
                 },
                 {
-                  inputDirectory: "src/test/03_integrator/html-files/Subfolder1",
+                  inputDirectory: "src/test/backend/integrator/html-files/Subfolder1",
                   relativeOutputDirectory: "/html-files/Subfolder1",
                 },
               ],
@@ -158,7 +158,7 @@ describe("Integrator", () => {
             htmlComponentIntegrations: [
               {
                 pathToComponent:
-                    "./src/test/03_integrator/component-to-integrate/test-component.html",
+                    "./src/test/backend/integrator/component-to-integrate/test-component.html",
               },
             ],
           },
@@ -168,7 +168,7 @@ describe("Integrator", () => {
 
         it("should check if an HTML file exists and contains the specified component", () => {
           integrator.runIntegrator();
-          const directoryPath: string = "./src/test/03_integrator/output";
+          const directoryPath: string = "./src/test/backend/integrator/output";
           const fileName: string = "test1.html";
           const filePath: string = path.join(directoryPath, fileName);
 
@@ -201,7 +201,7 @@ describe("Integrator", () => {
                 htmlComponentIntegrations: [
                   {
                     pathToComponent:
-                        "./src/test/03_integrator/component-to-integrate/test-component.html",
+                        "./src/test/backend/integrator/component-to-integrate/test-component.html",
                     selector: "#searchBar",
                   },
                 ],
@@ -246,7 +246,7 @@ describe("Integrator", () => {
             htmlComponentIntegrations: [
               {
                 pathToComponent:
-                    "./src/test/03_integrator/component-to-integrate/test-component.html",
+                    "./src/test/backend/integrator/component-to-integrate/test-component.html",
                 selector: "#notValid",
               },
             ],
@@ -272,7 +272,7 @@ describe("Integrator", () => {
           integratorConfig: {
             scriptIntegrations: [
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/test-component.html",
+                pathToScript: "./src/test/backend/integrator/scripts-to-integrate/test-component.html",
               },
             ],
           },
@@ -314,12 +314,12 @@ describe("Integrator", () => {
           integratorConfig: {
             scriptIntegrations: [
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/script-two.js",
+                pathToScript: "./src/test/backend/integrator/scripts-to-integrate/script-two.js",
                 selector: "#scriptSelector",
                 placement: "afterbegin"
               },
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/script-one.js",
+                pathToScript: "./src/test/backend/integrator/scripts-to-integrate/script-one.js",
                 selector: "#scriptSelector",
                 placement: "afterbegin"
               },
@@ -367,7 +367,7 @@ describe("Integrator", () => {
           integratorConfig: {
             scriptIntegrations: [
               {
-                pathToScript: "./src/test/03_integrator/scripts-to-integrate/module-script.js",
+                pathToScript: "./src/test/backend/integrator/scripts-to-integrate/module-script.js",
                 selector: "#scriptSelector",
                 placement: "afterbegin",
                 module: true
@@ -414,7 +414,7 @@ describe("Integrator", () => {
           integratorConfig: {
             stylesheetIntegrations: [
               {
-                pathToStylesheet: "./src/test/03_integrator/stylesheets-to-integrate/stylesheet.css",
+                pathToStylesheet: "./src/test/backend/integrator/stylesheets-to-integrate/stylesheet.css",
               }
             ],
           },
@@ -456,7 +456,7 @@ describe("Integrator", () => {
           integratorConfig: {
             stylesheetIntegrations: [
               {
-                pathToStylesheet: "./src/test/03_integrator/stylesheets-to-integrate/stylesheet.css",
+                pathToStylesheet: "./src/test/backend/integrator/stylesheets-to-integrate/stylesheet.css",
                 selector: "#styleSelector",
                 placement: "beforeend",
               }

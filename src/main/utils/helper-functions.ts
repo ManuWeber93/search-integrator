@@ -1,4 +1,4 @@
-function removeDuplicatesAndFalsyValuesInArray(inputArray: any[]): any[] {
+function removeDuplicatesAndFalsyValuesInArray<T>(inputArray: T[]): T[] {
   return [...new Set(inputArray)].filter(Boolean) as any[];
 }
 

@@ -4,12 +4,12 @@ import {
   ISearchInstance,
   ISearchOptions,
   ISearchResult,
-} from "../search/search_framework/models/ISearchFramework";
+} from "../search/search-framework/models/i-search-framework";
 
-import { IRecords } from "../models/ParserModels";
-import DefaultConfig from "../DefaultConfig.js";
-import { ISearchIntegratorConfig } from "../models/SearchIntegratorModels";
-import FuseSearch from "../search/search_framework/FuseSearch.js";
+import { IRecords } from "../models/parser-models";
+import DefaultConfig from "../default-config.js";
+import { ISearchIntegratorConfig } from "../models/search-integrator-models";
+import FuseSearch from "../search/search-framework/fuse-search.js";
 
 declare global {
   // These objects are available on the client since they are packed in the webpack bundle

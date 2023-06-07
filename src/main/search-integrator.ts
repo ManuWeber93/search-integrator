@@ -1,18 +1,18 @@
-import Parser from "./backend/01_parser/Parser.js";
-import * as FileHandler from "./utils/FileHandler.js";
+import Parser from "./backend/parser/parser.js";
+import * as FileHandler from "./utils/file-handler.js";
 import {
   ISearchIntegrator,
   ISearchIntegratorConfig,
-} from "./models/SearchIntegratorModels";
-import { IRecords } from "./models/ParserModels";
+} from "./models/search-integrator-models";
+import { IRecords } from "./models/parser-models";
 import {
   ISearchFramework,
   ISearchIndex,
-} from "./search/search_framework/models/ISearchFramework";
-import FuseSearch from "./search/search_framework/FuseSearch.js";
-import DefaultConfig from "./DefaultConfig.js";
-import { Logger, LogLevel } from "./utils/Logger.js";
-import Integrator from "./backend/02_integrator/Integrator.js";
+} from "./search/search-framework/models/i-search-framework";
+import FuseSearch from "./search/search-framework/fuse-search.js";
+import DefaultConfig from "./default-config.js";
+import { Logger, LogLevel } from "./utils/logger.js";
+import Integrator from "./backend/integrator/integrator.js";
 
 import webpack, { Configuration, Stats } from "webpack";
 

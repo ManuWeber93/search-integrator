@@ -1,5 +1,5 @@
-import { ISearchOptions } from "./search/search_framework/models/ISearchFramework";
-import { IScriptIntegration } from "./models/IntegratorModels";
+import { ISearchOptions } from "./search/search-framework/models/i-search-framework";
+import { IScriptIntegration } from "./models/integrator-models";
 
 class DefaultConfig {
   public static readonly PARSER_OUTPUT_FILENAME: string = "parsedWebpages.json";

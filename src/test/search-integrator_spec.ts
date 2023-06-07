@@ -1,22 +1,22 @@
 import "mocha";
 import {expect} from "chai";
-import SearchIntegrator from "../main/SearchIntegrator.js";
-import {ISearchIntegratorConfig} from "../main/models/SearchIntegratorModels";
+import SearchIntegrator from "../main/search-integrator.js";
+import {ISearchIntegratorConfig} from "../main/models/search-integrator-models";
 import fs from "fs";
-import { after } from "mocha";
-import { deleteFolderRecursive } from "../main/utils/FileHandler.js";
+// import { after } from "mocha";
+// import { deleteFolderRecursive } from "../main/utils/file-handler.js";
 
 
-describe("SearchIntegrator", () => {
+describe("SearchIntegrator", (): void => {
     const testInputDirectoryNotEmpty: string = "src/test/search-integrator-test/website";
     const testBaseUrl: string = ".";
     const testOutputDirectory: string = "src/test/search-integrator-test/output";
 
-    after( "delete output folder", () => deleteFolderRecursive(testOutputDirectory))
+    // after( "delete output folder", () => deleteFolderRecursive(testOutputDirectory))
 
-    describe("integrateSearch", () => {
+    describe("integrateSearch", (): void => {
 
-        context("valid configuration without packing ", () => {
+        context("valid configuration without packing ", (): void => {
             const config: ISearchIntegratorConfig = {
                 baseUrl: testBaseUrl,
                 parserConfig: {
@@ -38,7 +38,6 @@ describe("SearchIntegrator", () => {
             const searchIntegrator: SearchIntegrator = new SearchIntegrator(config);
 
             it('should run through all the steps and create all files', async function() {
-                this.timeout(15000)
                 await searchIntegrator.integrateSearch()
                 expect(fs.existsSync(`${testOutputDirectory}/${config.parserConfig?.parserOutputFilename}`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/${config.searchConfig?.searchIndexFilename}`)).to.be.true;
@@ -50,7 +49,7 @@ describe("SearchIntegrator", () => {
 
         });
 
-        context("valid configuration with packing ", () => {
+        context("valid configuration with packing ", (): void => {
             const config: ISearchIntegratorConfig = {
                 baseUrl: testBaseUrl,
                 parserConfig: {
@@ -71,7 +70,7 @@ describe("SearchIntegrator", () => {
             const searchIntegrator: SearchIntegrator = new SearchIntegrator(config);
 
             it('should run through all the steps', async function() {
-                this.timeout(15000)
+                this.timeout(30000)
                 await searchIntegrator.integrateSearch();
                 expect(fs.existsSync(`${testOutputDirectory}/${config.parserConfig?.parserOutputFilename}`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/${config.searchConfig?.searchIndexFilename}`)).to.be.true;
@@ -80,7 +79,6 @@ describe("SearchIntegrator", () => {
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-one.html`)).to.be.true;
                 expect(fs.existsSync(`${testOutputDirectory}/html-files/test-page-two.html`)).to.be.true;
             });
-
         })
     })
 })

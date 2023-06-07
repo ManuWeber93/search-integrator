@@ -2,25 +2,25 @@ import fs from "fs";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import { HTMLElement, parse } from "node-html-parser";
-import { getJsonFileFromFS } from "../../utils/FileHandler.js";
+import { getJsonFileFromFS } from "../../utils/file-handler.js";
 
 import {
   IRecord,
   IRecords,
   ISynonyms,
   IThesaurusApiResponse,
-} from "../../models/ParserModels";
+} from "../../models/parser-models";
 import {
   concatDefaultAndConfigLists,
   fileNameContainsExcludedSubstring,
   removeDuplicatesAndFalsyValuesInArray,
   removeLinebreaksAndTrailingSpaces,
-} from "../../utils/HelperFunctions.js";
-import DefaultConfig from "../../DefaultConfig.js";
+} from "../../utils/helper-functions.js";
+import DefaultConfig from "../../default-config.js";
 import {
   IInputDirectory,
   ISearchIntegratorConfig,
-} from "../../models/SearchIntegratorModels";
+} from "../../models/search-integrator-models";
 
 class Parser {
   private readonly config: ISearchIntegratorConfig;
@@ -99,8 +99,8 @@ class Parser {
     let htmlFiles: string[] = this.filterInputFiles(files);
 
     for (const filename of htmlFiles) {
-      const filePath = path.join(inputDirectory, filename);
-      const htmlFile = fs.readFileSync(filePath, "utf-8");
+      const filePath: string = path.join(inputDirectory, filename);
+      const htmlFile : string = fs.readFileSync(filePath, "utf-8");
       const root: HTMLElement = parse(htmlFile);
       this.createRecord(root, relativeOutputDirectory, filename);
     }
@@ -145,7 +145,7 @@ class Parser {
       root,
       "strong, em, mark"
     );
-    const metaDescription: string[] = removeDuplicatesAndFalsyValuesInArray(
+    const metaDescription: any[] = removeDuplicatesAndFalsyValuesInArray(
       root
         .querySelectorAll("meta")
         .filter((element) => element.getAttribute("name") === "description")

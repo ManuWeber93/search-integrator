@@ -1,11 +1,11 @@
 import "mocha";
 import { expect } from "chai";
-import FuseSearch from "../../main/search/search_framework/FuseSearch.js";
-import { IRecord } from "../../main/models/ParserModels";
+import FuseSearch from "../../main/search/search-framework/fuse-search.js";
+import { IRecord } from "../../main/models/parser-models";
 import {
   ISearchIndex,
   ISearchInstance,
-} from "../../main/search/search_framework/models/ISearchFramework";
+} from "../../main/search/search-framework/models/i-search-framework";
 import Fuse from "fuse.js";
 import { v4 as uuidv4 } from "uuid";
 

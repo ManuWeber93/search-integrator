@@ -2,7 +2,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 import sinonChai from "sinon-chai";
 import chai from "chai";
-import { Logger, LogLevel } from "../../main/utils/Logger.js";
+import { Logger, LogLevel } from "../../main/utils/logger.js";
 
 chai.use(sinonChai);
 
