@@ -40,7 +40,7 @@ class SearchIntegrator implements ISearchIntegrator {
 
     this.webpackConfig = {
       mode: "production",
-      entry: [path.resolve(__dirname, "frontend", "SearchProcessor.js")],
+      entry: [path.resolve(__dirname, "frontend", "search-processor.js")],
       output: {
         filename: "search-integrator.js",
         path: path.resolve(`${this.config.outputBaseDirectory}/dist`),
