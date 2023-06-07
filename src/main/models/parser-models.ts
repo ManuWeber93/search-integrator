@@ -35,7 +35,7 @@ interface IRecord {
   links: string[];
   altTextOfImages: string[];
   highlightedTexts: string[];
-  metaDescription: string[];
+  metaDescription: (string | undefined)[];
   additionalElementContent: string[];
   additionalAttributeContent: string[];
   customSynonyms: string[];

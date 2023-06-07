@@ -145,7 +145,7 @@ class Parser {
       root,
       "strong, em, mark"
     );
-    const metaDescription: any[] = removeDuplicatesAndFalsyValuesInArray(
+    const metaDescription = removeDuplicatesAndFalsyValuesInArray(
       root
         .querySelectorAll("meta")
         .filter((element) => element.getAttribute("name") === "description")
