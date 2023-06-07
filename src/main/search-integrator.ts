@@ -124,15 +124,18 @@ class SearchIntegrator implements ISearchIntegrator {
       );
     }
 
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
       webpack(
         this.webpackConfig,
         (err: Error | undefined, stats: Stats | undefined) => {
           if (err || stats?.hasErrors()) {
-            throw new Error(`Webpack bundle could not be created.
-              Error: ${err}
-              Stats: ${stats?.toString()}`);
+            reject(
+              new Error(`Webpack bundle could not be created.
+                Error: ${err}
+                Stats: ${stats?.toString()}`)
+            );
           }
+
           resolve();
         }
       );

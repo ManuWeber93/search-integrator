@@ -373,6 +373,7 @@ describe("Parser", () => {
       });
 
       // Test case should not run to often, since there is a limit of API requests with the free plan of API ninjas
+      /*
       it("should extract synonyms if API key is present", async () => {
         const config: ISearchIntegratorConfig = {
           inputDirectories: [
@@ -394,6 +395,7 @@ describe("Parser", () => {
           0
         );
       }).timeout(30000);
+    */
     });
   });
 });
