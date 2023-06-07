@@ -1,4 +1,4 @@
-import { LogLevel } from "../utils/Logger";
+import { LogLevel } from "../utils/logger.js";
 import { IParserConfig, IRecords } from "./parser-models";
 import { ISearchConfig } from "./search-models";
 import { IIntegratorConfig } from "./integrator-models";
