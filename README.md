@@ -1,8 +1,15 @@
-# search-integrator
-
-Search-integrator is a framework to integrate an on-site-search on your website.
+A framework to integrate an on-site-search on static websites.
 
 # Installation
+```
+npm i search-integrator
+```
+
+# Quickstart
+
+
+
+
 
 # Usage
 
