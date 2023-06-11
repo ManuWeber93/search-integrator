@@ -1,11 +1,12 @@
+# search-integrator
 A framework to integrate a clientside on-site-search on static websites.
 
-# Installation
+## Installation
 ```
 npm i search-integrator
 ```
 
-# Quickstart
+## Quickstart
 1. Install the search-integrator framework `npm i search-integrator`
 2. Create a search-component for your website (HTML, JS & CSS)
    - The HTML should contain the search input field. Example:
@@ -88,11 +89,11 @@ await searchIntegrator.integrateSearch();
 ```
 4. Run the build-script. Your search-enriched website has been placed into the outputBaseDirectory.
 
-# How it works
-## Concept
+## How it works
+### Concept
 
-## API
-### SearchIntegrator
+### API
+#### SearchIntegrator
 The SearchIntegrator object is used in the build script of the website to integrate a search to all webpages of a website.
 To create a SearchIntegrator instance a [config file](#Configuration) is needed.
 The SearchIntegrator offers one public function 'integrateSearch' which does the following:
@@ -102,12 +103,12 @@ The SearchIntegrator offers one public function 'integrateSearch' which does the
 - It integrates the SearchProcessor library and all configured HTML, script, and stylesheet-components into all webpages from the configured input directories. 
 - It saves the enriched webpages to the output directory
 
-### SearchProcessor
+#### SearchProcessor
 The SearchProcessor library is used to execute the search on the client side. It is added to each configured input webpage and can thus be used from the search component.
 The SearchProcessor offers one public function 'search' which takes a search term and a callback function as input arguments.
 It then performs a search according to the provided search term and calls the callback function which takes as arguments the searchResults as well as all records (can be used to display further information to the search results). 
 
-# Configuration
+## Configuration
 
 
 
