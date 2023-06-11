@@ -56,7 +56,7 @@ class SearchIntegrator implements ISearchIntegrator {
   }
 
   public async integrateSearch(): Promise<void> {
-    const logger: Logger = new Logger(this.config.logLevel);
+    const logger: Logger = Logger.getLogger(this.config.logLevel);
 
     const records: IRecords = await this.parseWebsiteData();
     logger.log("Webpages successfully parsed.", LogLevel.Info);

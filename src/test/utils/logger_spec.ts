@@ -22,7 +22,7 @@ describe("Logger Test", () => {
   });
 
   it("should log messages with the appropriate log levels", () => {
-    logger = new Logger(LogLevel.All);
+    logger = Logger.getLogger(LogLevel.All);
 
     logger.log("Info message", LogLevel.Info);
     logger.log("Debug message", LogLevel.Debug);
@@ -37,7 +37,7 @@ describe("Logger Test", () => {
   });
 
   it("should not log messages with log level Off", () => {
-    logger = new Logger(LogLevel.Off);
+    logger = Logger.getLogger(LogLevel.Off);
 
     logger.log("Info message", LogLevel.Info);
     logger.log("Debug message", LogLevel.Debug);
@@ -46,7 +46,7 @@ describe("Logger Test", () => {
   });
 
   it("should log only messages with log level Info and above", () => {
-    logger = new Logger(LogLevel.Info);
+    logger = Logger.getLogger(LogLevel.Info);
 
     logger.log("Info message", LogLevel.Info);
     logger.log("Debug message", LogLevel.Debug);
