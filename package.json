@@ -5,7 +5,7 @@
     "/src/main/**/*.js",
     "/src/main/**/*.d.ts"
   ],
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A framework which allows to integrate a clientside on-site-search to any website.",
   "keywords": [
     "search",
