@@ -6,7 +6,7 @@ import DefaultConfig from "../../default-config.js";
 import { concatDefaultAndConfigLists } from "../../utils/helper-functions.js";
 import path from "path";
 import { IInputDirectory, ISearchIntegratorConfig } from "../../models/search-integrator-models";
-import { Logger, LogLevel } from "../../utils/logger";
+import { Logger, LogLevel } from "../../utils/logger.js";
 
 class Integrator {
   private readonly config: ISearchIntegratorConfig;
@@ -69,7 +69,7 @@ class Integrator {
     outputDirectoryName: string
   ) {
     filesOfDirectoryToBeEnriched.forEach((htmlFilePath: string): void => {
-      this.logger.log(`Running logger for file ${path.basename(htmlFilePath)}`, LogLevel.Debug);
+      this.logger.log(`Running integrator for file ${path.basename(htmlFilePath)}`, LogLevel.Debug);
 
       const htmlFile: HTMLElement = this.createHTMLDocument(htmlFilePath);
 
