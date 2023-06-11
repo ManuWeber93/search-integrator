@@ -92,13 +92,13 @@ class Integrator {
 
   private integrateHtmlComponents(htmlFile: HTMLElement): void {
     if (!this.htmlComponentsToIntegrate) {
-      this.logger.log(`no html components to integrate`, LogLevel.Debug);
+      this.logger.log(`No html components to integrate`, LogLevel.Debug);
       return;
     }
 
     this.htmlComponentsToIntegrate.forEach(
       (htmlComponentIntegration: IHtmlComponentIntegration) => {
-        this.logger.log(`integrating html component with path ${htmlComponentIntegration.pathToComponent}`, LogLevel.Debug);
+        this.logger.log(`Integrating html component with path ${htmlComponentIntegration.pathToComponent}`, LogLevel.Debug);
         const htmlComponent = fs.readFileSync(
           htmlComponentIntegration.pathToComponent,
           "utf-8"
@@ -111,7 +111,7 @@ class Integrator {
           htmlComponentIntegration.placement ??
             DefaultConfig.INTEGRATOR_HTML_COMPONENT_PLACEMENT
         );
-        this.logger.log(`integration of html component with path ${htmlComponentIntegration.pathToComponent} successful`, LogLevel.Debug);
+        this.logger.log(`Integration of html component with path ${htmlComponentIntegration.pathToComponent} successful`, LogLevel.Debug);
       }
     );
   }
@@ -121,7 +121,7 @@ class Integrator {
     outputDirectoryName: string
   ): void {
     if (!this.scriptsToIntegrate) {
-      this.logger.log(`no scripts to integrate`, LogLevel.Debug);
+      this.logger.log(`No scripts to integrate`, LogLevel.Debug);
       return;
     }
 
@@ -139,7 +139,7 @@ class Integrator {
         scriptIntegration.selector ?? DefaultConfig.INTEGRATOR_SCRIPT_SELECTOR,
         scriptIntegration.placement ?? DefaultConfig.INTEGRATOR_SCRIPT_PLACEMENT
       );
-      this.logger.log(`integration of script with path ${scriptIntegration.pathToScript} successful`, LogLevel.Debug);
+      this.logger.log(`Integration of script with path ${scriptIntegration.pathToScript} successful`, LogLevel.Debug);
     });
   }
 
@@ -161,13 +161,13 @@ class Integrator {
     outputDirectoryName: string
   ): void {
     if (!this.stylesheetsToIntegrate) {
-      this.logger.log(`no stylesheets to integrate`, LogLevel.Debug);
+      this.logger.log(`No stylesheets to integrate`, LogLevel.Debug);
       return;
     }
 
     this.stylesheetsToIntegrate.forEach(
       (stylesheetIntegration: IStylesheetIntegration) => {
-        this.logger.log(`integrating stylesheet with path ${stylesheetIntegration.pathToStylesheet}`, LogLevel.Debug);
+        this.logger.log(`Integrating stylesheet with path ${stylesheetIntegration.pathToStylesheet}`, LogLevel.Debug);
         const linkTag = this.createLinkTag(
           stylesheetIntegration.pathToStylesheet,
           outputDirectoryName
@@ -180,7 +180,7 @@ class Integrator {
           stylesheetIntegration.placement ??
             DefaultConfig.INTEGRATOR_STYLESHEET_PLACEMENT
         );
-        this.logger.log(`integration of stylesheet with path ${stylesheetIntegration.pathToStylesheet} successful`, LogLevel.Debug);
+        this.logger.log(`Integration of stylesheet with path ${stylesheetIntegration.pathToStylesheet} successful`, LogLevel.Debug);
       }
     );
   }

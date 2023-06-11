@@ -71,10 +71,10 @@ class SearchIntegrator implements ISearchIntegrator {
     );
 
     await this.buildWebpackBundle(records, index);
-    logger.log("Webpack bundle successfully created", LogLevel.Info);
+    logger.log("Webpack bundle successfully created.", LogLevel.Info);
 
     this.runComponentIntegrator();
-    logger.log("Components successfully integrated", LogLevel.Info);
+    logger.log("Components successfully integrated.", LogLevel.Info);
   }
 
   private async parseWebsiteData(): Promise<IRecords> {
