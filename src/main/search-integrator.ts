@@ -56,7 +56,7 @@ class SearchIntegrator implements ISearchIntegrator {
   }
 
   public async integrateSearch(): Promise<void> {
-    const logger: Logger = new Logger(this.config.logLevel);
+    const logger: Logger = Logger.getLogger(this.config.logLevel);
 
     const records: IRecords = await this.parseWebsiteData();
     logger.log("Webpages successfully parsed.", LogLevel.Info);
@@ -71,10 +71,10 @@ class SearchIntegrator implements ISearchIntegrator {
     );
 
     await this.buildWebpackBundle(records, index);
-    logger.log("Webpack bundle successfully created", LogLevel.Info);
+    logger.log("Webpack bundle successfully created.", LogLevel.Info);
 
     this.runComponentIntegrator();
-    logger.log("Components successfully integrated", LogLevel.Info);
+    logger.log("Components successfully integrated.", LogLevel.Info);
   }
 
   private async parseWebsiteData(): Promise<IRecords> {

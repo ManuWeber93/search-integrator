@@ -7,15 +7,24 @@ enum LogLevel {
 
 class Logger {
   private readonly logLevel: LogLevel;
+  private static logger: Logger;
 
-  constructor(logLevel: LogLevel = LogLevel.Info) {
+  private constructor(logLevel: LogLevel = LogLevel.Info) {
     this.logLevel = logLevel;
   }
 
   public log(logMessage: string, logLevel: LogLevel): void {
-    if (this.logLevel >= logLevel) {
+    if (Logger.logger.logLevel >= logLevel) {
       console.log(`search-integrator [${LogLevel[logLevel]}]: ${logMessage}`);
     }
+  }
+
+  public static getLogger(logLevel?: LogLevel) {
+    if (!Logger.logger || Logger.logger.logLevel !== logLevel) {
+      Logger.logger = new Logger(logLevel);
+    }
+
+    return Logger.logger;
   }
 }
 
