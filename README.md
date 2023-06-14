@@ -36,7 +36,10 @@ following HTML elements are indexed (according to best practices from SEO and se
 - Semantically highlighted texts (strong, em, mark elements)
 - Meta description (meta element with 'name=description')
 
-Further elements to be indexed [can be configured](#configuration) via CSS selectors.
+Further elements to be indexed [can be configured](#configuration) via CSS selectors. Alternatively the following CSS
+classes can be used:
+- data-searchIntegrator-include: HTML-elements with this class get indexed.
+- data-searchIntegrator-ignore: HTML-elements with this class get ignored.
 
 For the search itself the powerful, lightweight, fuzzy-search library Fuse.js (https://fusejs.io/) is used.
 
