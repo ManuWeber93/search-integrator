@@ -41,13 +41,13 @@ Further elements to be indexed [can be configured](#configuration) via CSS selec
 For the search itself the powerful, lightweight, fuzzy-search library Fuse.js (https://fusejs.io/) is used.
 
 ![conzept_english drawio](https://github.com/ManuWeber93/search-integrator/assets/91136383/4da5c185-49ed-438f-a49e-7654cbaea604)
-The concept of the search-integrator framework is divided into to parts: The integration of the search into the
+The concept of the search-integrator framework is divided into two parts: The integration of the search into the
 webpages (which happens on the server)
 and the effective search based on a user's search query (which happens on the client).
 
 ### SearchIntegrator
 
-The [SearchIntegrator](#searchintegrator) object is used in the build script of the website to integrate a search to the
+The [SearchIntegrator](#searchintegrator) object is used in the build script of the website to integrate a search into the
 website.
 To create a SearchIntegrator instance a [ISearchIntegratorConfig object](#configuration) is needed.
 The SearchIntegrator offers one public function 'integrateSearch' which does the following:
