@@ -23,6 +23,7 @@ interface IInputDirectory {
 
 interface ISearchIntegrator {
   integrateSearch: () => Promise<void>;
+  integrateSearchNoIntegrations: () => Promise<void>;
 }
 
 interface ISearchProcessor {

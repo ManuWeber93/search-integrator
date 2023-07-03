@@ -38,6 +38,7 @@ following HTML elements are indexed (according to best practices from SEO and se
 
 Further elements to be indexed [can be configured](#configuration) via CSS selectors. Alternatively the following CSS
 classes can be used:
+
 - data-searchIntegrator-include: HTML-elements with this class get indexed.
 - data-searchIntegrator-ignore: HTML-elements with this class get ignored.
 
@@ -50,7 +51,8 @@ and the effective search based on a user's search query (which happens on the cl
 
 ### SearchIntegrator
 
-The [SearchIntegrator](#searchintegrator) object is used in the build script of the website to integrate a search into the
+The [SearchIntegrator](#searchintegrator) object is used in the build script of the website to integrate a search into
+the
 website.
 To create a SearchIntegrator instance a [ISearchIntegratorConfig object](#configuration) is needed.
 The SearchIntegrator offers one public function 'integrateSearch' which does the following:
@@ -62,12 +64,14 @@ The SearchIntegrator offers one public function 'integrateSearch' which does the
 - It builds a bundle which contains all information needed to perform a clientside search. The bundle is
   provided as library with the name 'SearchProcessor'.
 - It links the SearchProcessor library into all webpages from the configured input directories. Furthermore, all
-  configured HTML, script, and stylesheet components are integrated into the webpages.
+  configured HTML, script, and stylesheet components are integrated into the webpages. If this step is not wanted,
+  please use the function 'integrateSearchNoIntegrations'. This function does not run the integrator at all.
 - It saves the enriched webpages to the output directory
 
 ```typescript
 interface ISearchIntegrator {
   integrateSearch: () => Promise<void>;
+  integrateSearchNoIntegrations: () => Promise<void>;
 }
 ```
 
@@ -293,11 +297,14 @@ interface ISynonyms {
   synonymCollections: string[][];
 }
 ```
+
 The strings in a list in the synonym collection are considered to be synonyms.
 
-An example of a synonyms file can be found here: https://github.com/ManuWeber93/search-integrator-quickstart-example/blob/main/open-ui-synonyms.json
+An example of a synonyms file can be found
+here: https://github.com/ManuWeber93/search-integrator-quickstart-example/blob/main/open-ui-synonyms.json
 
 In addition to the possibility to define your own synonyms, the search-integrator framework can
-be [configured](#configuration) (IParserConfig, includeThesaurusSynonyms & apiNinjasApiKey) to consult the Thesaurus API from API Ninjas (https://api-ninjas.com/api/thesaurus)
+be [configured](#configuration) (IParserConfig, includeThesaurusSynonyms & apiNinjasApiKey) to consult the Thesaurus API
+from API Ninjas (https://api-ninjas.com/api/thesaurus)
 regarding synonyms.
 
